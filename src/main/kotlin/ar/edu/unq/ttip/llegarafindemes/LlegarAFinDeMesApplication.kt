@@ -1,11 +1,11 @@
-package ar.edu.unq.ttip.llegandoafindemes
+package ar.edu.unq.ttip.llegardoafindemes
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class LlegandoAFinDeMesApplication
+class LlegarAFinDeMesApplication
 
 fun main(args: Array<String>) {
-	runApplication<LlegandoAFinDeMesApplication>(*args)
+	runApplication<LlegarAFinDeMesApplication>(*args)
 }

@@ -1,1 +1,1 @@
-rootProject.name = "llegando-a-fin-de-mes"
+rootProject.name = "llegar-a-fin-de-mes"
