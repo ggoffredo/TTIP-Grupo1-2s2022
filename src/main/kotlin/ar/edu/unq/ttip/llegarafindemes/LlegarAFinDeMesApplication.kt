@@ -1,4 +1,4 @@
-package ar.edu.unq.ttip.llegardoafindemes
+package ar.edu.unq.ttip.llegarafindemes
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
