@@ -42,6 +42,13 @@ tasks.withType<Test> {
 	useJUnitPlatform()
 }
 
+tasks.jacocoTestReport {
+	dependsOn(tasks.test)
+	reports {
+		xml.required.set(true)
+	}
+}
+
 springBoot {
 	mainClass.set("ar.edu.unq.ttip.llegarafindemes.LlegarAFinDeMesApplicationKt")
 }
