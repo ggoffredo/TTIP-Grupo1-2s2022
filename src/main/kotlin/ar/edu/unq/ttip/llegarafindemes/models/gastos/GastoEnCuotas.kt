@@ -3,12 +3,12 @@ package ar.edu.unq.ttip.llegarafindemes.models.gastos
 import ar.edu.unq.ttip.llegarafindemes.models.MedioDeGasto
 import ar.edu.unq.ttip.llegarafindemes.models.Usuario
 import java.time.LocalDate
-import javax.persistence.Column
-import javax.persistence.Entity
+import javax.persistence.*
 
-@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+@MappedSuperclass
 open class GastoEnCuotas(
-    id: Int = 0,
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) override var id: Int = 0,
     descripcion: String,
     monto: Float,
     medioDeGasto: MedioDeGasto,

@@ -7,7 +7,7 @@ class Usuario(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) var id: Int = 0,
     @Column(nullable = false) var nombre: String,
     @Column(nullable = false) var apellido: String,
-    @Column(nullable = false) var email: String,
+    @Column(nullable = false, unique = true) var email: String,
     @Column(nullable = false) var password: String,
 ) {
 }
