@@ -1,1 +1,1 @@
-http://localhost:8080/user/1/ingresos
+http://localhost:8080/users/1/ingresos

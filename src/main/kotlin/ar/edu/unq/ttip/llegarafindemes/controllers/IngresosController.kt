@@ -14,7 +14,7 @@ class IngresosController {
     @Autowired
     private lateinit var ingresosService: IngresosService
 
-    @GetMapping(value = ["/user/{userId}/ingresos"])
+    @GetMapping(value = ["/users/{userId}/ingresos"])
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     fun getGastosForUser(@PathVariable userId: Int, @RequestParam date: LocalDate?): List<Ingreso> {

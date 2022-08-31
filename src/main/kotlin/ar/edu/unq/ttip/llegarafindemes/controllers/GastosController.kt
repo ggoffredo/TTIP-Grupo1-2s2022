@@ -14,7 +14,7 @@ class GastosController {
     @Autowired
     private lateinit var gastosService: GastosService
 
-    @GetMapping(value = ["/user/{userId}/gastos"])
+    @GetMapping(value = ["/users/{userId}/gastos"])
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     fun getGastosForUser(@PathVariable userId: Int, @RequestParam date: LocalDate?): List<Gasto> {
