@@ -16,5 +16,4 @@ class GastoOcasional(
     medioDeGasto: MedioDeGasto,
     fechaInicioDeCobro: LocalDate,
     usuario: Usuario
-) : GastoEnCuotas(id, descripcion, monto, medioDeGasto, 1, fechaInicioDeCobro, usuario) {
-}
+) : GastoEnCuotas(id, descripcion, monto, medioDeGasto, 1, fechaInicioDeCobro, usuario)

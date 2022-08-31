@@ -15,5 +15,4 @@ open class GastoEnCuotas(
     @Column(nullable = false) var cantidadDeCuotas: Int,
     @Column (nullable = false) var fechaInicioDeCobro: LocalDate,
     usuario: Usuario
-) : Gasto(id, descripcion, monto, medioDeGasto, usuario) {
-}
+) : Gasto(id, descripcion, monto, medioDeGasto, usuario)

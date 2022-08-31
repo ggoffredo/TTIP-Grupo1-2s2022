@@ -1,5 +1,6 @@
 package ar.edu.unq.ttip.llegarafindemes.models
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import javax.persistence.*
 
 // Visa, Mastercard, Efectivo, etc.
@@ -8,6 +9,5 @@ import javax.persistence.*
 class MedioDeGasto(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) var id: Int,
     @Column(nullable = false) var nombre: String,
-    @ManyToOne(cascade = [CascadeType.ALL]) @JoinColumn(referencedColumnName = "id", nullable = false) var usuario: Usuario
-) {
-}
+    @JsonIgnore @ManyToOne(cascade = [CascadeType.ALL]) @JoinColumn(referencedColumnName = "id", nullable = false) var usuario: Usuario
+)

@@ -1,5 +1,6 @@
 package ar.edu.unq.ttip.llegarafindemes.models
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import javax.persistence.*
 
 @Entity
@@ -8,6 +9,5 @@ class Usuario(
     @Column(nullable = false) var nombre: String,
     @Column(nullable = false) var apellido: String,
     @Column(nullable = false, unique = true) var email: String,
-    @Column(nullable = false) var password: String,
-) {
-}
+    @JsonIgnore @Column(nullable = false) var password: String,
+)
