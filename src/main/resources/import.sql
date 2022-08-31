@@ -17,3 +17,15 @@ INSERT INTO gasto_ocasional (descripcion, monto, cantidad_de_cuotas, fecha_inici
 INSERT INTO gasto_ocasional (descripcion, monto, cantidad_de_cuotas, fecha_inicio_de_cobro, medio_de_gasto_id, usuario_id) VALUES ('Colchon', 15000, 1, '2022-09-01', 5, 2), ('Campera', 20000, 1, '2022-09-01', 5, 2);
 INSERT INTO gasto_ocasional (descripcion, monto, cantidad_de_cuotas, fecha_inicio_de_cobro, medio_de_gasto_id, usuario_id) VALUES ('Regalo', 13000, 1, '2022-09-01', 8, 3), ('Sarten', 10000, 1, '2022-09-01', 8, 3);
 INSERT INTO gasto_ocasional (descripcion, monto, cantidad_de_cuotas, fecha_inicio_de_cobro, medio_de_gasto_id, usuario_id) VALUES ('Sushi', 5000, 1, '2022-09-01', 10, 4), ('Afeitadora', 9000, 1, '2022-09-01', 10, 4);
+
+INSERT INTO ingreso_fijo (descripcion, monto, usuario_id) VALUES ('sueldo', 100000, 1);
+INSERT INTO ingreso_fijo (descripcion, monto, usuario_id) VALUES ('alquiler', 50000, 1);
+INSERT INTO ingreso_fijo (descripcion, monto, usuario_id) VALUES ('sueldo', 50000, 2);
+INSERT INTO ingreso_fijo (descripcion, monto, usuario_id) VALUES ('sueldo', 200000, 3);
+INSERT INTO ingreso_fijo (descripcion, monto, usuario_id) VALUES ('sueldo', 180000, 4);
+
+INSERT INTO ingreso_ocasional (descripcion, monto, usuario_id, fecha_ingreso) VALUES ('Freelo', 10000, 1, '2022-09-01');
+INSERT INTO ingreso_ocasional (descripcion, monto, usuario_id, fecha_ingreso) VALUES ('Otro freelo', 15000, 1, '2022-09-01');
+INSERT INTO ingreso_ocasional (descripcion, monto, usuario_id, fecha_ingreso) VALUES ('Diseño web', 5000, 2, '2022-09-01');
+INSERT INTO ingreso_ocasional (descripcion, monto, usuario_id, fecha_ingreso) VALUES ('Reparación PC', 10000, 3, '2022-09-01');
+INSERT INTO ingreso_ocasional (descripcion, monto, usuario_id, fecha_ingreso) VALUES ('Campaña marketing', 100000, 4, '2022-09-01');
