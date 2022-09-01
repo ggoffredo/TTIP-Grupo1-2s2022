@@ -24,3 +24,4 @@ out/
 !**/src/main/**/out/
 !**/src/test/**/out/
 .vscode/
+node_modules/
