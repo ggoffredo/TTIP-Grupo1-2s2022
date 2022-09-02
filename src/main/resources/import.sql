@@ -14,7 +14,7 @@ INSERT INTO gasto (descripcion, monto, duracion, periodicidad, fecha, medio_de_p
 INSERT INTO gasto (descripcion, monto, duracion, periodicidad, fecha, medio_de_pago_id, usuario_id) VALUES ('Tuenti', 1000, 0, 2, '2022-09-01', 2, 3), ('Netflix', 1500, 0, 2, '2022-09-01', 4, 3);
 INSERT INTO gasto (descripcion, monto, duracion, periodicidad, fecha, medio_de_pago_id, usuario_id) VALUES ('Movistar', 3000, 0, 2, '2022-09-01', 1, 4), ('Spotify', 1000, 0, 2, '2022-09-01', 2, 4);
 
--- Gastos ocasionales (duracion 1, periodicidad 2 (mensual)) y en cuotas (duracion >= 1, periodicidad 3)
+-- Gastos ocasionales
 INSERT INTO gasto (descripcion, monto, duracion, periodicidad, fecha, medio_de_pago_id, usuario_id) VALUES ('Rappi', 2500, 1, 2, '2022-09-01', 1, 1), ('Pava Electrica', 4000, 12, 2, '2022-09-01', 2, 1);
 INSERT INTO gasto (descripcion, monto, duracion, periodicidad, fecha, medio_de_pago_id, usuario_id) VALUES ('Colchon', 15000, 12, 2, '2022-09-01', 1, 2), ('Campera', 20000, 3, 2, '2022-09-01', 2, 2);
 INSERT INTO gasto (descripcion, monto, duracion, periodicidad, fecha, medio_de_pago_id, usuario_id) VALUES ('Regalo', 13000, 1, 2, '2022-09-01', 3, 3), ('Sarten', 10000, 1, 2, '2022-09-01', 4, 3);
