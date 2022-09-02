@@ -17,7 +17,6 @@ class GastosController {
     @GetMapping(value = ["/users/{userId}/gastos"])
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
-    @CrossOrigin
     fun getGastosForUser(@PathVariable userId: Int, @RequestParam date: LocalDate?): List<Gasto> {
         return gastosService.getGastosForUser(userId, date)
     }

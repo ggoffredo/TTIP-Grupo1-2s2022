@@ -17,7 +17,6 @@ class IngresosController {
     @GetMapping(value = ["/users/{userId}/ingresos"])
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
-    @CrossOrigin
     fun getIngresosForUser(@PathVariable userId: Int, @RequestParam date: LocalDate?): List<Ingreso> {
         return ingresosService.getIngresosForUser(userId, date)
     }
