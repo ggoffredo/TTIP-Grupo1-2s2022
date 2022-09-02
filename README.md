@@ -26,7 +26,7 @@ _**Llegar a fin de mes**_ está orientada a cualquier persona que quiera llevar 
 Para el seguimiento de las tareas realizadas se utiliza _[Trello](https://trello.com/b/44vTWuF3/tip)_. Se registra un sprint por cada entrega y el resultado de las mismas queda registrado en la columna correspondiente, teniendo una columna por cada entrega realizada.
 
 ### DOR
-Para considerar que una tarjeta puede ser trabajada esta debe contar por lo menos con un criterio de aceptación y su correspondiente estimación reflejada enntre parentesis en el título de la misma.
+Para considerar que una tarjeta puede ser trabajada, esta debe contar por lo menos con un criterio de aceptación y su correspondiente estimación reflejada entre parentesis en el título de la misma.
 
 Para los criterios de aceptación se utiliza el formato: _dado_ [...] _cuando_ [...] _entonces_ [...]
 
