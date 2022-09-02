@@ -30,5 +30,5 @@ Para considerar que una tarjeta puede ser trabajada esta debe contar por lo meno
 
 Para los criterios de aceptación se utiliza el formato: _dado_ [...] _cuando_ [...] _entonces_ [...]
 
-### DOD
+### DOD (Definition of done)
 Para considerar que una tarjeta se encuentra lista, la misma debe haber pasado por el estado _In Review_ y haberse verificado que se cumplan los criterios de aceptación que posee definidos. Junto con cumplir con las reglas de coverage establecidas para la aprobación del pull request vinculado.
