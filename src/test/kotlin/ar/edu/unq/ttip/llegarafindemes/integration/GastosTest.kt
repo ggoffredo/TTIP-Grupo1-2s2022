@@ -32,10 +32,13 @@ class GastosTest {
                 jsonPath("$.[0].monto") {
                     value(30000)
                 }
-                jsonPath("$.[0].type") {
-                    value("fijo")
+                jsonPath("$.[0].periodicidad") {
+                    value("MENSUAL")
                 }
-                jsonPath("$.[0].medioDeGasto.nombre") {
+                jsonPath("$.[0].duracion") {
+                    value(0)
+                }
+                jsonPath("$.[0].medioDePago.nombre") {
                     value("Efectivo")
                 }
                 jsonPath("$.[5].descripcion") {
@@ -44,17 +47,17 @@ class GastosTest {
                 jsonPath("$.[5].monto") {
                     value(4000)
                 }
-                jsonPath("$.[5].type") {
-                    value("ocasional")
+                jsonPath("$.[5].periodicidad") {
+                    value("MENSUAL")
                 }
-                jsonPath("$.[5].medioDeGasto.nombre") {
+                jsonPath("$.[5].duracion") {
+                    value(12)
+                }
+                jsonPath("$.[5].medioDePago.nombre") {
                     value("Visa")
                 }
-                jsonPath("$.[5].fechaInicioDeCobro") {
+                jsonPath("$.[5].fecha") {
                     isArray()
-                }
-                jsonPath("$.[5].cantidadDeCuotas") {
-                    value(1)
                 }
             }
         }

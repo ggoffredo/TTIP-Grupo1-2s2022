@@ -1,6 +1,6 @@
 package ar.edu.unq.ttip.llegarafindemes.controllers
 
-import ar.edu.unq.ttip.llegarafindemes.models.gastos.Gasto
+import ar.edu.unq.ttip.llegarafindemes.models.Gasto
 import ar.edu.unq.ttip.llegarafindemes.services.GastosService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus

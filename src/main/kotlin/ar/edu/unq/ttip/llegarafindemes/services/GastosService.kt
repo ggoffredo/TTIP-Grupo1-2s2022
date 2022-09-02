@@ -1,8 +1,7 @@
 package ar.edu.unq.ttip.llegarafindemes.services
 
-import ar.edu.unq.ttip.llegarafindemes.models.gastos.Gasto
-import ar.edu.unq.ttip.llegarafindemes.repositories.GastosFijosRepository
-import ar.edu.unq.ttip.llegarafindemes.repositories.GastosOcasionalesRepository
+import ar.edu.unq.ttip.llegarafindemes.models.Gasto
+import ar.edu.unq.ttip.llegarafindemes.repositories.GastosRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.time.LocalDate
@@ -11,13 +10,9 @@ import java.time.LocalDate
 class GastosService {
 
     @Autowired
-    private lateinit var gastosFijosRepository: GastosFijosRepository
-    @Autowired
-    private lateinit var gastosOcasionalesRepository: GastosOcasionalesRepository
+    private lateinit var gastosRepository: GastosRepository
 
     fun getGastosForUser(userdId: Int, date: LocalDate?): List<Gasto> {
-        val gastosFijos = gastosFijosRepository.findByUsuarioId(userdId)
-        val gastosOcasionales = gastosOcasionalesRepository.findByUsuarioId(userdId)
-        return gastosFijos + gastosOcasionales
+        return gastosRepository.findByUsuarioId(userdId)
     }
 }

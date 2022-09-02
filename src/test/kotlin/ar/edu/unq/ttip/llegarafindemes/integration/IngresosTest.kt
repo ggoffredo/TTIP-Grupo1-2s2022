@@ -27,13 +27,19 @@ class IngresosTest {
             status { isOk() }
             content {
                 jsonPath("$.[0].descripcion") {
-                    value("sueldo")
+                    value("Sueldo")
                 }
                 jsonPath("$.[0].monto") {
                     value(100000)
                 }
-                jsonPath("$.[0].type") {
-                    value("fijo")
+                jsonPath("$.[0].periodicidad") {
+                    value("MENSUAL")
+                }
+                jsonPath("$.[0].duracion") {
+                    value(0)
+                }
+                jsonPath("$.[0].fecha") {
+                    isArray()
                 }
                 jsonPath("$.[2].descripcion") {
                     value("Freelo")
@@ -41,10 +47,13 @@ class IngresosTest {
                 jsonPath("$.[2].monto") {
                     value(10000)
                 }
-                jsonPath("$.[2].type") {
-                    value("ocasional")
+                jsonPath("$.[2].periodicidad") {
+                    value("MENSUAL")
                 }
-                jsonPath("$.[2].fechaIngreso") {
+                jsonPath("$.[2].duracion") {
+                    value(1)
+                }
+                jsonPath("$.[2].fecha") {
                     isArray()
                 }
             }
