@@ -9,7 +9,7 @@ import Divider from "@mui/material/Divider";
 export default function ChartCard({chart, title, label}) {
 
     return <>
-        <Card sx={{ maxWidth: 500 }}>
+        <Card sx={{ maxWidth: 400 }}>
             <CardContent>
                 <Typography variant="h5" component="div">
                     {title}
