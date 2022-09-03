@@ -1,7 +1,6 @@
 package ar.edu.unq.ttip.llegarafindemes.services
 
 import ar.edu.unq.ttip.llegarafindemes.models.PFijo
-import ar.edu.unq.ttip.llegarafindemes.repositories.GastosRepository
 import ar.edu.unq.ttip.llegarafindemes.repositories.PFijoRepository
 import org.apache.commons.csv.CSVFormat
 import org.apache.commons.csv.CSVParser
@@ -42,6 +41,8 @@ class BCRAService {
     fun processCSV(path: Path) {
         val bufferedReader = File(path.toUri()).bufferedReader()
         val csvParser = CSVParser(bufferedReader, CSVFormat.DEFAULT.withDelimiter(';').withHeader())
+
+        pfijoRepository.deleteAll()
 
         for (csvRecord in csvParser) {
             val pfijo = PFijo(

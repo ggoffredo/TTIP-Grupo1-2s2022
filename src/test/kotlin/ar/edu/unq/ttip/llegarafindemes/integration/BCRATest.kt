@@ -21,13 +21,21 @@ class BCRATest {
     @Test
     fun enBaseAUnCSVSeCreanLosRegistrosCorrespondientes(){
         bcraService.processCSV(Path("./src/test/kotlin/ar/edu/unq/ttip/llegarafindemes/resources/PFIJO.CSV"))
-        var PFs = bcraService.getAllPFOptions()
-        PFs.forEach { pf -> println(pf) }
-        assert(PFs.isNotEmpty())
+        var pfs = bcraService.getAllPFOptions()
+        pfs.forEach { pf -> println(pf) }
+        assert(pfs.isNotEmpty())
     }
 
     @Test
     fun alProcesarMasDeUnCSVSolamenteSemantieneLaUltimaInformacion(){
-        assert(false)
+        bcraService.processCSV(Path("./src/test/kotlin/ar/edu/unq/ttip/llegarafindemes/resources/PFIJO.CSV"))
+        var pfs = bcraService.getAllPFOptions()
+
+        assert(pfs.size == 998)
+
+        bcraService.processCSV(Path("./src/test/kotlin/ar/edu/unq/ttip/llegarafindemes/resources/PFIJO-2.CSV"))
+        pfs = bcraService.getAllPFOptions()
+
+        assert(pfs.size == 2)
     }
 }
