@@ -13,7 +13,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import Logo from '../resources/named-logo.png'
 
-const pages = ['Página 1', 'Página 2', 'Página 3'];
+const pages = ['Dashboard'];
 const settings = ['Opción 1', 'Opción 2', 'Opción 3', 'Opción 4'];
 
 const Navbar = () => {
@@ -39,7 +39,7 @@ const Navbar = () => {
         <AppBar position="static">
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
-                    <img src={Logo} alt="React Logo" style={{height: '50px'}}/>
+                    <img src={Logo} alt="Llegar a fin de mes logo" style={{height: '50px'}}/>
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                         <IconButton
                             size="large"
