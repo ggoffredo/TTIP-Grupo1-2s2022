@@ -7,10 +7,12 @@ import Divider from "@mui/material/Divider";
 import {Accordion, AccordionDetails, AccordionSummary} from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Typography from "@mui/material/Typography";
+import GastosTable from "./GastosTable";
 
 export default function Dashboard() {
     const [ingresos, setIngresos] = useState([])
     const [gastos, setGastos] = useState([])
+    const [gastosAmount, setGastosAmount] = useState([])
 
     async function getIngresos() {
         let response = await axios({
@@ -29,7 +31,8 @@ export default function Dashboard() {
             responseType: 'stream',
         });
         let gastosApi = response.data;
-        setGastos(gastosApi.reduce((partialSum, gasto) => partialSum + gasto.monto, 0));
+        setGastos(gastosApi);
+        setGastosAmount(gastosApi.reduce((partialSum, gasto) => partialSum + gasto.monto, 0));
     }
 
     useEffect(() => {
@@ -39,8 +42,8 @@ export default function Dashboard() {
 
     function getDoughnutChartData() {
         return {
-            Gastos: gastos,
-            Libre: ingresos - gastos
+            Gastos: gastosAmount,
+            Libre: ingresos - gastosAmount
         };
     }
 
@@ -65,12 +68,19 @@ export default function Dashboard() {
                     <Typography>Gastos vs Ingresos</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                    <Grid item xs={2} sm={4} md={4}>
-                        <ChartCard
-                            chart={getDoughnutChart()}
-                            label={`Ingresos: ${ingresos}`}
-                            title={'Gastos vs ingresos'}
-                        />
+                    <Grid container item spacing={2}>
+                        <Grid item xs={2} sm={4} md={4}>
+                            <ChartCard
+                                chart={getDoughnutChart()}
+                                label={`Ingresos: ${ingresos}`}
+                                title={'Gastos vs ingresos'}
+                            />
+                        </Grid>
+                        <Grid item xs={2} sm={4} md={8}>
+                            <GastosTable
+                                data={gastos}
+                            />
+                        </Grid>
                     </Grid>
                 </AccordionDetails>
             </Accordion>
