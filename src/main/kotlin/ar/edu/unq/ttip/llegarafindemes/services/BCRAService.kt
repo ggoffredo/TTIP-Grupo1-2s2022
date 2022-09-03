@@ -1,8 +1,11 @@
 package ar.edu.unq.ttip.llegarafindemes.services
 
 import ar.edu.unq.ttip.llegarafindemes.models.PFijo
+import ar.edu.unq.ttip.llegarafindemes.repositories.GastosRepository
+import ar.edu.unq.ttip.llegarafindemes.repositories.PFijoRepository
 import org.apache.commons.csv.CSVFormat
 import org.apache.commons.csv.CSVParser
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.io.File
 import java.io.FileOutputStream
@@ -10,13 +13,15 @@ import java.net.URL
 import java.nio.channels.Channels
 import java.nio.file.Files
 import java.nio.file.Path
-import java.util.*
 import kotlin.io.path.Path
 
 @Service
 class BCRAService {
     private val pfcsvName = "PFIJO.CSV"
     private val pfcsvPath = "http://www.bcra.gov.ar/pdfs/BCRAyVos/$pfcsvName"
+
+    @Autowired
+    private lateinit var pfijoRepository: PFijoRepository
 
     fun downloadPFCSVFile(): String? {
         var url = URL(pfcsvPath)
@@ -36,7 +41,7 @@ class BCRAService {
 
     fun processCSV(path: Path) {
         val bufferedReader = File(path.toUri()).bufferedReader()
-        val csvParser = CSVParser(bufferedReader, CSVFormat.DEFAULT.withDelimiter(';'))
+        val csvParser = CSVParser(bufferedReader, CSVFormat.DEFAULT.withDelimiter(';').withHeader())
 
         for (csvRecord in csvParser) {
             val pfijo = PFijo(
@@ -53,12 +58,11 @@ class BCRAService {
                 territorioDeValidez = csvRecord.get(10),
                 masInformacion = csvRecord.get(11)
             )
-            //TODO: persistir en db con BCRARepository
-            println(pfijo);
+            pfijoRepository.save(pfijo)
         }
     }
 
     fun getAllPFOptions(): MutableList<PFijo> {
-        TODO("Not yet implemented")
+        return pfijoRepository.findAll()
     }
 }
