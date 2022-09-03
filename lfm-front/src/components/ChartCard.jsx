@@ -8,18 +8,24 @@ import Divider from "@mui/material/Divider";
 
 export default function ChartCard({chart, title, label}) {
 
+    const labelComponent = () => {
+        return label
+            ? <Box sx={{width: 'fit-content', margin: 'auto'}}>
+                <Paper elevation={1} sx={{padding: '5px'}}>
+                    {label}
+                </Paper>
+            </Box>
+            : null;
+    }
+
     return <>
-        <Card sx={{ maxWidth: 400 }}>
+        <Card>
             <CardContent>
                 <Typography variant="h5" component="div">
                     {title}
                 </Typography>
                 <div style={{margin: 5}}> <Divider/> </div>
-                <Box sx={{width: 'fit-content', margin: 'auto'}}>
-                    <Paper elevation={1} sx={{padding: '5px'}}>
-                        {label}
-                    </Paper>
-                </Box>
+                {labelComponent()}
                 {chart}
             </CardContent>
         </Card>
