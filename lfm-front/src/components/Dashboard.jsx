@@ -1,14 +1,12 @@
 import {useEffect, useState} from "react";
 import Grid from '@mui/material/Grid';
 import Divider from "@mui/material/Divider";
-import {Accordion, AccordionDetails, AccordionSummary} from "@mui/material";
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import Typography from "@mui/material/Typography";
 import GastosTable from "./CustomTables/GastosTable";
 import GastosIngresosDoughnutChart from "./CustomCharts/GastosIngresosDoughnutChart";
 import {arraySum} from '../helpers/Utils';
 import {getIngresosForUserId} from "../services/IngresosService";
 import {getGastosForUserId} from "../services/GastosService";
+import AccordionCore from "./Core/AccordionCore";
 
 export default function Dashboard() {
     const [gastos, setGastos] = useState([])
@@ -36,22 +34,13 @@ export default function Dashboard() {
             <p style={{fontFamily: 'Staatliches', fontSize: '70px', marginTop: 0, marginBottom: 0, textAlign: 'left'}}>Dashboard</p>
             <Divider/>
         </Grid>
-        <Grid item xs={12}>
-            {/*
-                TODO: Encapsular accordion como componente core. Deberia ser configurable el titulo, el spacing y deberia pasarse el array de componentes
-                a renderizar en los detalles
-            */}
-            <Accordion>
-                <AccordionSummary expandIcon={<ExpandMoreIcon/>} aria-controls="panel1a-content" id="panel1a-header">
-                    <Typography>Gastos vs Ingresos</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                    <Grid container item spacing={2}>
-                        <GastosIngresosDoughnutChart gastos={gastosAmount} ingresos={ingresosAmount}/>
-                        <GastosTable data={gastos}/>
-                    </Grid>
-                </AccordionDetails>
-            </Accordion>
-        </Grid>
+        <AccordionCore
+            title={'Gastos vs Ingresos'}
+            spacing={2}
+            children={<>
+                <GastosIngresosDoughnutChart gastos={gastosAmount} ingresos={ingresosAmount}/>
+                <GastosTable data={gastos}/>
+            </>}
+        />
     </Grid>
 }
