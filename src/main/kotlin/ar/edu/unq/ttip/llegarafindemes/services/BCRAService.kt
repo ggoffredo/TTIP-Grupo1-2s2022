@@ -62,6 +62,8 @@ class BCRAService {
             )
             pfijoRepository.save(pfijo)
         }
+
+        bufferedReader.close()
     }
 
     fun getAllPFOptions(): MutableList<PFijo> {
