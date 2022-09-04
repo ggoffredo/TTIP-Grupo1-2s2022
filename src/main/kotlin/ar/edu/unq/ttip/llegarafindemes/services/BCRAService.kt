@@ -31,15 +31,16 @@ class BCRAService {
                 }
             }
         }
+
         return url.file
     }
 
     fun deletePFCSVFile(){
-        Files.delete(Path(pfcsvName))
+        Files.deleteIfExists(Path(pfcsvName))
     }
 
-    fun processCSV(path: Path) {
-        val bufferedReader = File(path.toUri()).bufferedReader()
+    fun processCSV(path: String = pfcsvName) {
+        val bufferedReader = File(path).bufferedReader()
         val csvParser = CSVParser(bufferedReader, CSVFormat.DEFAULT.withDelimiter(';').withHeader())
 
         pfijoRepository.deleteAll()
