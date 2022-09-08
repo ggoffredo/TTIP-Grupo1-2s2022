@@ -12,13 +12,6 @@ class BCRATest {
     private var bcraService: BCRAService = BCRAService()
 
     @Test
-    fun descargaDelArchivoCSVdePlazosFijosDelBCRA() {
-        var file = bcraService.downloadPFCSVFile()
-        assert(!file.isNullOrEmpty())
-        bcraService.deletePFCSVFile()
-    }
-
-    @Test
     fun enBaseAUnCSVSeCreanLosRegistrosCorrespondientes(){
         bcraService.processCSV("./src/test/kotlin/ar/edu/unq/ttip/llegarafindemes/resources/PFIJO.CSV")
         var pfs = bcraService.getAllPFOptions()

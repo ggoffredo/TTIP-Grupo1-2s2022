@@ -22,7 +22,7 @@ class BCRAService {
     @Autowired
     private lateinit var pfijoRepository: PFijoRepository
 
-    fun downloadPFCSVFile(): String? {
+    fun downloadPFCSVFile() {
         var url = URL(pfcsvPath)
         url.openStream().use {
             Channels.newChannel(it).use { rbc ->
@@ -31,8 +31,6 @@ class BCRAService {
                 }
             }
         }
-
-        return url.file
     }
 
     fun deletePFCSVFile(){
