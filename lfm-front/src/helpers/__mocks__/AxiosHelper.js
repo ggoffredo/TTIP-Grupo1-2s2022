@@ -2,6 +2,10 @@ import {ingresos} from "./IngresosMockResponse";
 import {gastos} from "./GastosMockResponse";
 import {dolares} from "./DolarSiMockResponse";
 
+const getFromLFMApi = (path) => {
+    return get(`http://localhost:8080/${path}`);
+}
+
 const get = (fullPath) => {
     switch (fullPath) {
         case 'http://localhost:8080/users/1/ingresos':
@@ -15,4 +19,4 @@ const get = (fullPath) => {
     }
 }
 
-export {get}
+export {get, getFromLFMApi}

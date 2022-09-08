@@ -11,7 +11,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import Logo from '../resources/named-logo.png'
+import Logo from '../resources/named-logo.png';
 
 const pages = ['Dashboard'];
 const settings = ['Opción 1', 'Opción 2', 'Opción 3', 'Opción 4'];
