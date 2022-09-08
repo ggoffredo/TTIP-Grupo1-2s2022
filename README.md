@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/ggoffredo/TTIP-Grupo1-2s2022/tree/main.svg?style=svg)](https://circleci.com/gh/ggoffredo/TTIP-Grupo1-2s2022/tree/main)
+
 # TTIP | Grupo 1 | 2022 | LLEGAR A FIN DE MES
 
 ## Objetivo
@@ -19,7 +21,7 @@ _**Llegar a fin de mes**_ está orientada a cualquier persona que quiera llevar 
 - Hibernate
 - PostgreSQL
 - Swagger
-- CircleCI
+- [CircleCI](https://app.circleci.com/pipelines/github/ggoffredo/TTIP-Grupo1-2s2022)
 - SonarCloud
  
 ## Seguimmiento
