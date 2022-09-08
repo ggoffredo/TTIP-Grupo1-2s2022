@@ -13,18 +13,16 @@ class PlazoFijoJob {
     @Autowired
     private lateinit var bcraService: BCRAService
 
-    //TODO: Modificar periodicidad para que corra una vez al dia tras ser ejecutada la aplicacion
-    @Scheduled(cron = "0 0/2 * * * ?")
+    @Scheduled(cron = "0 0 * * * ?")
     fun run() {
-        LoggerFactory.getLogger(PlazoFijoJob::class.java).info("Updating Plazos fijo")
-        println("Updating Plazos fijo")
-        println("Downloading CSV")
+        var logger = LoggerFactory.getLogger(PlazoFijoJob::class.java)
+        logger.info("Updating Plazos fijo")
+        logger.info("Downloading CSV")
         bcraService.downloadPFCSVFile()
-        println("Processing PF")
+        logger.info("Processing CSV")
         bcraService.processCSV()
-        println("Deleting CSV")
+        logger.info("Deleting CSV")
         bcraService.deletePFCSVFile()
-        println("Update Plazos fijo finished")
-        LoggerFactory.getLogger(PlazoFijoJob::class.java).info("Update Plazos fijo finished")
+        logger.info("Update Plazos fijo finished")
     }
 }
