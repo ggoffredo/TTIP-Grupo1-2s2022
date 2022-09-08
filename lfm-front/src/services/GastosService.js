@@ -1,7 +1,7 @@
-import {get} from '../helpers/AxiosHelper'
+import {getFromLFMApi} from '../helpers/AxiosHelper'
 
 const getGastosForUserId = (userId) => {
-    return get(`users/${userId}/gastos`);
+    return getFromLFMApi(`users/${userId}/gastos`);
 }
 
 export {getGastosForUserId}
