@@ -7,6 +7,7 @@ import {arraySum} from '../helpers/Utils';
 import {getIngresosForUserId} from "../services/IngresosService";
 import {getGastosForUserId} from "../services/GastosService";
 import AccordionCore from "./Core/AccordionCore";
+import DolarValues from "./DolarValues";
 
 export default function Dashboard() {
     const [gastos, setGastos] = useState([])
@@ -34,6 +35,7 @@ export default function Dashboard() {
             <p style={{fontFamily: 'Staatliches', fontSize: '70px', marginTop: 0, marginBottom: 0, textAlign: 'left'}}>Dashboard</p>
             <Divider/>
         </Grid>
+        <DolarValues/>
         <AccordionCore
             title={'Gastos vs Ingresos'}
             spacing={2}
