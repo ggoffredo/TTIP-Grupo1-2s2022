@@ -1,11 +1,14 @@
 import axios from "axios";
 
-const get = (path) => {
+const getFromLFMApi = (path) => {
+    return get(`http://localhost:8080/${path}`);
+}
+
+const get = (fullPath) => {
     return axios({
         method: 'get',
-        url: `http://localhost:8080/${path}`,
-        responseType: 'stream',
+        url: fullPath,
     }).then(response => response.data);
 }
 
-export {get}
+export {get, getFromLFMApi}
