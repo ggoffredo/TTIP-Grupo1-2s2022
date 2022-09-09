@@ -33,3 +33,8 @@ INSERT INTO ingreso (descripcion, monto, duracion, periodicidad, fecha, usuario_
 INSERT INTO ingreso (descripcion, monto, duracion, periodicidad, fecha, usuario_id) VALUES ('Diseño web', 5000, 1, 2, '2022-09-01', 2);
 INSERT INTO ingreso (descripcion, monto, duracion, periodicidad, fecha, usuario_id) VALUES ('Reparación PC', 10000, 1, 2, '2022-09-01', 3);
 INSERT INTO ingreso (descripcion, monto, duracion, periodicidad, fecha, usuario_id) VALUES ('Campaña marketing', 100000, 1, 2, '2022-09-01', 4);
+
+-- Plazos fijos disponibles
+INSERT INTO pfijo (canal, codigo_entidad, denominacion, descripcion_entidad, fecha_informacion, mas_informacion, monto_minimo, nombre_completo, nombre_corto, plazo_minimo, tasa, territorio_de_validez) VALUES ('Home banking', 7,	'Pesos', 'BANCO DE GALICIA Y BUENOS AIRES S.A.U.', '2022-08-12', '', 100,	'PLAZOFIJOTRADTASAREGULADA', 'PFTRADTASAREGULADA', '30 días', 69.5,	'Todo el territorio nacional');
+INSERT INTO pfijo (canal, codigo_entidad, denominacion, descripcion_entidad, fecha_informacion, mas_informacion, monto_minimo, nombre_completo, nombre_corto, plazo_minimo, tasa, territorio_de_validez) VALUES ('Home banking', 11, 'Pesos', 'BANCO DE LA NACION ARGENTINA', '2022-08-12', '', 100, 'PLAZO FIJO TRADICIONAL', 'TRADICIONAL', '30 días', 69.58, 'Todo el territorio nacional');
+INSERT INTO pfijo (canal, codigo_entidad, denominacion, descripcion_entidad, fecha_informacion, mas_informacion, monto_minimo, nombre_completo, nombre_corto, plazo_minimo, tasa, territorio_de_validez) VALUES ('Home banking', 14, 'Pesos', 'BANCO DE LA PROVINCIA DE BUENOS AIRES', '2022-08-12', '', 100, 'PLAZO FIJO INTRANSFERIBLE EN PESOS', 'PLAZO FIJO INTRA.EN.PESOS', '30 días', 69.58, 'Todo el territorio nacional');

@@ -15,7 +15,7 @@ class PlazoFijoJob {
 
     @Scheduled(cron = "0 0 * * * ?")
     fun run() {
-        var logger = LoggerFactory.getLogger(PlazoFijoJob::class.java)
+        val logger = LoggerFactory.getLogger(PlazoFijoJob::class.java)
         logger.info("Updating Plazos fijo")
         logger.info("Downloading CSV")
         bcraService.downloadPFCSVFile()

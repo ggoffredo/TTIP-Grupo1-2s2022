@@ -7,6 +7,7 @@ import {arraySum} from '../helpers/Utils';
 import {getIngresosForUserId} from "../services/IngresosService";
 import {getGastosForUserId} from "../services/GastosService";
 import AccordionCore from "./Core/AccordionCore";
+import PlazosFijosTable from "./CustomTables/PlazosFijosTable";
 
 export default function Dashboard() {
     const [gastos, setGastos] = useState([])
@@ -37,10 +38,17 @@ export default function Dashboard() {
         <AccordionCore
             title={'Gastos vs Ingresos'}
             spacing={2}
-            children={<>
-                <GastosIngresosDoughnutChart gastos={gastosAmount} ingresos={ingresosAmount}/>
-                <GastosTable data={gastos}/>
-            </>}
+            children={
+                <>
+                    <GastosIngresosDoughnutChart gastos={gastosAmount} ingresos={ingresosAmount}/>
+                    <GastosTable data={gastos}/>
+                </>
+            }
+        />
+        <AccordionCore
+            title={'Plazos fijos'}
+            spacing={1}
+            children={<PlazosFijosTable/>}
         />
     </Grid>
 }

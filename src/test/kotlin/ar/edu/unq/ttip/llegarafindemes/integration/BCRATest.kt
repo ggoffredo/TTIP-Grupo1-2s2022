@@ -14,7 +14,7 @@ class BCRATest {
     @Test
     fun enBaseAUnCSVSeCreanLosRegistrosCorrespondientes(){
         bcraService.processCSV("./src/test/kotlin/ar/edu/unq/ttip/llegarafindemes/resources/PFIJO.CSV")
-        var pfs = bcraService.getAllPFOptions()
+        val pfs = bcraService.getAllPFOptions()
         pfs.forEach { pf -> println(pf) }
         assert(pfs.isNotEmpty())
     }
