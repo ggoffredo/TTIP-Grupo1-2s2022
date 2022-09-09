@@ -7,7 +7,7 @@ data class PFijo(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) var id: Int = 0,
     @Column(nullable = false) val codigoEntidad: String,
     @Column(nullable = false) val descripcionEntidad: String,
-    @Column(nullable = false) val fechaInformación: String,
+    @Column(nullable = false) val fechaInformacion: String,
     @Column(nullable = false) val nombreCompleto: String,
     @Column(nullable = false) val nombreCorto: String,
     @Column(nullable = false) val denominacion: String,

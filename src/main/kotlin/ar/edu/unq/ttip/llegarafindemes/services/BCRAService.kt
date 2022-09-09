@@ -11,7 +11,6 @@ import java.io.FileOutputStream
 import java.net.URL
 import java.nio.channels.Channels
 import java.nio.file.Files
-import java.nio.file.Path
 import kotlin.io.path.Path
 
 @Service
@@ -23,7 +22,7 @@ class BCRAService {
     private lateinit var pfijoRepository: PFijoRepository
 
     fun downloadPFCSVFile() {
-        var url = URL(pfcsvPath)
+        val url = URL(pfcsvPath)
         url.openStream().use {
             Channels.newChannel(it).use { rbc ->
                 FileOutputStream(pfcsvName).use { fos ->
@@ -47,7 +46,7 @@ class BCRAService {
             val pfijo = PFijo(
                 codigoEntidad = csvRecord.get(0),
                 descripcionEntidad = csvRecord.get(1),
-                fechaInformación = csvRecord.get(2),
+                fechaInformacion = csvRecord.get(2),
                 nombreCompleto = csvRecord.get(3),
                 nombreCorto = csvRecord.get(4),
                 denominacion = csvRecord.get(5),
