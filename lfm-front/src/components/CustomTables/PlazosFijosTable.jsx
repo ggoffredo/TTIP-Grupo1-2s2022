@@ -13,15 +13,6 @@ const PlazosFijosTable = () => {
 
     const getPlazosFijosData = async () => {
         let plazosFijosApi = await getPlazosFijos();
-        plazosFijosApi = plazosFijosApi.map(plazoFijo => {
-            return {
-                banco: plazoFijo['descripcionEntidad'],
-                moneda: plazoFijo['denominacion'],
-                monto: plazoFijo['montoMinimo'],
-                plazo: plazoFijo['plazoMinimo'],
-                tasa: plazoFijo['tasa']
-            }
-        })
         setPlazosFijos(plazosFijosApi);
     }
 
