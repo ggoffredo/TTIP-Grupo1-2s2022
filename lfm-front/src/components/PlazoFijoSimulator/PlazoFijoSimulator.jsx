@@ -9,14 +9,15 @@ import BankSelect from "./BankSelect";
 import CustomInput from "./CustomInput";
 import CalculateButton from "./CalculateButton";
 import ViewTitle from "../ViewTitle";
+import {todayStringFormatted} from "../../helpers/Utils";
 
 const PlazoFijoSimulator = () => {
+    const [amountOfMoney, setAmountOfMoney] = useState(0);
     const [selectedBank, setSelectedBank] = useState('');
     const [selectedRate, setSelectedRate] = useState(0);
-    const [amountOfMoney, setAmountOfMoney] = useState(0);
-    const [toDate, setToDate] = useState("2022-09-09");
+    const [plazosFijos, setPlazosFijos] = useState([]);
     const [interest, setInterest] = useState("");
-    const [plazosFijos, setPlazosFijos] = useState([])
+    const [toDate, setToDate] = useState(todayStringFormatted());
 
     const getPlazosFijosData = async () => {
         let response = await getPlazosFijos();
@@ -32,12 +33,15 @@ const PlazoFijoSimulator = () => {
         let rate = plazosFijos.filter(plazoFijo => {return plazoFijo.banco === event.target.value})[0].tasa
         setSelectedRate(rate)
     };
+
     const handleMoneyInput = (event) => {
         setAmountOfMoney(event.target.value);
     };
+
     const handleDaysInput = (event) => {
         setToDate(event.target.value);
     };
+
     const handleSubmit = (event) => {
         event.preventDefault();
         let fromDate = Date.now();
