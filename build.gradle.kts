@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
 	id("org.springframework.boot") version "2.7.3"
 	id("io.spring.dependency-management") version "1.0.13.RELEASE"
+	id("org.sonarqube") version "3.3"
 	id("jacoco")
 	war
 	kotlin("jvm") version "1.6.21"
@@ -32,6 +33,16 @@ dependencies {
 	implementation ("org.apache.commons:commons-csv:1.5")
 }
 
+sonarqube {
+	properties {
+		property("sonar.projectKey", "ggoffredo_TTIP-Grupo1-2s2022")
+		property("sonar.organization", "lfm")
+		property("sonar.host.url", "https://sonarcloud.io")
+		property("sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacoco/test/jacocoTestReport.xml")
+		property("sonar.exclusions", "'**/apis/**', '**/security/**', '**/jobs/**', '**/aspects/**'")
+	}
+}
+
 tasks.withType<KotlinCompile> {
 	kotlinOptions {
 		freeCompilerArgs = listOf("-Xjsr305=strict")
@@ -48,6 +59,11 @@ tasks.jacocoTestReport {
 	reports {
 		xml.required.set(true)
 	}
+	classDirectories.setFrom(files(classDirectories.files.map {
+		fileTree(it) {
+			exclude("**/apis/**", "**/jobs/**", "**/aspects/**", "**/security/**")
+		}
+	}))
 }
 
 springBoot {
