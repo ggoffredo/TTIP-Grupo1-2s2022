@@ -32,7 +32,7 @@ const TableHeadComponent = (headers) => (
     <TableHead>
         <TableRow>
             {headers.map((header) => {
-                return <StyledTableCell align="center">{capitalize(header)}</StyledTableCell>
+                return <StyledTableCell align="center" key={header}>{capitalize(header)}</StyledTableCell>
             })}
         </TableRow>
     </TableHead>
@@ -40,10 +40,10 @@ const TableHeadComponent = (headers) => (
 
 const TableBodyComponent = (data, headers) => (
     <TableBody>
-        {data.map((row) => (
-            <StyledTableRow key={row.name} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                {headers.map((header) => {
-                    return <StyledTableCell align="center">{row[header.toLowerCase()]}</StyledTableCell>
+        {data.map((row, i) => (
+            <StyledTableRow key={`${row.name}-${i}`} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                {headers.map((header, k) => {
+                    return <StyledTableCell align="center" key={`${header}-${k}`}>{row[header.toLowerCase()]}</StyledTableCell>
                 })}
             </StyledTableRow>
         ))}
