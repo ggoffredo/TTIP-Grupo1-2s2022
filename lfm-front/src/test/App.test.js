@@ -4,7 +4,7 @@ import 'jest-canvas-mock';
 
 jest.mock('../helpers/AxiosHelper')
 
-test('Renders Gaston vs ingresos chart', () => {
+test('Renders Gastos vs ingresos chart', () => {
   render(<App />);
   const linkElement = screen.getByText('Gastos vs ingresos');
   expect(linkElement).toBeInTheDocument();

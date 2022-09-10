@@ -1,0 +1,8 @@
+.interestResult{
+    border-radius: 10px;
+    border: 2px solid green;
+    background-color: rgba(145, 250, 147, 0.56);
+    padding: 10px;
+    width: 180px;
+    margin: auto;
+}
