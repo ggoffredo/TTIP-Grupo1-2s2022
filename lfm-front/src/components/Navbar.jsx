@@ -12,8 +12,12 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import Logo from '../resources/named-logo.png'
+import {Link} from "react-router-dom";
 
-const pages = ['Dashboard'];
+const pages = [
+    {button: 'Dashboard', link: '/'},
+    {button: 'Simular Plazo Fijo', link: '/plazosFijos'}
+];
 const settings = ['Opción 1', 'Opción 2', 'Opción 3', 'Opción 4'];
 
 const Navbar = () => {
@@ -70,21 +74,25 @@ const Navbar = () => {
                             }}
                         >
                             {pages.map((page) => (
-                                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                    <Typography textAlign="center">{page}</Typography>
-                                </MenuItem>
+                                <Link to={page.link}>
+                                    <MenuItem key={page} onClick={handleCloseNavMenu}>
+                                        <Typography textAlign="center">{page.button}</Typography>
+                                    </MenuItem>
+                                </Link>
                             ))}
                         </Menu>
                     </Box>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {pages.map((page) => (
-                            <Button
-                                key={page}
-                                onClick={handleCloseNavMenu}
-                                sx={{ my: 2, color: 'white', display: 'block' }}
-                            >
-                                {page}
-                            </Button>
+                            <Link to={page.link}>
+                                <Button
+                                    key={page}
+                                    onClick={handleCloseNavMenu}
+                                    sx={{ my: 2, color: 'white', display: 'block' }}
+                                >
+                                    {page.button}
+                                </Button>
+                            </Link>
                         ))}
                     </Box>
 
