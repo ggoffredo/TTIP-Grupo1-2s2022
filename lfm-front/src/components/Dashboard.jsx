@@ -1,6 +1,5 @@
 import {useEffect, useState} from "react";
 import Grid from '@mui/material/Grid';
-import Divider from "@mui/material/Divider";
 import GastosTable from "./CustomTables/GastosTable";
 import GastosIngresosDoughnutChart from "./CustomCharts/GastosIngresosDoughnutChart";
 import {arraySum} from '../helpers/Utils';
@@ -9,6 +8,7 @@ import {getGastosForUserId} from "../services/GastosService";
 import AccordionCore from "./Core/AccordionCore";
 import PlazosFijosTable from "./CustomTables/PlazosFijosTable";
 import DolarValues from "./DolarValues";
+import ViewTitle from "./ViewTitle";
 
 export default function Dashboard() {
     const [gastos, setGastos] = useState([])
@@ -32,10 +32,7 @@ export default function Dashboard() {
     }, []);
 
     return <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-        <Grid item xs={12}>
-            <p style={{fontFamily: 'Staatliches', fontSize: '70px', marginTop: 0, marginBottom: 0, textAlign: 'left'}}>Dashboard</p>
-            <Divider/>
-        </Grid>
+        <ViewTitle title={"Dashboard"}/>
         <DolarValues/>
         <AccordionCore
             title={'Gastos vs Ingresos'}
