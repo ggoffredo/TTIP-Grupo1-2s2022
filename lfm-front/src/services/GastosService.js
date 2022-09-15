@@ -4,4 +4,8 @@ const getGastosForUserId = (userId) => {
     return getFromLFMApi(`users/${userId}/gastos`);
 }
 
-export {getGastosForUserId}
+const getGastosForUserIdPerMonth = (userId) => {
+    return getFromLFMApi(`users/${userId}/gastosMensualizados`);
+}
+
+export {getGastosForUserId, getGastosForUserIdPerMonth}
