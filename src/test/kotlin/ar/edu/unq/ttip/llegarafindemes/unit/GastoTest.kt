@@ -53,7 +53,7 @@ class GastoTest {
     }
 
     @Test
-    fun asd(){
+    fun unGastoOcasionalDeDocePeriodosMensualsPosteriorAlMesActualCorrespondeEstarEnElMesActual(){
         val gastoOcasional = buildGasto(Periodicidad.MENSUAL, 12, LocalDate.now().minusMonths(1).withDayOfMonth(1))
         assertTrue(gastoOcasional.correspondsToMonth(LocalDate.now().withDayOfMonth(1)))
     }
@@ -62,9 +62,5 @@ class GastoTest {
         val medioDePago = MedioDePago(1, "Visa")
         val usuario = Usuario(1, "Pepe", "Rodriguez", "peperodriguez@gmail.com", "UnaPassword")
         return Gasto(1, "Pava", 1000, periodicidad, duracion, fecha, medioDePago, usuario)
-    }
-
-    private fun getLocalDateNowWithFirstDayOfMonth(): LocalDate {
-        return LocalDate.now().withDayOfMonth(1)
     }
 }
