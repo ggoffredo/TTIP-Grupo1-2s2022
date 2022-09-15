@@ -47,19 +47,19 @@ class GastosTest {
             status { isOk() }
             content {
                 jsonPath("$.[0].mes")                       { isArray() }
-                jsonPath("$.[0].montoTotalDeGastos")        { value(35000) }
+                jsonPath("$.[0].montoTotal")                { value(35000) }
                 jsonPath("$.[0].gastos.length()")           { value(2) }
                 jsonPath("$.[0].gastos.[0].descripcion")    { value("Alquiler") }
                 jsonPath("$.[0].gastos.[1].descripcion")    { value("Expensas") }
                 jsonPath("$.[1].mes")                       { isArray() }
-                jsonPath("$.[1].montoTotalDeGastos")        { value(43000) }
+                jsonPath("$.[1].montoTotal")                { value(43000) }
                 jsonPath("$.[1].gastos.length()")           { value(4) }
                 jsonPath("$.[1].gastos.[0].descripcion")    { value("Alquiler") }
                 jsonPath("$.[1].gastos.[1].descripcion")    { value("Expensas") }
                 jsonPath("$.[1].gastos.[2].descripcion")    { value("Telecentro") }
                 jsonPath("$.[1].gastos.[3].descripcion")    { value("Pava Electrica") }
                 jsonPath("$.[2].mes")                       { isArray() }
-                jsonPath("$.[2].montoTotalDeGastos")        { value(49500) }
+                jsonPath("$.[2].montoTotal")                { value(49500) }
                 jsonPath("$.[2].gastos.length()")           { value(6) }
                 jsonPath("$.[2].gastos.[0].descripcion")    { value("Alquiler") }
                 jsonPath("$.[2].gastos.[1].descripcion")    { value("Expensas") }
