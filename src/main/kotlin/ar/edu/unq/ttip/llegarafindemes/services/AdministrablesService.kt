@@ -18,7 +18,7 @@ class AdministrablesService {
         this.administrables = administrables
         val administrableMasViejo = this.administrables.first()
         val fechaInicial = administrableMasViejo.fecha
-        val fechaFinal = LocalDate.now()
+        val fechaFinal = LocalDate.now().plusMonths(1)
         this.monthsToCalculate = Stream
             .iterate(
                 fechaInicial.withDayOfMonth(1)
