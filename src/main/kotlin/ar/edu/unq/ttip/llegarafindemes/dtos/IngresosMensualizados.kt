@@ -4,9 +4,9 @@ import ar.edu.unq.ttip.llegarafindemes.models.Administrable
 import com.fasterxml.jackson.annotation.JsonProperty
 import java.time.LocalDate
 
-class GastosMensualizados(
+class IngresosMensualizados(
     override val mes: LocalDate,
-    @JsonProperty("gastos") override val administrables: List<Administrable>
+    @JsonProperty("ingresos") override val administrables: List<Administrable>
 ) : AdministrablesMensualizados(mes, administrables) {
 
     init { this.setMontoTotal() }
