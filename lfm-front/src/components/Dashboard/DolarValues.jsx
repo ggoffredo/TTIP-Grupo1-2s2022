@@ -1,9 +1,9 @@
 import Stack from "@mui/material/Stack";
 import Chip from "@mui/material/Chip";
 import Grid from "@mui/material/Grid";
-import {getDolarValues} from "../services/DolarSiService";
+import {getDolarValues} from "../../services/DolarSiService";
 import {useEffect, useState} from "react";
-import {capitalize} from "../helpers/Utils";
+import {capitalize} from "../../helpers/Utils";
 
 const DolarValues = () => {
     const [dolares, setDolares] = useState([])

@@ -15,12 +15,12 @@ const getDoughnutChart = (ingresos, gastos) => {
     />
 }
 
-const GastosIngresosDoughnutChart = ({ingresos, gastos}) => {
+const GastosIngresosDoughnutChart = ({ingresos, gastos, title}) => {
     return <Grid item xs={2} sm={4} md={4}>
         <ChartCard
             chart={getDoughnutChart(ingresos, gastos)}
             label={`Ingresos: ${ingresos}`}
-            title={'Gastos vs ingresos'}
+            title={title}
         />
     </Grid>
 }

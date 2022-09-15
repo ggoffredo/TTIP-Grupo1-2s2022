@@ -42,31 +42,33 @@ class GastosTest {
     }
 
     @Test
-    fun alPedirLosGastosMensualizadosDeUnUsuarioSeObtienenLosGastosSeparadosPorCadaMesHastaElMesAnteriorAlActual() {
+    fun alPedirLosGastosMensualizadosDeUnUsuarioSeObtienenLosGastosSeparadosPorCadaMesHastaElMesActual() {
+        // TODO: Deberíamos mockear el LocalDate.now para evitar que el test rompa más adelante
+        // https://stackoverflow.com/questions/32792000/how-can-i-mock-java-time-localdate-now
         this.mockMvc.get("/users/1/gastosMensualizados").andExpect {
             status { isOk() }
             content {
                 jsonPath("$.[0].mes")                       { isArray() }
                 jsonPath("$.[0].montoTotal")                { value(35000) }
                 jsonPath("$.[0].gastos.length()")           { value(2) }
-                jsonPath("$.[0].gastos.[0].descripcion")    { value("Alquiler") }
-                jsonPath("$.[0].gastos.[1].descripcion")    { value("Expensas") }
+                jsonPath("$.[0].gastos.[0].descripcion")    { value("Expensas") }
+                jsonPath("$.[0].gastos.[1].descripcion")    { value("Alquiler") }
                 jsonPath("$.[1].mes")                       { isArray() }
                 jsonPath("$.[1].montoTotal")                { value(43000) }
                 jsonPath("$.[1].gastos.length()")           { value(4) }
-                jsonPath("$.[1].gastos.[0].descripcion")    { value("Alquiler") }
-                jsonPath("$.[1].gastos.[1].descripcion")    { value("Expensas") }
-                jsonPath("$.[1].gastos.[2].descripcion")    { value("Telecentro") }
-                jsonPath("$.[1].gastos.[3].descripcion")    { value("Pava Electrica") }
+                jsonPath("$.[1].gastos.[0].descripcion")    { value("Expensas") }
+                jsonPath("$.[1].gastos.[1].descripcion")    { value("Alquiler") }
+                jsonPath("$.[1].gastos.[2].descripcion")    { value("Pava Electrica") }
+                jsonPath("$.[1].gastos.[3].descripcion")    { value("Telecentro") }
                 jsonPath("$.[2].mes")                       { isArray() }
                 jsonPath("$.[2].montoTotal")                { value(49500) }
                 jsonPath("$.[2].gastos.length()")           { value(6) }
-                jsonPath("$.[2].gastos.[0].descripcion")    { value("Alquiler") }
-                jsonPath("$.[2].gastos.[1].descripcion")    { value("Expensas") }
-                jsonPath("$.[2].gastos.[2].descripcion")    { value("Telecentro") }
-                jsonPath("$.[2].gastos.[3].descripcion")    { value("Pava Electrica") }
-                jsonPath("$.[2].gastos.[4].descripcion")    { value("Gimnasio") }
-                jsonPath("$.[2].gastos.[5].descripcion")    { value("Rappi") }
+                jsonPath("$.[2].gastos.[0].descripcion")    { value("Expensas") }
+                jsonPath("$.[2].gastos.[1].descripcion")    { value("Alquiler") }
+                jsonPath("$.[2].gastos.[2].descripcion")    { value("Pava Electrica") }
+                jsonPath("$.[2].gastos.[3].descripcion")    { value("Telecentro") }
+                jsonPath("$.[2].gastos.[4].descripcion")    { value("Rappi") }
+                jsonPath("$.[2].gastos.[5].descripcion")    { value("Gimnasio") }
             }
         }
     }

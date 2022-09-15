@@ -1,5 +1,5 @@
 import {render, waitFor} from '@testing-library/react';
-import DolarValues from "../components/DolarValues";
+import DolarValues from "../components/Dashboard/DolarValues";
 
 jest.mock('../helpers/AxiosHelper')
 
