@@ -13,9 +13,7 @@ const CompraDolaresTable = ({monto}) => {
     }
 
     useEffect(() => {
-        getDolarValues().then(res => {
-            getDolares(res)
-        })
+        getDolarValues().then(res => getDolares(res))
     }, [monto])
 
     const normalizeName = (name) => {

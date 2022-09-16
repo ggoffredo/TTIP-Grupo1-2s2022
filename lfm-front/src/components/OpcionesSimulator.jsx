@@ -42,7 +42,6 @@ export default function OpcionesSimulator() {
             getGastos(),
             getGastosMensualizados()
         ]).then((res) => {
-            console.log(res)
             let [ingresos, gastos, gastosMensualizados] = res;
             calcularAhorros(ingresos, gastos);
             proyectarExcedenteMensual(ingresos, gastos, gastosMensualizados);
