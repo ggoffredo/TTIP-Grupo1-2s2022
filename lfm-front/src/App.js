@@ -1,6 +1,7 @@
 import './App.css';
 import Navbar from "./components/Navbar";
 import Dashboard from "./components/Dashboard/Dashboard";
+import OpcionesSimulator from "./components/OpcionesSimulator";
 import PlazoFijoSimulator from "./components/PlazoFijoSimulator/PlazoFijoSimulator";
 import Container from '@mui/material/Container';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -14,6 +15,7 @@ function App() {
                     <Routes>
                         <Route path="/" element={<Dashboard/>}/>
                         <Route path="/plazosFijos" element={<PlazoFijoSimulator/>}/>
+                        <Route path="/opciones" element={<OpcionesSimulator/>}/>
                     </Routes>
                 </Container>
             </div>

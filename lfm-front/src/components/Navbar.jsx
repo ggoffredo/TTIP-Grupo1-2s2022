@@ -16,7 +16,8 @@ import {Link} from "react-router-dom";
 
 const pages = [
     {button: 'Dashboard', link: '/'},
-    {button: 'Simular Plazo Fijo', link: '/plazosFijos'}
+    {button: 'Simular Plazo Fijo', link: '/plazosFijos'},
+    {button: 'Opciones de inversión', link: '/opciones'}
 ];
 const settings = ['Opción 1', 'Opción 2', 'Opción 3', 'Opción 4'];
 
