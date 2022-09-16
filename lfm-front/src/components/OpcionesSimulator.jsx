@@ -54,9 +54,9 @@ export default function OpcionesSimulator() {
 
         <ProyeccionYAhorros proyeccion={proyeccionMensual} ahorros={ahorros}/>
         <Grid item xs={6}>
-                <ViewSubTitle subTitle={'En base a proyección mensual'}/>
-                <ConstitucionPlazosFijosTable monto={proyeccionMensual}/>
-                <CompraDolares monto={proyeccionMensual}/>
+            <ViewSubTitle subTitle={'En base a proyección mensual'}/>
+            <ConstitucionPlazosFijosTable monto={proyeccionMensual}/>
+            <CompraDolares monto={proyeccionMensual}/>
         </Grid>
         <Grid item xs={6} >
             <ViewSubTitle subTitle={'En base a ahorros'}/>

@@ -1,7 +1,7 @@
 [![CircleCI](https://circleci.com/gh/ggoffredo/TTIP-Grupo1-2s2022/tree/main.svg?style=svg)](https://circleci.com/gh/ggoffredo/TTIP-Grupo1-2s2022/tree/main)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ggoffredo_TTIP-Grupo1-2s2022&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=ggoffredo_TTIP-Grupo1-2s2022)
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=ggoffredo_TTIP-Grupo1-2s2022&metric=coverage)](https://sonarcloud.io/summary/new_code?id=jcvincenti_DesApp-Grupo-C-012022)
-[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=ggoffredo_TTIP-Grupo1-2s2022&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=jcvincenti_DesApp-Grupo-C-012022)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=ggoffredo_TTIP-Grupo1-2s2022&metric=coverage)](https://sonarcloud.io/api/project_badges/measure?project=ggoffredo_TTIP-Grupo1-2s2022&metric=coverage)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=ggoffredo_TTIP-Grupo1-2s2022&metric=ncloc)](https://sonarcloud.io/api/project_badges/measure?project=ggoffredo_TTIP-Grupo1-2s2022&metric=ncloc)
 [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=ggoffredo_TTIP-Grupo1-2s2022&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=ggoffredo_TTIP-Grupo1-2s2022)
 # TTIP | Grupo 1 | 2022 | LLEGAR A FIN DE MES
 
@@ -23,11 +23,10 @@ _**Llegar a fin de mes**_ está orientada a cualquier persona que quiera llevar 
 - Spring Boot
 - Hibernate
 - PostgreSQL
-- Swagger
 - [CircleCI](https://app.circleci.com/pipelines/github/ggoffredo/TTIP-Grupo1-2s2022)
 - [SonarCloud](https://sonarcloud.io/project/overview?id=ggoffredo_TTIP-Grupo1-2s2022)
  
-## Seguimmiento
+## Seguimiento
 Para el seguimiento de las tareas realizadas se utiliza _[Trello](https://trello.com/b/44vTWuF3/tip)_. Se registra un sprint por cada entrega y el resultado de las mismas queda registrado en la columna correspondiente, teniendo una columna por cada entrega realizada.
 
 ### DOR (Definition of ready)
