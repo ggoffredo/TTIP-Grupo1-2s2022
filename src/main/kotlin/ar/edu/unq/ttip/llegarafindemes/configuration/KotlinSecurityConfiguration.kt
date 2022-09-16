@@ -1,5 +1,6 @@
 package ar.edu.unq.ttip.llegarafindemes.configuration
 
+import ar.edu.unq.ttip.llegarafindemes.annotations.Generated
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
@@ -12,6 +13,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource
 
 @Configuration
 @EnableWebSecurity
+@Generated
 class KotlinSecurityConfiguration : WebSecurityConfigurerAdapter() {
 
     override fun configure(http: HttpSecurity) {

@@ -1,5 +1,6 @@
 package ar.edu.unq.ttip.llegarafindemes.jobs
 
+import ar.edu.unq.ttip.llegarafindemes.annotations.Generated
 import ar.edu.unq.ttip.llegarafindemes.services.BCRAService
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Component
 
 @Component
 @EnableScheduling
+@Generated
 class PlazoFijoJob {
     @Autowired
     private lateinit var bcraService: BCRAService
