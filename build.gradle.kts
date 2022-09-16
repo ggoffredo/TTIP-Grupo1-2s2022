@@ -59,13 +59,11 @@ tasks.jacocoTestReport {
 	reports {
 		xml.required.set(true)
 	}
-	afterEvaluate {
-		classDirectories.setFrom(files(classDirectories.files.map {
-			fileTree(it) {
-				exclude("**/jobs/**", "**/configuration/**")
-			}
-		}))
-	}
+	classDirectories.setFrom(files(classDirectories.files.map {
+		fileTree(it) {
+			exclude("**/jobs/**", "**/configuration/**")
+		}
+	}))
 }
 
 springBoot {
