@@ -5,9 +5,9 @@ import Grid from "@mui/material/Grid";
 
 const AccordionCore = ({title, spacing, children}) => {
     return <Grid item xs={12}>
-        <Accordion>
+        <Accordion sx={{backgroundColor: '#025c96'}}>
             <AccordionSummary expandIcon={<ExpandMoreIcon/>} aria-controls="panel1a-content" id="panel1a-header">
-                <Typography>{title}</Typography>
+                <Typography sx={{color: 'white'}}>{title}</Typography>
             </AccordionSummary>
             <AccordionDetails>
                 <Grid container item spacing={spacing}>

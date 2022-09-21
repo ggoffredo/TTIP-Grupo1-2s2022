@@ -7,8 +7,8 @@ const ProyeccionYAhorro  = ({proyeccion, ahorros}) => {
     const getChips = () => {
         return (
             <>
-                <Chip label={`Proyección: $${proyeccion}`} color="success" variant="outlined" key="proyeccion"/>
-                <Chip label={`Ahorros: $${ahorros}`} color="success" variant="outlined" key="ahorros"/>
+                <Chip label={`Proyección: $${proyeccion}`} color="#152377" variant="outlined" key="proyeccion"/>
+                <Chip label={`Ahorros: $${ahorros}`} color="#152377" variant="outlined" key="ahorros"/>
             </>
         )
     }
