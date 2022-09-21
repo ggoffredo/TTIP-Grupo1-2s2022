@@ -56,14 +56,7 @@ tasks.withType<Test> {
 
 tasks.jacocoTestReport {
 	dependsOn(tasks.test)
-	reports {
-		xml.required.set(true)
-	}
-	classDirectories.setFrom(files(classDirectories.files.map {
-		fileTree(it) {
-			exclude("**/jobs/**", "**/configuration/**")
-		}
-	}))
+	reports { xml.required.set(true) }
 }
 
 springBoot {
