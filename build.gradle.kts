@@ -39,7 +39,7 @@ sonarqube {
 		property("sonar.organization", "lfm")
 		property("sonar.host.url", "https://sonarcloud.io")
 		property("sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacoco/test/jacocoTestReport.xml")
-		property("sonar.coverage.exclusions", "'**/jobs/**', '**/configuration/**'")
+		property("sonar.coverage.exclusions", "**/jobs/**, **/configuration/**")
 	}
 }
 
