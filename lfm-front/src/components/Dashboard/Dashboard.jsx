@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import Grid from '@mui/material/Grid';
 import {getIngresosForUserIdPerMonth} from "../../services/IngresosService";
 import {getGastosForUserIdPerMonth} from "../../services/GastosService";
@@ -7,9 +7,10 @@ import ViewTitle from "../ViewTitle";
 import GastosVsIngresos from "./Accordions/GastosVsIngresos";
 import Gastos from "./Accordions/Gastos";
 import PlazosFijos from "./Accordions/PlazosFijos";
+import {GastosContext} from "../Contexts";
 
 export default function Dashboard() {
-    const [gastos, setGastos] = useState([])
+    const {gastos, setGastos} = useContext(GastosContext)
     const [ingresos, setIngresos] = useState([])
 
     async function getIngresos() {
