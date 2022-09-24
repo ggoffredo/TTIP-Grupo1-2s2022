@@ -12,7 +12,7 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.mockito.InjectMocks
 import org.mockito.Mock
-import org.mockito.Mockito.`when`
+import org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations
 import org.mockito.Spy
 import java.time.LocalDate
@@ -22,7 +22,7 @@ class GastosTest {
     @Mock
     lateinit var gastosRepositoryMock: GastosRepository
     @Spy
-    lateinit var administrablesService: AdministrablesService //NOSONAR
+    lateinit var administrablesService: AdministrablesService
 
     @InjectMocks
     lateinit var subject: GastosService
@@ -43,6 +43,7 @@ class GastosTest {
     fun cuandoSePidenLosGastosMensualizadosDeUnUsuarioConGastosEstosSeSeparanEnMesesSegunElGastoMasViejo() {
         val gastosMensualizados = this.subject.getGastosForUserPerMonth(1)
         assertEquals(gastosMensualizados.size, 2)
+        verify(administrablesService, times(1)).getAdministrablesPerMonth(this.gastos)
 
         val gastosMesPosterior = gastosMensualizados.first()
         assertEquals(gastosMesPosterior.mes, LocalDate.now().minusMonths(1).withDayOfMonth(1))
@@ -57,8 +58,10 @@ class GastosTest {
 
     @Test
     fun cuandoSePidenLosGastosMensualizadosDeUnUsuarioSinGastosSeRetornaUnaListaVaciaDeGastosMensualizados() {
-        `when`(gastosRepositoryMock.findByUsuarioIdOrderByFechaAsc(2)).thenReturn(listOf())
+        val emptyList = listOf<Gasto>()
+        `when`(gastosRepositoryMock.findByUsuarioIdOrderByFechaAsc(2)).thenReturn(emptyList)
         val gastosMensualizados = this.subject.getGastosForUserPerMonth(2)
+        verify(administrablesService, times(1)).getAdministrablesPerMonth(emptyList)
         assertEquals(gastosMensualizados.size, 0)
     }
 

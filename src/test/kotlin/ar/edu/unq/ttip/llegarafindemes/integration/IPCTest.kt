@@ -13,7 +13,7 @@ class IPCTest {
     @Test
     fun enBaseALaPaginaDelINDECSeObtieneElIPCDelUltimoMes(){
         val ipc = ipcService.getLastMonthIPC()
-        assert(ipc.value .isNotEmpty())
+        assert(ipc.value.isNotEmpty())
         assert(ipc.month.isNotEmpty())
     }
 
