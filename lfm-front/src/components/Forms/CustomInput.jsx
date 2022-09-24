@@ -1,9 +1,10 @@
 import Input from "@mui/material/Input";
 import FormItem from "./FormItem";
 
-const CustomInput = ({inputLabel, selectedValue, handleSelectedValueCallback, isDisabled, isEndAdornment, adornment, inputType}) => {
+const CustomInput = ({inputLabel, selectedValue, handleSelectedValueCallback, isDisabled, isEndAdornment, adornment, inputType, hasError}) => {
     return <FormItem
         label={inputLabel}
+        hasError={hasError}
         input={
             <Input
                 id="rate-disabled-input"

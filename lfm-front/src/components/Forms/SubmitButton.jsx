@@ -3,12 +3,12 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import React from "react";
 
-const CalculateButton = () => {
+const SubmitButton = ({label}) => {
     return <Grid item>
         <FormControl sx={{ width: '200px' }} variant="standard" margin="dense">
-            <Button variant="outlined" size="large" type="submit"> Calcular </Button>
+            <Button variant="outlined" size="large" type="submit"> {label} </Button>
         </FormControl>
     </Grid>
 }
 
-export default CalculateButton;
+export default SubmitButton;
