@@ -28,6 +28,7 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("org.postgresql:postgresql:42.5.0")
 	implementation("joda-time:joda-time:2.11.1")
+	implementation("org.jsoup:jsoup:1.15.3")
 	testImplementation("org.springframework.boot:spring-boot-starter-test:2.7.3")
 	testImplementation("org.springframework.security:spring-security-test:5.7.3")
 	implementation ("org.apache.commons:commons-csv:1.5")
