@@ -6,8 +6,8 @@ import CardContent from "@mui/material/CardContent";
 import './PlazoFijoSimulator.css';
 import {getPlazosFijos} from "../../services/PlazosFijosService";
 import BankSelect from "./BankSelect";
-import CustomInput from "./CustomInput";
-import CalculateButton from "./CalculateButton";
+import CustomInput from "../Forms/CustomInput";
+import SubmitButton from "../Forms/SubmitButton";
 import ViewTitle from "../ViewTitle";
 import {todayStringFormatted} from "../../helpers/Utils";
 
@@ -80,7 +80,7 @@ const PlazoFijoSimulator = () => {
                                 handleSelectedValueCallback={handleDaysInput}
                                 inputType={"date"}
                             />
-                            <CalculateButton/>
+                            <SubmitButton label={"Calcular"}/>
                             <Grid item> {interest && <p className="interestResult">{interest}</p>} </Grid>
                         </Grid>
                     </form>
