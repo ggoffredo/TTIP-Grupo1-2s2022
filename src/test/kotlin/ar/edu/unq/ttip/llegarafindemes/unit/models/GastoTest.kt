@@ -1,4 +1,4 @@
-package ar.edu.unq.ttip.llegarafindemes.unit
+package ar.edu.unq.ttip.llegarafindemes.unit.models
 
 import ar.edu.unq.ttip.llegarafindemes.models.Gasto
 import ar.edu.unq.ttip.llegarafindemes.models.MedioDePago

@@ -72,4 +72,11 @@ class GastosTest {
             }
         }
     }
+
+    @Test
+    fun alPedirLosGastosDeUnUsuarioInexistenteSeRetorna404() {
+        this.mockMvc.get("/users/150/gastos").andExpect {
+            status { isNotFound() }
+        }
+    }
 }
