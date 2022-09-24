@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.*
-import java.time.LocalDate
 
 @Controller
 class IngresosController {
@@ -18,8 +17,8 @@ class IngresosController {
     @GetMapping(value = ["/users/{userId}/ingresos"])
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
-    fun getIngresosForUser(@PathVariable userId: Int, @RequestParam date: LocalDate?): List<Ingreso> {
-        return ingresosService.getIngresosForUser(userId, date)
+    fun getIngresosForUser(@PathVariable userId: Int): List<Ingreso> {
+        return ingresosService.getIngresosForUser(userId)
     }
 
     @GetMapping(value = ["/users/{userId}/ingresosMensualizados"])

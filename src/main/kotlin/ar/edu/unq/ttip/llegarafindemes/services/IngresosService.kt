@@ -15,7 +15,7 @@ class IngresosService {
     @Autowired
     private lateinit var administrablesService: AdministrablesService
 
-    fun getIngresosForUser(userdId: Int, date: LocalDate?): List<Ingreso> {
+    fun getIngresosForUser(userdId: Int): List<Ingreso> {
         return ingresosRepository.findByUsuarioId(userdId)
     }
 

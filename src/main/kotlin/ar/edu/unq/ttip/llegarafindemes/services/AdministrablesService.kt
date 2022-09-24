@@ -12,7 +12,7 @@ import java.util.stream.Stream
 @Service
 class AdministrablesService {
     private var monthsToCalculate = mutableListOf<LocalDate>()
-    private lateinit var administrables : List<Administrable>
+    private var administrables = listOf<Administrable>()
 
     fun getAdministrablesPerMonth(administrables: List<Administrable>): AdministrablesService {
         this.administrables = administrables
