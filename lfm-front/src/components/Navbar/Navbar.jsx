@@ -12,6 +12,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Logo from '../../resources/named-logo.png'
 import {Link} from "react-router-dom";
 import SignInUpAvatar from "./SignInUpAvatar";
+import useUser from "../CustomHooks/UseUser";
 
 const pages = [
     {button: 'Dashboard', link: '/'},
@@ -21,6 +22,7 @@ const pages = [
 
 const Navbar = () => {
     const [anchorElNav, setAnchorElNav] = useState(null);
+    const {user} = useUser()
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -56,7 +58,7 @@ const Navbar = () => {
                             onClose={handleCloseNavMenu}
                             sx={{display: { xs: 'block', md: 'none' }}}
                         >
-                            {pages.map((page) => (
+                            {user && pages.map((page) => (
                                 <Link to={page.link} key={page.link}>
                                     <MenuItem key={page} onClick={handleCloseNavMenu}>
                                         <Typography textAlign="center">{page.button}</Typography>
@@ -66,7 +68,7 @@ const Navbar = () => {
                         </Menu>
                     </Box>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        {pages.map((page) => (
+                        {user && pages.map((page) => (
                             <Link to={page.link} key={page.link}>
                                 <Button
                                     key={page}
