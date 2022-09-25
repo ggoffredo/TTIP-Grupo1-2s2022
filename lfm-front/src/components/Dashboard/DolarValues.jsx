@@ -34,7 +34,7 @@ const DolarValues = () => {
     }
 
     return <Grid item xs={12}>
-        <Stack direction="row" spacing={1}>
+        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1}>
             {getChips()}
         </Stack>
     </Grid>
