@@ -1,13 +1,13 @@
 import axios from "axios";
 
 const getFromLFMApi = (path) => {
-    return get(`http://localhost:8080/${path}`);
+    return get(`${process.env.REACT_APP_BACKEND_API}${path}`);
 }
 
 const logInToLFM = (userEmail, userPassword) => {
     return axios({
         method: 'post',
-        url: "http://localhost:8080/login",
+        url: `${process.env.REACT_APP_BACKEND_API}login`,
         auth: {
             username: userEmail,
             password: userPassword

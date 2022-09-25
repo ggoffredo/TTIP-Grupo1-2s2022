@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import ChartCard from "../ChartCard";
+import {useEffect, useState} from 'react';
+import ChartCard from "../Core/Charts/ChartCard";
 import Grid from "@mui/material/Grid";
 import StyledTable from "../Core/StyledTable";
 import {getPlazosFijos} from "../../services/PlazosFijosService";

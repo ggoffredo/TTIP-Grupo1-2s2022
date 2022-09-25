@@ -1,7 +1,6 @@
 import {FormControl} from "@mui/material";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
-import React from "react";
 
 const SubmitButton = ({label}) => {
     return <Grid item>

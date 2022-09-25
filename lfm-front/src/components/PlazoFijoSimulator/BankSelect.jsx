@@ -2,7 +2,6 @@ import MenuItem from "@mui/material/MenuItem";
 import {InputAdornment, Select} from "@mui/material";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import FormItem from "../Forms/FormItem";
-import React from "react";
 
 const BankSelect = ({banksDatasource, selectedValue, handleSelectCallback}) => {
     return <FormItem

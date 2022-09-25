@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import {InputAdornment} from "@mui/material";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
@@ -55,7 +55,7 @@ const PlazoFijoSimulator = () => {
     return <Grid container rowSpacing={4} justifyContent="center">
         <ViewTitle title={"Simulador de plazo fijo"}/>
         <Grid item xs={8} sm={6} md={4}>
-            <Card>
+            <Card sx={{border: "1px solid #025c96"}}>
                 <CardContent>
                     <form onSubmit={handleSubmit}>
                         <Grid container direction="column">

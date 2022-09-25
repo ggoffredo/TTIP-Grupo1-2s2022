@@ -13,7 +13,6 @@ const GastosVsIngresos = ({gastos, ingresos}) => {
 
     return <AccordionCore
         title={'Gastos vs Ingresos'}
-        spacing={10}
         children={
             <>
                 <GastosIngresosDoughnutChart

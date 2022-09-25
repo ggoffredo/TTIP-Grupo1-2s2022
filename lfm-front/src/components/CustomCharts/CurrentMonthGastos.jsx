@@ -1,9 +1,7 @@
 import {firstDayOfMonthStringFormatted, getDateFromString} from "../../helpers/Utils";
 import LineChart from "../Core/Charts/LineChart";
 import Grid from "@mui/material/Grid";
-import ChartCard from "../ChartCard";
-import React from "react";
-
+import ChartCard from "../Core/Charts/ChartCard";
 
 const CurrentMonthGastos = ({gastosMesEnCurso}) => {
     const getCorrectDate = (stringDate) => {

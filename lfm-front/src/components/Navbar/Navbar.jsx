@@ -31,7 +31,7 @@ const Navbar = () => {
     };
 
     return (
-        <AppBar position="static" sx={{backgroundColor: '#025c96'}}>
+        <AppBar position="static" sx={{backgroundColor: '#5086c1'}}>
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <img src={Logo} alt="Llegar a fin de mes logo" style={{height: '50px'}}/>
@@ -71,7 +71,7 @@ const Navbar = () => {
                                 <Button
                                     key={page}
                                     onClick={handleCloseNavMenu}
-                                    sx={{ my: 2, color: '#20D3BD', display: 'block' }}
+                                    sx={{ my: 2, color: 'white', display: 'block' }}
                                 >
                                     {page.button}
                                 </Button>

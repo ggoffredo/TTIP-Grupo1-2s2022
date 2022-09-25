@@ -1,6 +1,5 @@
 import {FormControl, InputLabel} from "@mui/material";
 import Grid from "@mui/material/Grid";
-import React from "react";
 
 const FormItem = ({label, input, hasError = false}) => {
     return <Grid item>
