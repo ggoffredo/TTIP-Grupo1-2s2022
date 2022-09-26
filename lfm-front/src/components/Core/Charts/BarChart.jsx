@@ -47,14 +47,25 @@ export default function BarChart({data}) {
     const options = {
         plugins: {
             legend: {
-                display: false,
-                labels: {
-                    font: {
-                        size: 88 //TODO: Revisar por que no toam el cambio de tamano
-                    }
-                },
-            },
+                display: false
+            }
         },
+        scales: {
+            x: {
+                ticks: {
+                    font: {
+                        size: 20
+                    }
+                }
+            },
+            y: {
+                ticks: {
+                    font: {
+                        size: 20
+                    }
+                }
+            }
+        }
     };
 
     return <div>

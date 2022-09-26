@@ -4,9 +4,9 @@ import BarChart from "../Core/Charts/BarChart";
 
 const getBarChartData = (ipc, pfIntereses) => {
     return {
-        Inlfacion: ipc,
-        InteresesPlazoFijo: pfIntereses
-    };
+        'Inflación': ipc,
+        'Interés Plazo Fijo': pfIntereses
+    }
 }
 
 const getBarChart = (ipc, pfIntereses) => {
