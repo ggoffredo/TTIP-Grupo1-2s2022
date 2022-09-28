@@ -15,7 +15,7 @@ import SignInUpAvatar from "./SignInUpAvatar";
 import useUser from "../CustomHooks/UseUser";
 
 const pages = [
-    {button: 'Dashboard', link: '/'},
+    {button: 'Dashboard', link: '/dashboard'},
     {button: 'Simular Plazo Fijo', link: '/plazosFijos'},
     {button: 'Opciones de inversión', link: '/opciones'}
 ];
