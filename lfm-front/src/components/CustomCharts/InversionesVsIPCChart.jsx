@@ -16,7 +16,7 @@ const getBarChart = (ipc, pfIntereses) => {
 }
 
 const InversionesVsIPCChart = ({ipc, pfIntereses, title}) => {
-    return <Grid item xs={8} sm={8} md={8}>
+    return <Grid item xs={12} sm={12} md={12}>
         <ChartCard
             chart={getBarChart(ipc, pfIntereses)}
             title={title}

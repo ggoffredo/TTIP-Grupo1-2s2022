@@ -71,22 +71,28 @@ export default function OpcionesSimulator() {
     }, []);
 
     return <Grid container spacing={{ xs: 2 }}>
-            <ViewTitle title={"Opciones de Inversión"}/>
-            <ProyeccionYAhorros proyeccion={proyeccionMensual} ahorros={ahorros}/>
-            <InversionesVsIPCChart
-                ipc={ipc}
-                pfIntereses={pfInteresPromedio}
-                title={'Inversiones VS Inflación'}
-            />
-        <Grid item xs={12} sm={12} lg={6}>
-            <ViewSubTitle subTitle={'En base a proyección mensual'}/>
-            <ConstitucionPlazosFijosTable monto={proyeccionMensual}/>
-            <CompraDolares monto={proyeccionMensual}/>
+        <ViewTitle title={"Opciones de Inversión"}/>
+        <ProyeccionYAhorros proyeccion={proyeccionMensual} ahorros={ahorros}/>
+        <Grid container justifyContent="center">
+            <Grid item xs={12} sm={12} lg={6}>
+                <InversionesVsIPCChart
+                    ipc={ipc}
+                    pfIntereses={pfInteresPromedio}
+                    title={'Inversiones VS Inflación'}
+                />
+            </Grid>
         </Grid>
-        <Grid item xs={12} sm={12} lg={6}>
-            <ViewSubTitle subTitle={'En base a ahorros'}/>
-            <ConstitucionPlazosFijosTable monto={ahorros}/>
-            <CompraDolares monto={ahorros}/>
+        <Grid container>
+            <Grid item xs={12} sm={12} lg={6}>
+                <ViewSubTitle subTitle={'En base a proyección mensual'}/>
+                <ConstitucionPlazosFijosTable monto={proyeccionMensual}/>
+                <CompraDolares monto={proyeccionMensual}/>
+            </Grid>
+            <Grid item xs={12} sm={12} lg={6}>
+                <ViewSubTitle subTitle={'En base a ahorros'}/>
+                <ConstitucionPlazosFijosTable monto={ahorros}/>
+                <CompraDolares monto={ahorros}/>
+            </Grid>
         </Grid>
     </Grid>
 }
