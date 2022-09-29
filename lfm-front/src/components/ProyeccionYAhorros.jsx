@@ -1,14 +1,14 @@
 import Stack from "@mui/material/Stack";
-import Chip from "@mui/material/Chip";
 import Grid from "@mui/material/Grid";
+import ChipCore from "./Core/ChipCore";
 
 const ProyeccionYAhorro  = ({proyeccion, ahorros}) => {
 
     const getChips = () => {
         return (
             <>
-                <Chip label={`Proyección: $${proyeccion}`} color="success" variant="outlined" key="proyeccion"/>
-                <Chip label={`Ahorros: $${ahorros}`} color="success" variant="outlined" key="ahorros"/>
+                <ChipCore labelContent={`Proyección: $${proyeccion}`} key="proyeccion"/>
+                <ChipCore labelContent={`Ahorros: $${ahorros}`} key="ahorros"/>
             </>
         )
     }

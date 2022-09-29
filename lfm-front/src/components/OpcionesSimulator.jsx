@@ -48,17 +48,17 @@ export default function OpcionesSimulator() {
         })
     }, []);
 
-    return <Grid container spacing={{ xs: 2 }} columns={{ xs: 12 }}>
+    return <Grid container spacing={{ xs: 2 }}>
         <ViewTitle title={"Opciones de Inversión"}/>
         {/* TODO: crear table que recibe dolares y ahorros y muestra el calculo*/}
 
         <ProyeccionYAhorros proyeccion={proyeccionMensual} ahorros={ahorros}/>
-        <Grid item xs={6}>
+        <Grid item xs={12} sm={12} lg={6}>
             <ViewSubTitle subTitle={'En base a proyección mensual'}/>
             <ConstitucionPlazosFijosTable monto={proyeccionMensual}/>
             <CompraDolares monto={proyeccionMensual}/>
         </Grid>
-        <Grid item xs={6} >
+        <Grid item xs={12} sm={12} lg={6}>
             <ViewSubTitle subTitle={'En base a ahorros'}/>
             <ConstitucionPlazosFijosTable monto={ahorros}/>
             <CompraDolares monto={ahorros}/>

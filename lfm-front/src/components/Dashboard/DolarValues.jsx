@@ -29,12 +29,12 @@ const DolarValues = () => {
         return dolares.map(dolar => {
             let name = normalizeName(dolar['casa']['nombre'])
             let value = normalizeValue(dolar['casa']['venta'])
-            return <Chip label={`${name}: $${value}`} color="success" variant="outlined" key={name}/>
+            return <Chip label={`${name}: $${value}`} variant="outlined" key={name} sx={{color: '#152377', border: '1px solid #152377'}}/>
         })
     }
 
     return <Grid item xs={12}>
-        <Stack direction="row" spacing={1}>
+        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1}>
             {getChips()}
         </Stack>
     </Grid>

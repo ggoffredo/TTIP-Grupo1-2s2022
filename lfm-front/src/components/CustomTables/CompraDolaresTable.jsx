@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import ChartCard from "../ChartCard";
+import {useEffect, useState} from 'react';
+import ChartCard from "../Core/Charts/ChartCard";
 import Grid from "@mui/material/Grid";
 import StyledTable from "../Core/StyledTable";
 import {getDolarValues} from "../../services/DolarSiService";
@@ -12,9 +12,7 @@ const CompraDolaresTable = ({monto}) => {
         return <StyledTable data={data} headers={['Nombre', 'Cotización', 'Monto', 'Cantidad']}/>
     }
 
-    useEffect(() => {
-        getDolarValues().then(res => getDolares(res))
-    }, [monto])
+    const getAndSetDolares = () => {getDolarValues().then(res => mapAndSetDolares(res))}
 
     const normalizeName = (name) => {
         return name.split(" ").map(namePart => {return capitalize(namePart)}).join(" ")
@@ -24,7 +22,7 @@ const CompraDolaresTable = ({monto}) => {
         return Number(value.replace(",", ".")).toFixed(2).replace(".", ",")
     }
 
-    const getDolares = (dolaresApi) => {
+    const mapAndSetDolares = (dolaresApi) => {
         let dolaresMap = dolaresApi.map(dolar => {
             let name = normalizeName(dolar['casa']['nombre'])
             let value =  normalizeValue(dolar['casa']['venta'])
@@ -32,6 +30,10 @@ const CompraDolaresTable = ({monto}) => {
         })
         setDolares(dolaresMap)
     }
+
+    useEffect(() => {
+        getAndSetDolares()
+    }, [monto])
 
     return (
         <Grid item xs={12} sm={12} md={12}>

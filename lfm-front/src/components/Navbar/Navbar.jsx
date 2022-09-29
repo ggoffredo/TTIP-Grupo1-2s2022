@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -31,7 +31,7 @@ const Navbar = () => {
     };
 
     return (
-        <AppBar position="static">
+        <AppBar position="static" sx={{backgroundColor: '#5086c1'}}>
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <img src={Logo} alt="Llegar a fin de mes logo" style={{height: '50px'}}/>
@@ -49,20 +49,12 @@ const Navbar = () => {
                         <Menu
                             id="menu-appbar"
                             anchorEl={anchorElNav}
-                            anchorOrigin={{
-                                vertical: 'bottom',
-                                horizontal: 'left',
-                            }}
+                            anchorOrigin={{vertical: 'bottom', horizontal: 'left'}}
                             keepMounted
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'left',
-                            }}
+                            transformOrigin={{vertical: 'top', horizontal: 'left'}}
                             open={Boolean(anchorElNav)}
                             onClose={handleCloseNavMenu}
-                            sx={{
-                                display: { xs: 'block', md: 'none' },
-                            }}
+                            sx={{display: { xs: 'block', md: 'none' }}}
                         >
                             {pages.map((page) => (
                                 <Link to={page.link} key={page.link}>

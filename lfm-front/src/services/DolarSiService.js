@@ -7,7 +7,7 @@ const dolares = [
 ];
 
 const getDolarValues = async () => {
-    let values = await get('https://www.dolarsi.com/api/api.php?type=valoresprincipales');
+    let values = await get(process.env.REACT_APP_DOLAR_SI_API);
     return values.filter(value => {
         return dolares.includes(value['casa']['nombre']);
     })

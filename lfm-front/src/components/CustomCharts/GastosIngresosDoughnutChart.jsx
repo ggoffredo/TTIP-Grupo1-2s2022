@@ -1,4 +1,4 @@
-import ChartCard from "../ChartCard";
+import ChartCard from "../Core/Charts/ChartCard";
 import Grid from "@mui/material/Grid";
 import DoughnutChart from "../Core/Charts/DoughnutChart";
 
@@ -16,7 +16,7 @@ const getDoughnutChart = (ingresos, gastos) => {
 }
 
 const GastosIngresosDoughnutChart = ({ingresos, gastos, title}) => {
-    return <Grid item xs={2} sm={4} md={4}>
+    return <Grid item xs={12} sm={8} md={5} lg={4}>
         <ChartCard
             chart={getDoughnutChart(ingresos, gastos)}
             label={`Ingresos: ${ingresos}`}
