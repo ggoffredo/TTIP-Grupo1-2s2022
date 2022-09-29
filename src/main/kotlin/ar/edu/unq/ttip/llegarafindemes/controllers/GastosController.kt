@@ -9,10 +9,7 @@ import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.*
 
 @Controller
-class GastosController {
-
-    @Autowired
-    private lateinit var gastosService: GastosService
+class GastosController(@Autowired private var gastosService: GastosService) {
 
     @GetMapping(value = ["/users/{userId}/gastos"])
     @ResponseBody

@@ -9,9 +9,7 @@ import org.springframework.stereotype.Component
 
 @Aspect
 @Component
-class UserAspect {
-    @Autowired
-    lateinit var userService: UserService
+class UserAspect(@Autowired var userService: UserService) {
 
     @Around(
         "execution(* ar.edu.unq.ttip.llegarafindemes.controllers.GastosController.*(..)) || execution(* ar.edu.unq.ttip.llegarafindemes.controllers.IngresosController.*(..))"

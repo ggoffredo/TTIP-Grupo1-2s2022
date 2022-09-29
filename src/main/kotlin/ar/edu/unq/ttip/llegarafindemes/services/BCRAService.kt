@@ -14,12 +14,9 @@ import java.nio.file.Files
 import kotlin.io.path.Path
 
 @Service
-class BCRAService {
+class BCRAService(@Autowired private var pfijoRepository: PFijoRepository) {
     private val pfcsvName = "PFIJO.CSV"
     private val pfcsvPath = "http://www.bcra.gov.ar/pdfs/BCRAyVos/$pfcsvName"
-
-    @Autowired
-    private lateinit var pfijoRepository: PFijoRepository
 
     fun downloadPFCSVFile() {
         val url = URL(pfcsvPath)

@@ -8,10 +8,7 @@ import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.*
 
 @Controller
-class PlazoFijoController {
-
-    @Autowired
-    private lateinit var bcraService: BCRAService
+class PlazoFijoController(@Autowired private var bcraService: BCRAService) {
 
     @GetMapping(value = ["/plazosFijos"])
     @ResponseBody
