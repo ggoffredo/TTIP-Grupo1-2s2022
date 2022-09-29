@@ -1,12 +1,23 @@
 package ar.edu.unq.ttip.llegarafindemes.services
 
 import ar.edu.unq.ttip.llegarafindemes.models.Ipc
+import com.fasterxml.jackson.databind.ObjectMapper
 import org.jsoup.Jsoup
 import org.jsoup.select.Elements
+import org.springframework.http.HttpHeaders
+import org.springframework.http.HttpRequest
+import org.springframework.http.client.ClientHttpRequestExecution
+import org.springframework.http.client.ClientHttpRequestInterceptor
 import org.springframework.stereotype.Service
+import org.springframework.web.client.RestTemplate
+import org.springframework.web.util.UriComponentsBuilder
 
 @Service
 class IPCService {
+
+    private val URL = "https://api.estadisticasbcra.com/inflacion_mensual_oficial"
+    // TODO: Mover a otro lado
+    private val token = "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTU5NTE4OTMsInR5cGUiOiJleHRlcm5hbCIsInVzZXIiOiJnYXN0b24uZ29mZnJlZG9AZ21haWwuY29tIn0.SSg8DqYMQbiXSYcVGdca7govAwuLyYsnZuGSUL0VP5dbckD9En7Hfn8O8npVqKpCXG5Twgb-j62y5P88tjSl4g"
 
     fun getLastMonthIPC(): Ipc {
         val document = Jsoup.parse(Jsoup
@@ -19,5 +30,17 @@ class IPCService {
 
     private fun toIPC(elements: Elements): Ipc {
         return Ipc(value = elements[2].toString().substringAfter("\n").substringBefore("%\n"), month = elements[4].toString().substringAfter("\n").substringBefore("\n"))
+    }
+
+    fun getIPCByMonth(): MutableList<Ipc> {
+        val restTemplate = RestTemplate()
+        val urlTemplate = UriComponentsBuilder.fromHttpUrl(URL).encode().toUriString()
+        restTemplate.interceptors.add(ClientHttpRequestInterceptor { outReq: HttpRequest, bytes: ByteArray?, clientHttpReqExec: ClientHttpRequestExecution ->
+            outReq.headers[HttpHeaders.AUTHORIZATION] = "BEARER $token"
+            clientHttpReqExec.execute(outReq, bytes!!)
+        })
+        val response = restTemplate.getForEntity(urlTemplate, Array<Any>::class.java)
+        val ipcs = response.body!!.map { e -> e as LinkedHashMap<String, Any>; Ipc(e["d"]!!.toString(), e["v"]!!.toString()) }
+        return ipcs.toMutableList()
     }
 }
