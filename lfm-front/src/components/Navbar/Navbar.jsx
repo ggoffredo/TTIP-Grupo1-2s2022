@@ -36,7 +36,9 @@ const Navbar = () => {
         <AppBar position="static" sx={{backgroundColor: '#5086c1'}}>
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
-                    <img src={Logo} alt="Llegar a fin de mes logo" style={{height: '50px'}}/>
+                    <Link to='/'>
+                        <img src={Logo} alt="Llegar a fin de mes logo" style={{height: '50px'}}/>
+                    </Link>
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                         <IconButton
                             size="large"
