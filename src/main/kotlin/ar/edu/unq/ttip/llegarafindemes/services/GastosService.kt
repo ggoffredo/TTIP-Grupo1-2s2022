@@ -7,12 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service
-class GastosService {
-
-    @Autowired
-    private lateinit var gastosRepository: GastosRepository
-    @Autowired
-    private lateinit var administrablesService: AdministrablesService
+class GastosService(
+    @Autowired private var gastosRepository: GastosRepository,
+    @Autowired private var administrablesService: AdministrablesService
+) {
 
     fun getGastosForUser(userdId: Int): List<Gasto> {
         return gastosRepository.findByUsuarioId(userdId)

@@ -5,15 +5,12 @@ import ar.edu.unq.ttip.llegarafindemes.models.Ingreso
 import ar.edu.unq.ttip.llegarafindemes.repositories.IngresosRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import java.time.LocalDate
 
 @Service
-class IngresosService {
-
-    @Autowired
-    private lateinit var ingresosRepository: IngresosRepository
-    @Autowired
-    private lateinit var administrablesService: AdministrablesService
+class IngresosService(
+    @Autowired private var ingresosRepository: IngresosRepository,
+    @Autowired private var administrablesService: AdministrablesService
+) {
 
     fun getIngresosForUser(userdId: Int): List<Ingreso> {
         return ingresosRepository.findByUsuarioId(userdId)

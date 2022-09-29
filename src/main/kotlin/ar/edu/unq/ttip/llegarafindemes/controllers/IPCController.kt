@@ -10,10 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody
 import org.springframework.web.bind.annotation.ResponseStatus
 
 @Controller
-class IPCController {
-
-    @Autowired
-    private lateinit var ipcService: IPCService
+class IPCController(@Autowired private var ipcService: IPCService) {
 
     @GetMapping(value = ["/ipc"])
     @ResponseBody

@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.*
 import java.util.*
 
 @Controller
-class UserController {
-    @Autowired
-    private lateinit var userService: UserService
+class UserController(@Autowired private var userService: UserService) {
 
     @PostMapping(value = ["/login"])
     @ResponseBody

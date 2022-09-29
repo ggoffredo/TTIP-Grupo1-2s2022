@@ -10,9 +10,7 @@ import org.springframework.stereotype.Component
 
 @Component
 @EnableScheduling
-class PlazoFijoJob {
-    @Autowired
-    private lateinit var bcraService: BCRAService
+class PlazoFijoJob(@Autowired private var bcraService: BCRAService) {
     @Value("\${enable.bcra-job}")
     private var runBcraJob: Boolean = false
     private val logger = LoggerFactory.getLogger(PlazoFijoJob::class.java)

@@ -8,9 +8,7 @@ import org.springframework.stereotype.Service
 import kotlin.jvm.Throws
 
 @Service
-class UserService {
-    @Autowired
-    private lateinit var userRepository: UserRepository
+class UserService(@Autowired private var userRepository: UserRepository) {
 
     @Throws(UserNotFoundException::class)
     fun login(email: String, password: String): Usuario {
