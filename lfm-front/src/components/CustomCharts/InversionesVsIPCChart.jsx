@@ -1,4 +1,4 @@
-import ChartCard from "../ChartCard";
+import ChartCard from "../Core/Charts/ChartCard";
 import Grid from "@mui/material/Grid";
 import BarChart from "../Core/Charts/BarChart";
 
@@ -16,7 +16,7 @@ const getBarChart = (ipc, pfIntereses) => {
 }
 
 const InversionesVsIPCChart = ({ipc, pfIntereses, title}) => {
-    return <Grid item xs={2} sm={4} md={4}>
+    return <Grid item xs={8} sm={8} md={8}>
         <ChartCard
             chart={getBarChart(ipc, pfIntereses)}
             title={title}

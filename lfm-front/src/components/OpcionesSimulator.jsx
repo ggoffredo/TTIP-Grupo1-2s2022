@@ -70,17 +70,14 @@ export default function OpcionesSimulator() {
         })
     }, []);
 
-    return  <div>
-                <InversionesVsIPCChart
-                    ipc={ipc}
-                    pfIntereses={pfInteresPromedio}
-                    title={'Inversiones VS Inflación'}
-                />
-                <br/>
-                <Grid container spacing={{ xs: 2 }}>
-                    <ViewTitle title={"Opciones de Inversión"}/>
-
-        <ProyeccionYAhorros proyeccion={proyeccionMensual} ahorros={ahorros}/>
+    return <Grid container spacing={{ xs: 2 }}>
+            <ViewTitle title={"Opciones de Inversión"}/>
+            <ProyeccionYAhorros proyeccion={proyeccionMensual} ahorros={ahorros}/>
+            <InversionesVsIPCChart
+                ipc={ipc}
+                pfIntereses={pfInteresPromedio}
+                title={'Inversiones VS Inflación'}
+            />
         <Grid item xs={12} sm={12} lg={6}>
             <ViewSubTitle subTitle={'En base a proyección mensual'}/>
             <ConstitucionPlazosFijosTable monto={proyeccionMensual}/>
