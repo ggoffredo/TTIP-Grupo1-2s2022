@@ -16,4 +16,9 @@ class UserService {
     fun login(email: String, password: String): Usuario {
         return userRepository.findByEmailAndPassword(email, password).orElseThrow{ UserNotFoundException() }
     }
+
+    @Throws(UserNotFoundException::class)
+    fun getUser(userId: Int): Usuario {
+        return userRepository.findById(userId).orElseThrow{ UserNotFoundException() }
+    }
 }

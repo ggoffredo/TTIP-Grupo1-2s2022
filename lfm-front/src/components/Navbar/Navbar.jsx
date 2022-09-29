@@ -12,15 +12,17 @@ import MenuItem from '@mui/material/MenuItem';
 import Logo from '../../resources/named-logo.png'
 import {Link} from "react-router-dom";
 import SignInUpAvatar from "./SignInUpAvatar";
+import useUser from "../CustomHooks/UseUser";
 
 const pages = [
-    {button: 'Dashboard', link: '/'},
+    {button: 'Dashboard', link: '/dashboard'},
     {button: 'Simular Plazo Fijo', link: '/plazosFijos'},
     {button: 'Opciones de inversión', link: '/opciones'}
 ];
 
 const Navbar = () => {
     const [anchorElNav, setAnchorElNav] = useState(null);
+    const {user} = useUser()
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -34,7 +36,9 @@ const Navbar = () => {
         <AppBar position="static" sx={{backgroundColor: '#5086c1'}}>
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
-                    <img src={Logo} alt="Llegar a fin de mes logo" style={{height: '50px'}}/>
+                    <Link to='/'>
+                        <img src={Logo} alt="Llegar a fin de mes logo" style={{height: '50px'}}/>
+                    </Link>
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                         <IconButton
                             size="large"
@@ -56,8 +60,8 @@ const Navbar = () => {
                             onClose={handleCloseNavMenu}
                             sx={{display: { xs: 'block', md: 'none' }}}
                         >
-                            {pages.map((page) => (
-                                <Link to={page.link} key={page.link}>
+                            {user && pages.map((page) => (
+                                <Link to={page.link} key={page.link} data-testid={`${page.link}-min`}>
                                     <MenuItem key={page} onClick={handleCloseNavMenu}>
                                         <Typography textAlign="center">{page.button}</Typography>
                                     </MenuItem>
@@ -66,8 +70,8 @@ const Navbar = () => {
                         </Menu>
                     </Box>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        {pages.map((page) => (
-                            <Link to={page.link} key={page.link}>
+                        {user && pages.map((page) => (
+                            <Link to={page.link} key={page.link} data-testid={`${page.link}-max`}>
                                 <Button
                                     key={page}
                                     onClick={handleCloseNavMenu}

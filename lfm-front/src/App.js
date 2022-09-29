@@ -6,6 +6,8 @@ import PlazoFijoSimulator from "./components/PlazoFijoSimulator/PlazoFijoSimulat
 import Container from '@mui/material/Container';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {UserProvider} from "./components/Contexts/UserContext";
+import Landing from "./components/Landing";
+import PrivateRoute from "./components/Router/PrivateRoute";
 
 function App() {
     return (
@@ -13,11 +15,16 @@ function App() {
             <div className="App">
                 <UserProvider>
                     <Navbar/>
+                    <Routes>
+                        <Route path="/" element={<Landing/>}/>
+                    </Routes>
                     <Container maxWidth="xl" sx={{marginTop: '20px'}}>
                         <Routes>
-                            <Route path="/" element={<Dashboard/>}/>
-                            <Route path="/plazosFijos" element={<PlazoFijoSimulator/>}/>
-                            <Route path="/opciones" element={<OpcionesSimulator/>}/>
+                            <Route element={<PrivateRoute/>}>
+                                <Route path="/dashboard" element={<Dashboard/>}/>
+                                <Route path="/plazosFijos" element={<PlazoFijoSimulator/>}/>
+                                <Route path="/opciones" element={<OpcionesSimulator/>}/>
+                            </Route>
                         </Routes>
                     </Container>
                 </UserProvider>

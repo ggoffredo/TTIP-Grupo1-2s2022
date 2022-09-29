@@ -4,12 +4,11 @@ import ar.edu.unq.ttip.llegarafindemes.services.BCRAService
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import kotlin.io.path.Path
 
 @SpringBootTest
 class BCRATest {
     @Autowired
-    private var bcraService: BCRAService = BCRAService()
+    private lateinit var bcraService: BCRAService
 
     @Test
     fun enBaseAUnCSVSeCreanLosRegistrosCorrespondientes(){

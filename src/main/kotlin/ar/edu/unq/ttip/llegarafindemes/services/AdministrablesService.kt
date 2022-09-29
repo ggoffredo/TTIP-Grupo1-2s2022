@@ -11,11 +11,12 @@ import java.util.stream.Stream
 
 @Service
 class AdministrablesService {
-    private lateinit var monthsToCalculate : MutableList<LocalDate>
-    private lateinit var administrables : List<Administrable>
+    private var monthsToCalculate = mutableListOf<LocalDate>()
+    private var administrables = listOf<Administrable>()
 
     fun getAdministrablesPerMonth(administrables: List<Administrable>): AdministrablesService {
         this.administrables = administrables
+        if (this.administrables.isEmpty()) return this
         val administrableMasViejo = this.administrables.first()
         val fechaInicial = administrableMasViejo.fecha
         val fechaFinal = LocalDate.now().plusMonths(1)

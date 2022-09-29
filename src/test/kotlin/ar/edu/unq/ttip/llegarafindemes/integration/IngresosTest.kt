@@ -65,4 +65,11 @@ class IngresosTest {
             }
         }
     }
+
+    @Test
+    fun alPedirLosIngresosDeUnUsuarioInexistenteSeRetorna404() {
+        this.mockMvc.get("/users/150/ingresos").andExpect {
+            status { isNotFound() }
+        }
+    }
 }

@@ -11,23 +11,25 @@ import CompraDolares from "./CustomTables/CompraDolaresTable";
 import InversionesVsIPCChart from "./CustomCharts/InversionesVsIPCChart";
 import {getIPCValue} from "../services/IPCService";
 import {getPlazosFijos} from "../services/PlazosFijosService";
+import useUser from "./CustomHooks/UseUser";
 
 export default function OpcionesSimulator() {
     const [ahorros, setAhorros] = useState(0)
     const [ipc, setIpc] = useState(0)
     const [pfInteresPromedio, setPfInteresPromedio] = useState(0)
     const [proyeccionMensual, setProyeccionMensual] = useState(0)
+    const {user} = useUser()
 
     function getIngresos() {
-        return getIngresosForUserId(1).then(res => arraySum(res, 'monto'))
+        return getIngresosForUserId(user.id).then(res => arraySum(res, 'monto'))
     }
 
     function getGastos() {
-        return getGastosForUserId(1).then(res => arraySum(res, 'monto'))
+        return getGastosForUserId(user.id).then(res => arraySum(res, 'monto'))
     }
 
     function getGastosMensualizados() {
-        return getGastosForUserIdPerMonth(1).then(res => res.length)
+        return getGastosForUserIdPerMonth(user.id).then(res => res.length)
     }
 
     function calcularAhorros(ingresos, gastos) {
