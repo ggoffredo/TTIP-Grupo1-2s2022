@@ -59,7 +59,7 @@ const Navbar = () => {
                             sx={{display: { xs: 'block', md: 'none' }}}
                         >
                             {user && pages.map((page) => (
-                                <Link to={page.link} key={page.link}>
+                                <Link to={page.link} key={page.link} data-testid={`${page.link}-min`}>
                                     <MenuItem key={page} onClick={handleCloseNavMenu}>
                                         <Typography textAlign="center">{page.button}</Typography>
                                     </MenuItem>
@@ -69,7 +69,7 @@ const Navbar = () => {
                     </Box>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {user && pages.map((page) => (
-                            <Link to={page.link} key={page.link}>
+                            <Link to={page.link} key={page.link} data-testid={`${page.link}-max`}>
                                 <Button
                                     key={page}
                                     onClick={handleCloseNavMenu}
