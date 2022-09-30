@@ -4,7 +4,6 @@ import ar.edu.unq.ttip.llegarafindemes.models.PFijo
 import ar.edu.unq.ttip.llegarafindemes.repositories.PFijoRepository
 import org.apache.commons.csv.CSVFormat
 import org.apache.commons.csv.CSVParser
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.io.File
 import java.io.FileOutputStream
@@ -14,7 +13,7 @@ import java.nio.file.Files
 import kotlin.io.path.Path
 
 @Service
-class BCRAService(@Autowired private var pfijoRepository: PFijoRepository) {
+class BCRAService(private val pfijoRepository: PFijoRepository) {
     private val pfcsvName = "PFIJO.CSV"
     private val pfcsvPath = "http://www.bcra.gov.ar/pdfs/BCRAyVos/$pfcsvName"
 

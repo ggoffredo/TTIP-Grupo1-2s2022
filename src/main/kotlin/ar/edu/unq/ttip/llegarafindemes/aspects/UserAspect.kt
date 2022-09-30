@@ -4,12 +4,11 @@ import ar.edu.unq.ttip.llegarafindemes.services.UserService
 import org.aspectj.lang.ProceedingJoinPoint
 import org.aspectj.lang.annotation.Around
 import org.aspectj.lang.annotation.Aspect
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
 @Aspect
 @Component
-class UserAspect(@Autowired var userService: UserService) {
+class UserAspect(private val userService: UserService) {
 
     @Around(
         "execution(* ar.edu.unq.ttip.llegarafindemes.controllers.GastosController.*(..)) || execution(* ar.edu.unq.ttip.llegarafindemes.controllers.IngresosController.*(..))"
