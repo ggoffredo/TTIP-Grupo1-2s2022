@@ -17,4 +17,11 @@ class UserController(private val userService: UserService) {
         val (username, password) = String(Base64.getUrlDecoder().decode(auth.split(" ")[1])).split(":")
         return userService.login(username, password)
     }
+
+    @PostMapping(value = ["/register"])
+    @ResponseBody
+    @ResponseStatus(HttpStatus.CREATED)
+    fun register(@RequestBody user: Usuario): Usuario {
+        return userService.register(user)
+    }
 }
