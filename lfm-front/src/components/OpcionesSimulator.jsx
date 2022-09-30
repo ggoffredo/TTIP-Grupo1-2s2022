@@ -9,9 +9,11 @@ import {arraySum} from "../helpers/Utils";
 import {getGastosForUserId, getGastosForUserIdPerMonth} from "../services/GastosService";
 import CompraDolares from "./CustomTables/CompraDolaresTable";
 import InversionesVsIPCChart from "./CustomCharts/InversionesVsIPCChart";
+import IPCTable from "./CustomTables/IPCTable";
 import {getIPCValue} from "../services/IPCService";
 import {getPlazosFijos} from "../services/PlazosFijosService";
 import useUser from "./CustomHooks/UseUser";
+import Divider from "@mui/material/Divider";
 
 export default function OpcionesSimulator() {
     const [ahorros, setAhorros] = useState(0)
@@ -83,6 +85,12 @@ export default function OpcionesSimulator() {
                     title={'Inversiones VS Inflación'}
                 />
             </Grid>
+            <Grid item xs={12} sm={12} lg={6}>
+                <IPCTable/>
+            </Grid>
+        </Grid>
+        <Grid item xs={12}>
+            <Divider sx={{borderColor: '#0FC2C0'}}/>
         </Grid>
         <Grid container>
             <Grid item xs={12} sm={12} lg={6}>

@@ -4,4 +4,8 @@ const getIPCValue = async () => {
     return await getFromLFMApi(`ipc`)
 }
 
-export {getIPCValue}
+const getIPCMensuales = async () => {
+    return await getFromLFMApi(`ipcMensuales`)
+}
+
+export {getIPCValue, getIPCMensuales}

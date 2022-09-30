@@ -21,8 +21,15 @@ const firstDayOfMonthStringFormatted = () => {
     return `${yyyy}-${mm}-01`
 }
 
+const getMonthStringFormatted = (stringDate) => {
+    let date = getDateFromString(stringDate);
+    let mm = String(date.toLocaleString('default', { month: 'long' }));
+    let yyyy = date.getFullYear();
+    return `${mm} - ${yyyy}`
+}
+
 const getDateFromString = (stringDate) => {
     return new Date(Date.parse(stringDate))
 }
 
-export {arraySum, capitalize, todayStringFormatted, firstDayOfMonthStringFormatted, getDateFromString}
+export {arraySum, capitalize, todayStringFormatted, firstDayOfMonthStringFormatted, getDateFromString, getMonthStringFormatted}

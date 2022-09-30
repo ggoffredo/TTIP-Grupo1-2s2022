@@ -18,4 +18,11 @@ class IPCController(@Autowired private var ipcService: IPCService) {
     fun getIPC(): Ipc {
         return ipcService.getLastMonthIPC()
     }
+
+    @GetMapping(value = ["/ipcMensuales"])
+    @ResponseBody
+    @ResponseStatus(HttpStatus.OK)
+    fun getIPCMensuales(): List<Ipc> {
+        return ipcService.getIPCByMonth()
+    }
 }

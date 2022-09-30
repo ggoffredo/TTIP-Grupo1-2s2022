@@ -40,7 +40,7 @@ class IPCService {
             clientHttpReqExec.execute(outReq, bytes!!)
         })
         val response = restTemplate.getForEntity(urlTemplate, Array<Any>::class.java)
-        val ipcs = response.body!!.map { e -> e as LinkedHashMap<String, Any>; Ipc(e["d"]!!.toString(), e["v"]!!.toString()) }
+        val ipcs = response.body!!.takeLast(6).reversed().map { e -> e as LinkedHashMap<String, Any>; Ipc(e["d"]!!.toString(), e["v"]!!.toString()) }
         return ipcs.toMutableList()
     }
 }
