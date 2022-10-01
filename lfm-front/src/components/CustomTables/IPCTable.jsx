@@ -3,7 +3,7 @@ import ChartCard from "../Core/Charts/ChartCard";
 import Grid from "@mui/material/Grid";
 import StyledTable from "../Core/StyledTable";
 import {getIPCMensuales} from "../../services/IPCService";
-import {getMonthStringFormatted} from "../../helpers/Utils";
+import Utils from "../../helpers/Utils";
 
 const IPCTable = () => {
     const [ipcs, setIpcs] = useState([])
@@ -16,7 +16,7 @@ const IPCTable = () => {
 
     const mapAndSetIPCs = (ipcs) => {
         let ipcsMap = ipcs.map(ipc => {
-            let month = getMonthStringFormatted(ipc['month'])
+            let month = Utils.getMonthStringFormatted(ipc['month'])
             let value =  ipc['value']
             return {mes: month, valor: value}
         })

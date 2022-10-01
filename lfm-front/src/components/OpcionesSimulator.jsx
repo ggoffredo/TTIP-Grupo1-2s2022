@@ -5,7 +5,7 @@ import ViewTitle from "./ViewTitle";
 import ProyeccionYAhorros from "./ProyeccionYAhorros";
 import {useEffect, useState} from "react";
 import {getIngresosForUserId} from "../services/IngresosService";
-import {arraySum} from "../helpers/Utils";
+import Utils from "../helpers/Utils";
 import {getGastosForUserId, getGastosForUserIdPerMonth} from "../services/GastosService";
 import CompraDolares from "./CustomTables/CompraDolaresTable";
 import InversionesVsIPCChart from "./CustomCharts/InversionesVsIPCChart";
@@ -23,11 +23,11 @@ export default function OpcionesSimulator() {
     const {user} = useUser()
 
     function getIngresos() {
-        return getIngresosForUserId(user.id).then(res => arraySum(res, 'monto'))
+        return getIngresosForUserId(user.id).then(res => Utils.arraySum(res, 'monto'))
     }
 
     function getGastos() {
-        return getGastosForUserId(user.id).then(res => arraySum(res, 'monto'))
+        return getGastosForUserId(user.id).then(res => Utils.arraySum(res, 'monto'))
     }
 
     function getGastosMensualizados() {

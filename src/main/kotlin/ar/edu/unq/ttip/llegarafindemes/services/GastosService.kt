@@ -3,14 +3,10 @@ package ar.edu.unq.ttip.llegarafindemes.services
 import ar.edu.unq.ttip.llegarafindemes.dtos.GastosMensualizados
 import ar.edu.unq.ttip.llegarafindemes.models.Gasto
 import ar.edu.unq.ttip.llegarafindemes.repositories.GastosRepository
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service
-class GastosService(
-    @Autowired private var gastosRepository: GastosRepository,
-    @Autowired private var administrablesService: AdministrablesService
-) {
+class GastosService(private val gastosRepository: GastosRepository, private val administrablesService: AdministrablesService) {
 
     fun getGastosForUser(userdId: Int): List<Gasto> {
         return gastosRepository.findByUsuarioId(userdId)

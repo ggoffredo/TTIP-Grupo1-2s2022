@@ -9,15 +9,18 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import useUser from "../CustomHooks/UseUser";
 import NavbarModal from "./NavbarModal";
+import RegisterModal from "./RegisterModal";
 
 const SignInUpAvatar = () => {
     const [anchorElUser, setAnchorElUser] = useState(null)
     const [logInOpen, setLogInOpen] = useState(false)
+    const [registerOpen, setRegisterOpen] = useState(false)
     const {user, setUser} = useUser()
 
     const handleOpenUserMenu = (event) => {setAnchorElUser(event.currentTarget)}
     const handleCloseUserMenu = () => {setAnchorElUser(null)}
     const handleOpenCloseLogIn = () => {setLogInOpen(!logInOpen)}
+    const handleOpenCloseRegister = () => {setRegisterOpen(!registerOpen)}
     const handleLogOut = () => {
         sessionStorage.setItem('user', null)
         setUser(null)
@@ -48,10 +51,10 @@ const SignInUpAvatar = () => {
         > Ingresar </Button>
         <Button
             variant="contained"
-            color="secondary"
+            color="primary"
             size="large"
             type="submit"
-            disabled
+            onClick={handleOpenCloseRegister}
         > Registrarse </Button>
     </>
     return <Box sx={{ flexGrow: 0 }}>
@@ -64,6 +67,7 @@ const SignInUpAvatar = () => {
             : buttons
         }
         <NavbarModal open={logInOpen} handleClose={handleOpenCloseLogIn}/>
+        <RegisterModal open={registerOpen} handleClose={handleOpenCloseRegister}/>
         <Menu
             sx={{ mt: '45px' }}
             id="menu-appbar"

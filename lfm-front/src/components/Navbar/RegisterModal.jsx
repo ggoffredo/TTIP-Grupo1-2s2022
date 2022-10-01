@@ -11,45 +11,49 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import IconButton from '@mui/material/IconButton';
 import {useState} from "react";
 import EmailIcon from '@mui/icons-material/Email';
+import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import Divider from "@mui/material/Divider";
-import useUser from "../CustomHooks/UseUser";
-import {logInToLFM} from "../../helpers/AxiosHelper";
+import {registerToLFM} from "../../helpers/AxiosHelper";
 import Utils from "../../helpers/Utils";
 
-const NavbarModal = ({open, handleClose}) => {
+const RegisterModal = ({open, handleClose}) => {
     const [showPassword, setShowPassword] = useState(false)
+    const [registerSuccessful, setRegisterSuccessful] = useState(false)
     const [userEmail, setUserEmail] = useState("")
     const [userPassword, setUserPassword] = useState("")
     const [emailError, setEmailError] = useState("")
     const [passwordError, setPasswordError] = useState("")
-    const {setUser} = useUser()
+    const [userName, setUserName] = useState("")
+    const [userLastName, setUserLastName] = useState("")
+    const [userNameError, setUserNameError] = useState("")
+    const [userLastNameError, setUserLastNameError] = useState("")
     const handleClickShowPassword = () => {setShowPassword(!showPassword)}
     const handleMouseDownPassword = (event) => {event.preventDefault()}
 
-    const logIn = () => {
-        logInToLFM(userEmail, userPassword)
-        .then(
-            response => {
-                setUser(response.data)
-                sessionStorage.setItem('user', JSON.stringify(response.data))
-                handleClose()
-            }
-        ).catch(
+    const register = () => {
+        registerToLFM(userName, userLastName, userEmail, userPassword)
+        .then(() => setRegisterSuccessful(true))
+        .catch(
             error => {
-                if (error.response.status === 404) {
-                    setEmailError("Credencial inválida")
-                    setPasswordError("Credencial inválida")
+                if (error.response.status === 403) {
+                    setEmailError("Ya existe un usuario con este email")
                 }
             }
         )
     }
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
+    const areInputsValid = () => {
         const isEmailValid = Utils.validateEmail(userEmail, setEmailError)
         const isPasswordValid = Utils.validateNotEmpty(userPassword, setPasswordError)
-        isEmailValid && isPasswordValid && logIn()
-    };
+        const isUserNameValid = Utils.validateNotEmpty(userName, setUserNameError)
+        const isUserLastnameValid = Utils.validateNotEmpty(userLastName, setUserLastNameError)
+        return isEmailValid && isPasswordValid && isUserNameValid && isUserLastnameValid
+    }
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        areInputsValid() && register()
+    }
 
     const passwordAdornment = <InputAdornment position="end">
         <IconButton
@@ -68,9 +72,25 @@ const NavbarModal = ({open, handleClose}) => {
                 <form onSubmit={handleSubmit}>
                     <Grid container direction="column" alignItems="center">
                         <Grid item>
-                            <p className="FormTitle">Ingresá tus credenciales</p>
+                            <p className="FormTitle">Ingresá tus datos</p>
                             <Divider/>
                         </Grid>
+                        <CustomInput
+                            inputLabel="Ingrese su nombre"
+                            selectedValue={userName}
+                            handleSelectedValueCallback={e => setUserName(e.target.value)}
+                            isEndAdornment={true}
+                            adornment={<InputAdornment position="end"><PermIdentityIcon/></InputAdornment>}
+                            hasError={userNameError}
+                        />
+                        <CustomInput
+                            inputLabel="Ingrese su apellido"
+                            selectedValue={userLastName}
+                            handleSelectedValueCallback={e => setUserLastName(e.target.value)}
+                            isEndAdornment={true}
+                            adornment={<InputAdornment position="end"><PermIdentityIcon/></InputAdornment>}
+                            hasError={userLastNameError}
+                        />
                         <CustomInput
                             inputLabel="Ingrese su email"
                             selectedValue={userEmail}
@@ -88,7 +108,11 @@ const NavbarModal = ({open, handleClose}) => {
                             inputType={showPassword ? 'text' : 'password'}
                             hasError={passwordError}
                         />
-                        <SubmitButton label={"Ingresar"}/>
+                        {
+                            registerSuccessful
+                                ? <SubmitButton color="success" variantType="contained" label="Registro Exitoso"/>
+                                : <SubmitButton label="Registrar"/>
+                        }
                     </Grid>
                 </form>
             </CardContent>
@@ -96,4 +120,4 @@ const NavbarModal = ({open, handleClose}) => {
     </Modal>
 }
 
-export default NavbarModal
+export default RegisterModal

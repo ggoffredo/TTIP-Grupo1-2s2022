@@ -15,6 +15,19 @@ const logInToLFM = (userEmail, userPassword) => {
     })
 }
 
+const registerToLFM = (userName, userLastname, userEmail, userPassword) => {
+    return axios({
+        method: 'post',
+        url: `${process.env.REACT_APP_BACKEND_API}register`,
+        data: {
+            nombre: userName,
+            apellido: userLastname,
+            email: userEmail,
+            password: userPassword
+        }
+    })
+}
+
 const get = (fullPath) => {
     return axios({
         method: 'get',
@@ -22,4 +35,4 @@ const get = (fullPath) => {
     }).then(response => response.data);
 }
 
-export {get, getFromLFMApi, logInToLFM}
+export {get, getFromLFMApi, logInToLFM, registerToLFM}
