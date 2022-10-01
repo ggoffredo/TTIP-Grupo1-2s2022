@@ -17,4 +17,10 @@ class IPCTest {
         assert(ipc.month.isNotEmpty())
     }
 
+    @Test
+    fun enBaseALaApiDeEstadisticaBCRASeObtieneElIPCDelLosUltimosMeses(){
+        val ipcs = ipcService.getIPCByMonth()
+        assert(ipcs.isNotEmpty())
+    }
+
 }
