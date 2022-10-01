@@ -82,6 +82,7 @@ const RegisterModal = ({open, handleClose}) => {
                             isEndAdornment={true}
                             adornment={<InputAdornment position="end"><PermIdentityIcon/></InputAdornment>}
                             hasError={userNameError}
+                            dataTestId={"Register-name"}
                         />
                         <CustomInput
                             inputLabel="Ingrese su apellido"
@@ -90,6 +91,7 @@ const RegisterModal = ({open, handleClose}) => {
                             isEndAdornment={true}
                             adornment={<InputAdornment position="end"><PermIdentityIcon/></InputAdornment>}
                             hasError={userLastNameError}
+                            dataTestId={"Register-lastname"}
                         />
                         <CustomInput
                             inputLabel="Ingrese su email"
@@ -98,6 +100,7 @@ const RegisterModal = ({open, handleClose}) => {
                             isEndAdornment={true}
                             adornment={<InputAdornment position="end"><EmailIcon/></InputAdornment>}
                             hasError={emailError}
+                            dataTestId={"Register-email"}
                         />
                         <CustomInput
                             inputLabel="Ingrese su contraseña"
@@ -107,11 +110,12 @@ const RegisterModal = ({open, handleClose}) => {
                             adornment={passwordAdornment}
                             inputType={showPassword ? 'text' : 'password'}
                             hasError={passwordError}
+                            dataTestId={"Register-password"}
                         />
                         {
                             registerSuccessful
-                                ? <SubmitButton color="success" variantType="contained" label="Registro Exitoso"/>
-                                : <SubmitButton label="Registrar"/>
+                                ? <SubmitButton color="success" variantType="contained" label="Registro Exitoso" dataTestId={"Register-button"}/>
+                                : <SubmitButton label="Registrar" dataTestId={"Register-button"}/>
                         }
                     </Grid>
                 </form>
