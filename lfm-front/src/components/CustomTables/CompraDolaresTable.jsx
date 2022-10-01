@@ -3,7 +3,7 @@ import ChartCard from "../Core/Charts/ChartCard";
 import Grid from "@mui/material/Grid";
 import StyledTable from "../Core/StyledTable";
 import {getDolarValues} from "../../services/DolarSiService";
-import {capitalize} from "../../helpers/Utils";
+import Utils from "../../helpers/Utils";
 
 const CompraDolaresTable = ({monto}) => {
     const [dolares, setDolares] = useState([])
@@ -15,7 +15,7 @@ const CompraDolaresTable = ({monto}) => {
     const getAndSetDolares = () => {getDolarValues().then(res => mapAndSetDolares(res))}
 
     const normalizeName = (name) => {
-        return name.split(" ").map(namePart => {return capitalize(namePart)}).join(" ")
+        return name.split(" ").map(namePart => {return Utils.capitalize(namePart)}).join(" ")
     }
 
     const normalizeValue = (value) => {

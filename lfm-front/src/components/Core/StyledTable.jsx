@@ -6,7 +6,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
-import {capitalize} from "../../helpers/Utils";
+import Utils from "../../helpers/Utils";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -31,7 +31,7 @@ const TableHeadComponent = (headers) => (
     <TableHead>
         <TableRow>
             {headers.map((header) => {
-                return <StyledTableCell align="center" key={header}>{capitalize(header)}</StyledTableCell>
+                return <StyledTableCell align="center" key={header}>{Utils.capitalize(header)}</StyledTableCell>
             })}
         </TableRow>
     </TableHead>

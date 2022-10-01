@@ -3,7 +3,7 @@ import Chip from "@mui/material/Chip";
 import Grid from "@mui/material/Grid";
 import {getDolarValues} from "../../services/DolarSiService";
 import {useEffect, useState} from "react";
-import {capitalize} from "../../helpers/Utils";
+import Utils from "../../helpers/Utils";
 
 const DolarValues = () => {
     const [dolares, setDolares] = useState([])
@@ -18,7 +18,7 @@ const DolarValues = () => {
     }
 
     const normalizeName = (name) => {
-        return name.split(" ").map(namePart => {return capitalize(namePart)}).join(" ")
+        return name.split(" ").map(namePart => {return Utils.capitalize(namePart)}).join(" ")
     }
 
     const normalizeValue = (value) => {

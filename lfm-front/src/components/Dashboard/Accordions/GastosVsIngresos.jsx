@@ -1,6 +1,6 @@
 import GastosIngresosDoughnutChart from "../../CustomCharts/GastosIngresosDoughnutChart";
 import AccordionCore from "../../Core/AccordionCore";
-import {arraySum} from "../../../helpers/Utils";
+import Utils from "../../../helpers/Utils";
 
 const GastosVsIngresos = ({gastos, ingresos}) => {
     const getMontoTotalFromLastMonth = (data) => {
@@ -8,7 +8,7 @@ const GastosVsIngresos = ({gastos, ingresos}) => {
     }
 
     const getSummarizedMontoTotalFromLastMonth = (data) => {
-        return arraySum(data, 'montoTotal')
+        return Utils.arraySum(data, 'montoTotal')
     }
 
     return <AccordionCore

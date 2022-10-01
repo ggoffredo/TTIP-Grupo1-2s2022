@@ -1,12 +1,12 @@
-import {firstDayOfMonthStringFormatted, getDateFromString} from "../../helpers/Utils";
+import Utils from "../../helpers/Utils";
 import LineChart from "../Core/Charts/LineChart";
 import Grid from "@mui/material/Grid";
 import ChartCard from "../Core/Charts/ChartCard";
 
 const CurrentMonthGastos = ({gastosMesEnCurso}) => {
     const getCorrectDate = (stringDate) => {
-        let firstDayOfMonth = firstDayOfMonthStringFormatted();
-        return getDateFromString(stringDate) > getDateFromString(firstDayOfMonth)
+        let firstDayOfMonth = Utils.firstDayOfMonthStringFormatted();
+        return Utils.getDateFromString(stringDate) > Utils.getDateFromString(firstDayOfMonth)
             ? stringDate
             : firstDayOfMonth
     }

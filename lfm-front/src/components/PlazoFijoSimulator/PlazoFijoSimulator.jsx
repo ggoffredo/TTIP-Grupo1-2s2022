@@ -9,7 +9,7 @@ import BankSelect from "./BankSelect";
 import CustomInput from "../Forms/CustomInput";
 import SubmitButton from "../Forms/SubmitButton";
 import ViewTitle from "../ViewTitle";
-import {todayStringFormatted} from "../../helpers/Utils";
+import Utils from "../../helpers/Utils";
 
 const PlazoFijoSimulator = () => {
     const [amountOfMoney, setAmountOfMoney] = useState(0);
@@ -17,7 +17,7 @@ const PlazoFijoSimulator = () => {
     const [selectedRate, setSelectedRate] = useState(0);
     const [plazosFijos, setPlazosFijos] = useState([]);
     const [interest, setInterest] = useState("");
-    const [toDate, setToDate] = useState(todayStringFormatted());
+    const [toDate, setToDate] = useState(Utils.todayStringFormatted());
 
     const getPlazosFijosData = async () => {
         let response = await getPlazosFijos();
