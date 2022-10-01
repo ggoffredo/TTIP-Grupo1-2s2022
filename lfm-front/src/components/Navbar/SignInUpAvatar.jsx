@@ -8,7 +8,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import useUser from "../CustomHooks/UseUser";
-import NavbarModal from "./NavbarModal";
+import LogInModal from "./LogInModal";
 import RegisterModal from "./RegisterModal";
 
 const SignInUpAvatar = () => {
@@ -66,7 +66,7 @@ const SignInUpAvatar = () => {
             </Tooltip>
             : buttons
         }
-        <NavbarModal open={logInOpen} handleClose={handleOpenCloseLogIn}/>
+        <LogInModal open={logInOpen} handleClose={handleOpenCloseLogIn}/>
         <RegisterModal open={registerOpen} handleClose={handleOpenCloseRegister}/>
         <Menu
             sx={{ mt: '45px' }}
