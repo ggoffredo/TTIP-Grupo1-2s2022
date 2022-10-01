@@ -2,7 +2,7 @@ import Input from "@mui/material/Input";
 import FormItem from "./FormItem";
 import {FormHelperText} from "@mui/material";
 
-const CustomInput = ({inputLabel, selectedValue, handleSelectedValueCallback, isDisabled, isEndAdornment, adornment, inputType, hasError}) => {
+const CustomInput = ({inputLabel, selectedValue, handleSelectedValueCallback, isDisabled, isEndAdornment, adornment, inputType, hasError, dataTestId}) => {
     return <>
         <FormItem
             label={inputLabel}
@@ -15,10 +15,11 @@ const CustomInput = ({inputLabel, selectedValue, handleSelectedValueCallback, is
                     disabled={isDisabled}
                     {...(isEndAdornment ? {endAdornment: adornment} : {startAdornment: adornment})}
                     type={inputType ?? "text"}
+                    data-testid={dataTestId}
                 />
             }
         />
-        {hasError && <FormHelperText id="component-error-text">{hasError}</FormHelperText>}
+        {hasError && <FormHelperText id="component-error-text" data-testid={`${dataTestId}-helper-text`}>{hasError}</FormHelperText>}
     </>
 }
 export default CustomInput;

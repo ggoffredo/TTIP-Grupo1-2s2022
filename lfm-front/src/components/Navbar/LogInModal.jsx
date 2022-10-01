@@ -16,7 +16,7 @@ import useUser from "../CustomHooks/UseUser";
 import {logInToLFM} from "../../helpers/AxiosHelper";
 import Utils from "../../helpers/Utils";
 
-const NavbarModal = ({open, handleClose}) => {
+const LogInModal = ({open, handleClose}) => {
     const [showPassword, setShowPassword] = useState(false)
     const [userEmail, setUserEmail] = useState("")
     const [userPassword, setUserPassword] = useState("")
@@ -78,6 +78,7 @@ const NavbarModal = ({open, handleClose}) => {
                             isEndAdornment={true}
                             adornment={<InputAdornment position="end"><EmailIcon/></InputAdornment>}
                             hasError={emailError}
+                            dataTestId={"Log-in-email"}
                         />
                         <CustomInput
                             inputLabel="Ingrese su contraseña"
@@ -87,8 +88,9 @@ const NavbarModal = ({open, handleClose}) => {
                             adornment={passwordAdornment}
                             inputType={showPassword ? 'text' : 'password'}
                             hasError={passwordError}
+                            dataTestId={"Log-in-password"}
                         />
-                        <SubmitButton label={"Ingresar"}/>
+                        <SubmitButton label={"Ingresar"} dataTestId={"Log-in-button"}/>
                     </Grid>
                 </form>
             </CardContent>
@@ -96,4 +98,4 @@ const NavbarModal = ({open, handleClose}) => {
     </Modal>
 }
 
-export default NavbarModal
+export default LogInModal
