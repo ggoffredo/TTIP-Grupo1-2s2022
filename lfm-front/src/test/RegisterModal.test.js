@@ -9,7 +9,7 @@ beforeEach(() => {
     useUser.mockImplementation(() => ({setUser: jest.fn()}));
 });
 
-test('Dado un usuario, cuando abre el register, entonces visualiza nombre, apellido, email, password, y el boton ingresar', () => {
+test('Dado un usuario, cuando abre el register, entonces visualiza nombre, apellido, email, password, y el boton registrar', () => {
     const {getByTestId} = render(<RegisterModal open={true}/>)
     const nameInput = getByTestId("Register-name")
     const lastnameInput = getByTestId("Register-lastname")

@@ -9,7 +9,7 @@ beforeEach(() => {
     useUser.mockImplementation(() => ({setUser: jest.fn()}));
 });
 
-test('Dado un usuario, cuando abre el log in, entonces visualiza los inputs email y password, y el boton ingresar', () => {
+test('Dado un usuario, cuando abre el log in, entonces visualiza email, password y el boton ingresar', () => {
     const {getByTestId} = render(<LogInModal open={true}/>)
     const emailInput = getByTestId("Log-in-email")
     const passwordInput = getByTestId("Log-in-password")
@@ -19,7 +19,7 @@ test('Dado un usuario, cuando abre el log in, entonces visualiza los inputs emai
     expect(loginButton).toBeInTheDocument();
 });
 
-test('Dado un usuario, cuando ingresa un mail con formato incorrecto y apreta ingresar, la leyenda le aparece debajo del input', () => {
+test('Dado un usuario, cuando ingresa un mail con formato incorrecto, entonces dicho error aparece debajo del input', () => {
     const {getByTestId} = render(<LogInModal open={true}/>)
     const emailInput = getByTestId("Log-in-email")
     const loginButton = getByTestId("Log-in-button")
@@ -29,7 +29,7 @@ test('Dado un usuario, cuando ingresa un mail con formato incorrecto y apreta in
     expect(emailErrorText.textContent).toBe("El formato del email es incorrecto")
 });
 
-test('Dado un usuario, cuando no ingresa email y apreta ingresar, la leyenda le aparece debajo del input', () => {
+test('Dado un usuario, cuando no ingresa email, entonces dicho error aparece debajo del input', () => {
     const {getByTestId} = render(<LogInModal open={true}/>)
     const passwordInput = getByTestId("Log-in-password")
     const loginButton = getByTestId("Log-in-button")
@@ -39,7 +39,7 @@ test('Dado un usuario, cuando no ingresa email y apreta ingresar, la leyenda le 
     expect(emailErrorText.textContent).toBe("El campo no puede estar vacío")
 });
 
-test('Dado un usuario, cuando ingresa mail correcto, no ingresa contraseña y apreta ingresar, la leyenda le aparece debajo del input', () => {
+test('Dado un usuario, cuando ingresa mail correcto y no ingresa contraseña, entonces dicho error aparece debajo del input', () => {
     const {getByTestId, queryByTestId} = render(<LogInModal open={true}/>)
     const emailInput = getByTestId("Log-in-email")
     const loginButton = getByTestId("Log-in-button")
@@ -50,7 +50,7 @@ test('Dado un usuario, cuando ingresa mail correcto, no ingresa contraseña y ap
     expect(queryByTestId('Log-in-email-helper-text')).toBeNull()
 });
 
-test('Dado un usuario, cuando ingresa mail y contraseña correcto y apreta ingresar, no aparecen errores', () => {
+test('Dado un usuario, cuando ingresa mail y contraseña correcto, entonces no aparecen errores', () => {
     const {getByTestId, queryByTestId} = render(<LogInModal open={true}/>)
     const emailInput = getByTestId("Log-in-email")
     const loginButton = getByTestId("Log-in-button")
