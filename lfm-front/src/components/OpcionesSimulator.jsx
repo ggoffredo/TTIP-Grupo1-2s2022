@@ -17,8 +17,7 @@ import Divider from "@mui/material/Divider";
 
 export default function OpcionesSimulator() {
     const [ahorros, setAhorros] = useState(0)
-    const [ipc, setIpc] = useState(0)
-    const [pfInteresPromedio, setPfInteresPromedio] = useState(0)
+    const [inversionesAndIpc, setInversionesAndIpc] = useState({})
     const [proyeccionMensual, setProyeccionMensual] = useState(0)
     const {user} = useUser()
 
@@ -45,18 +44,20 @@ export default function OpcionesSimulator() {
         setProyeccionMensual(promedioExcedenteMensual);
     }
 
-    const getIPC = async () => {
+    const getAndSetInversionesAndIpc = async () => {
+        let result = {}
         let ipcApi = await getIPCValue()
-        setIpc(Number(ipcApi.value.replace(",", ".")))
+        result['Inflación'] = Number(ipcApi.value.replace(",", "."))
+        result['Plazos Fijos'] = await getPFInteresesPromedio()
+        setInversionesAndIpc(result)
     }
 
     const getPFInteresesPromedio = async () => {
         let plazosFijosApi = await getPlazosFijos();
-        let promedio = Number((plazosFijosApi.reduce(getSumPFintereses,0)) / plazosFijosApi.length);
-        setPfInteresPromedio(promedio)
+        return Number((plazosFijosApi.reduce(getSumPFintereses,0)) / plazosFijosApi.length);
     }
 
-    function getSumPFintereses(total, pf) {
+    const getSumPFintereses = (total, pf) => {
         return total + (pf.tasa * 30 / 365);
     }
 
@@ -65,8 +66,7 @@ export default function OpcionesSimulator() {
             getIngresos(),
             getGastos(),
             getGastosMensualizados(),
-            getIPC(),
-            getPFInteresesPromedio()
+            getAndSetInversionesAndIpc()
         ]).then((res) => {
             let [ingresos, gastos, gastosMensualizados] = res;
             calcularAhorros(ingresos, gastos);
@@ -80,9 +80,8 @@ export default function OpcionesSimulator() {
         <Grid container justifyContent="center">
             <Grid item xs={12} sm={12} lg={6}>
                 <InversionesVsIPCChart
-                    ipc={ipc}
-                    pfIntereses={pfInteresPromedio}
-                    title={'Inversiones VS Inflación'}
+                    inversiones={inversionesAndIpc}
+                    title={'Inflación VS Inversiones'}
                 />
             </Grid>
             <Grid item xs={12} sm={12} lg={6}>

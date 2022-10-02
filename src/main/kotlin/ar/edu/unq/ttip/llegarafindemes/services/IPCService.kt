@@ -1,7 +1,7 @@
 package ar.edu.unq.ttip.llegarafindemes.services
 
+import ar.edu.unq.ttip.llegarafindemes.helpers.RestTemplateHelper
 import ar.edu.unq.ttip.llegarafindemes.models.Ipc
-import com.fasterxml.jackson.databind.ObjectMapper
 import org.jsoup.Jsoup
 import org.jsoup.select.Elements
 import org.springframework.http.HttpHeaders
@@ -33,13 +33,8 @@ class IPCService {
     }
 
     fun getIPCByMonth(): MutableList<Ipc> {
-        val restTemplate = RestTemplate()
-        val urlTemplate = UriComponentsBuilder.fromHttpUrl(URL).encode().toUriString()
-        restTemplate.interceptors.add(ClientHttpRequestInterceptor { outReq: HttpRequest, bytes: ByteArray?, clientHttpReqExec: ClientHttpRequestExecution ->
-            outReq.headers[HttpHeaders.AUTHORIZATION] = "BEARER $token"
-            clientHttpReqExec.execute(outReq, bytes!!)
-        })
-        val response = restTemplate.getForEntity(urlTemplate, Array<Any>::class.java)
+        val restTemplateHelper = RestTemplateHelper()
+        val response = restTemplateHelper.addUrl(URL).addBearer(token).getForEntity(Array<Any>::class.java)
         val ipcs = response.body!!.takeLast(6).reversed().map { e -> e as LinkedHashMap<String, Any>; Ipc(e["d"]!!.toString(), e["v"]!!.toString()) }
         return ipcs.toMutableList()
     }
