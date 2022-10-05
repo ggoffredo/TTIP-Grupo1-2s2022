@@ -4,20 +4,18 @@ import ar.edu.unq.ttip.llegarafindemes.helpers.RestTemplateHelper
 import ar.edu.unq.ttip.llegarafindemes.models.Ipc
 import org.jsoup.Jsoup
 import org.jsoup.select.Elements
-import org.springframework.http.HttpHeaders
-import org.springframework.http.HttpRequest
-import org.springframework.http.client.ClientHttpRequestExecution
-import org.springframework.http.client.ClientHttpRequestInterceptor
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
-import org.springframework.web.client.RestTemplate
-import org.springframework.web.util.UriComponentsBuilder
 
 @Service
 class IPCService {
 
-    private val URL = "https://api.estadisticasbcra.com/inflacion_mensual_oficial"
-    // TODO: Mover a otro lado
-    private val token = "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTU5NTE4OTMsInR5cGUiOiJleHRlcm5hbCIsInVzZXIiOiJnYXN0b24uZ29mZnJlZG9AZ21haWwuY29tIn0.SSg8DqYMQbiXSYcVGdca7govAwuLyYsnZuGSUL0VP5dbckD9En7Hfn8O8npVqKpCXG5Twgb-j62y5P88tjSl4g"
+    @Value("\${bcra.api.base-url}")
+    private val BASE_URL = "bcraBaseUrl"
+    @Value("\${bcra.api.inflacion-mensual}")
+    private val INFLACION_MENSUAL_PATH = "/inflacion_mensual_oficial"
+    @Value("\${bcra.api.token}")
+    private var token = "someToken"
 
     fun getLastMonthIPC(): Ipc {
         val document = Jsoup.parse(Jsoup
@@ -34,7 +32,7 @@ class IPCService {
 
     fun getIPCByMonth(): MutableList<Ipc> {
         val restTemplateHelper = RestTemplateHelper()
-        val response = restTemplateHelper.addUrl(URL).addBearer(token).getForEntity(Array<Any>::class.java)
+        val response = restTemplateHelper.addUrl("$BASE_URL$INFLACION_MENSUAL_PATH").addBearer(token).getForEntity(Array<Any>::class.java)
         val ipcs = response.body!!.takeLast(6).reversed().map { e -> e as LinkedHashMap<String, Any>; Ipc(e["d"]!!.toString(), e["v"]!!.toString()) }
         return ipcs.toMutableList()
     }
