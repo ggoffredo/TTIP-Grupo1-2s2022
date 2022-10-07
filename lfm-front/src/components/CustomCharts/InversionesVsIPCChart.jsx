@@ -15,12 +15,12 @@ const InversionesVsIPCChart = ({inversiones, title}) => {
     }
 
     const filterInversiones = () => {
-        return Object.keys(inversiones)
-            .filter(key => enabledChips.current.includes(key))
+        return Object.values(inversiones).flat()
+            .filter(key => enabledChips.current.includes(key.nombre))
             .reduce((obj, key) => {
                 return {
                     ...obj,
-                    [key]: inversiones[key]
+                    [key.nombre]: key.tasaDeVariacion
                 };
             }, {})
     }
@@ -43,8 +43,12 @@ const InversionesVsIPCChart = ({inversiones, title}) => {
         setChartChips(chips)
     }
 
+    const getNamesFromInversiones = () => {
+        return Object.values(inversiones).map( arr => arr.map( inv => inv.nombre)).flat()
+    }
+
     useEffect(() => {
-        enabledChips.current = Object.keys(inversiones)
+        enabledChips.current = getNamesFromInversiones()
         populateBarChartData()
     }, [inversiones])
 

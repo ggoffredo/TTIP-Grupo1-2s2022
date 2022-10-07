@@ -11,9 +11,9 @@ import CompraDolares from "./CustomTables/CompraDolaresTable";
 import InversionesVsIPCChart from "./CustomCharts/InversionesVsIPCChart";
 import IPCTable from "./CustomTables/IPCTable";
 import {getIPCValue} from "../services/IPCService";
-import {getPlazosFijos} from "../services/PlazosFijosService";
 import useUser from "./CustomHooks/UseUser";
 import Divider from "@mui/material/Divider";
+import {getFromLFMApi} from "../helpers/AxiosHelper";
 
 export default function OpcionesSimulator() {
     const [ahorros, setAhorros] = useState(0)
@@ -39,26 +39,21 @@ export default function OpcionesSimulator() {
     }
 
     function proyectarExcedenteMensual(ingresos, gastos, cantidadDeMeses) {
-        //TODO: Por ser POC se utiliza un promedio en base a la cantidad de meses en los que se registraron gastos
         let promedioExcedenteMensual = ((ingresos - gastos) / cantidadDeMeses).toFixed()
         setProyeccionMensual(promedioExcedenteMensual);
     }
 
     const getAndSetInversionesAndIpc = async () => {
-        let result = {}
         let ipcApi = await getIPCValue()
-        result['Inflación'] = Number(ipcApi.value.replace(",", "."))
-        result['Plazos Fijos'] = await getPFInteresesPromedio()
-        setInversionesAndIpc(result)
-    }
-
-    const getPFInteresesPromedio = async () => {
-        let plazosFijosApi = await getPlazosFijos();
-        return Number((plazosFijosApi.reduce(getSumPFintereses,0)) / plazosFijosApi.length);
-    }
-
-    const getSumPFintereses = (total, pf) => {
-        return total + (pf.tasa * 30 / 365);
+        let inversiones = await getFromLFMApi("inversiones")
+        inversiones['Inflación'] = [{
+            "nombre": "Inflación",
+            "tasaDeVariacion": Number(ipcApi.value.replace(",", ".")),
+            "periodo": "MENSUAL",
+            "cantidadDePeriodos": 1,
+            "tipoDeInversion": "Inflación"
+        }]
+        setInversionesAndIpc(inversiones)
     }
 
     useEffect(()=> {
@@ -81,7 +76,7 @@ export default function OpcionesSimulator() {
             <Grid item xs={12} sm={12} lg={6}>
                 <InversionesVsIPCChart
                     inversiones={inversionesAndIpc}
-                    title={'Inflación VS Inversiones'}
+                    title={'Inflación VS Inversiones (últimos 30 días)'}
                 />
             </Grid>
             <Grid item xs={12} sm={12} lg={6}>

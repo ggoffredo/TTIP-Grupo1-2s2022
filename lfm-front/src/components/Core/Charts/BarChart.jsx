@@ -22,7 +22,12 @@ export default function BarChart({data}) {
         'rgba(75, 192, 192, 0.2)',
         'rgba(153, 102, 255, 0.2)',
         'rgba(255, 159, 64, 0.2)',
+        'rgba(2, 183, 142, 0.2)',
+        'rgba(199, 1, 1, 0.2)',
+        'rgba(25, 215, 4, 0.2)',
+        'rgba(1, 29, 196, 0.2)'
     ];
+
     const borderColors = [
         'rgba(255, 99, 132, 1)',
         'rgba(54, 162, 235, 1)',
@@ -30,6 +35,10 @@ export default function BarChart({data}) {
         'rgba(75, 192, 192, 1)',
         'rgba(153, 102, 255, 1)',
         'rgba(255, 159, 64, 1)',
+        'rgba(2, 183, 142, 1)',
+        'rgba(199, 1, 1, 1)',
+        'rgba(25, 215, 4, 1)',
+        'rgba(1, 29, 196, 1)'
     ];
 
     const chartData = {
