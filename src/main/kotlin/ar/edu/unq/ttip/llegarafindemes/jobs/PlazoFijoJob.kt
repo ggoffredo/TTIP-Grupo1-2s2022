@@ -9,24 +9,25 @@ import org.springframework.stereotype.Component
 
 @Component
 @EnableScheduling
-class PlazoFijoJob(private val BcraScrapperService: BcraScrapperService) {
+class PlazoFijoJob(private val bcraScrapperService: BcraScrapperService) {
+
     @Value("\${bcra.enable-job}")
     private var runBcraJob: Boolean = false
     private val logger = LoggerFactory.getLogger(PlazoFijoJob::class.java)
 
     @Scheduled(cron = "@daily")
     fun run() {
-        if (!this.runBcraJob){
+        if (!this.runBcraJob) {
             logger.info("Plazos fijos job skipped")
             return
         }
         logger.info("Updating Plazos fijos")
         logger.info("Downloading CSV")
-        BcraScrapperService.downloadPFCSVFile()
+        bcraScrapperService.downloadPFCSVFile()
         logger.info("Processing CSV")
-        BcraScrapperService.processCSV()
+        bcraScrapperService.processCSV()
         logger.info("Deleting CSV")
-        BcraScrapperService.deletePFCSVFile()
+        bcraScrapperService.deletePFCSVFile()
         logger.info("Update Plazos fijos finished")
     }
 }

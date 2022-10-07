@@ -1,9 +1,6 @@
 package ar.edu.unq.ttip.llegarafindemes.services
 
-import ar.edu.unq.ttip.llegarafindemes.helpers.RestTemplateHelper
 import ar.edu.unq.ttip.llegarafindemes.models.Inversion
-import ar.edu.unq.ttip.llegarafindemes.models.Periodicidad
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 
 @Service
