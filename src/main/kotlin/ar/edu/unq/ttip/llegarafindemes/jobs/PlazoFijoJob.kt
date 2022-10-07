@@ -1,6 +1,6 @@
 package ar.edu.unq.ttip.llegarafindemes.jobs
 
-import ar.edu.unq.ttip.llegarafindemes.services.BCRAService
+import ar.edu.unq.ttip.llegarafindemes.services.BcraScrapperService
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.scheduling.annotation.EnableScheduling
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component
 
 @Component
 @EnableScheduling
-class PlazoFijoJob(private val bcraService: BCRAService) {
+class PlazoFijoJob(private val BcraScrapperService: BcraScrapperService) {
     @Value("\${bcra.enable-job}")
     private var runBcraJob: Boolean = false
     private val logger = LoggerFactory.getLogger(PlazoFijoJob::class.java)
@@ -22,11 +22,11 @@ class PlazoFijoJob(private val bcraService: BCRAService) {
         }
         logger.info("Updating Plazos fijos")
         logger.info("Downloading CSV")
-        bcraService.downloadPFCSVFile()
+        BcraScrapperService.downloadPFCSVFile()
         logger.info("Processing CSV")
-        bcraService.processCSV()
+        BcraScrapperService.processCSV()
         logger.info("Deleting CSV")
-        bcraService.deletePFCSVFile()
+        BcraScrapperService.deletePFCSVFile()
         logger.info("Update Plazos fijos finished")
     }
 }

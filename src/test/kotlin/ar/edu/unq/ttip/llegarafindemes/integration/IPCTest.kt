@@ -1,6 +1,6 @@
 package ar.edu.unq.ttip.llegarafindemes.integration
 
-import ar.edu.unq.ttip.llegarafindemes.services.IPCService
+import ar.edu.unq.ttip.llegarafindemes.services.BcraApiService
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -8,18 +8,18 @@ import org.springframework.boot.test.context.SpringBootTest
 @SpringBootTest
 class IPCTest {
     @Autowired
-    private var ipcService: IPCService = IPCService()
+    private var bcraApiService: BcraApiService = BcraApiService()
 
     @Test
     fun enBaseALaPaginaDelINDECSeObtieneElIPCDelUltimoMes(){
-        val ipc = ipcService.getLastMonthIPC()
+        val ipc = bcraApiService.getLastMonthIPC()
         assert(ipc.value.isNotEmpty())
         assert(ipc.month.isNotEmpty())
     }
 
     @Test
     fun enBaseALaApiDeEstadisticaBCRASeObtieneElIPCDelLosUltimosMeses(){
-        val ipcs = ipcService.getIPCByMonth()
+        val ipcs = bcraApiService.getIPCByMonth()
         assert(ipcs.isNotEmpty())
     }
 

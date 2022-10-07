@@ -1,6 +1,6 @@
 package ar.edu.unq.ttip.llegarafindemes.integration
 
-import ar.edu.unq.ttip.llegarafindemes.services.BCRAService
+import ar.edu.unq.ttip.llegarafindemes.services.BcraScrapperService
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest
 @SpringBootTest
 class BCRATest {
     @Autowired
-    private lateinit var bcraService: BCRAService
+    private lateinit var bcraService: BcraScrapperService
 
     @Test
     fun enBaseAUnCSVSeCreanLosRegistrosCorrespondientes(){

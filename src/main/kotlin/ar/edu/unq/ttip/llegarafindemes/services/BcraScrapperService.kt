@@ -14,7 +14,7 @@ import java.nio.file.Files
 import kotlin.io.path.Path
 
 @Service
-class BCRAService(private val pfijoRepository: PFijoRepository) {
+class BcraScrapperService(private val pfijoRepository: PFijoRepository) {
     @Value("\${bcra.plazos-fijos.csv-file-name}")
     private val CSV_FILE_NAME = "PFIJO.CSV"
     @Value("\${bcra.plazos-fijos.base-url}")
