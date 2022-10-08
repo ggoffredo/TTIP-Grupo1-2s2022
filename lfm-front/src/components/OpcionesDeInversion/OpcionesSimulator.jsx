@@ -69,7 +69,7 @@ export default function OpcionesSimulator() {
             enabledChips.current = getNamesFromInversiones()
             updateFilteredInversiones()
         })
-    }, []);
+    });
 
     return <Grid container spacing={{ xs: 2 }}>
         <ViewTitle title={"Opciones de Inversión"}/>

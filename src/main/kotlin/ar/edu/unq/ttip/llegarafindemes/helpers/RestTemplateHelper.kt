@@ -5,9 +5,11 @@ import org.springframework.http.HttpRequest
 import org.springframework.http.ResponseEntity
 import org.springframework.http.client.ClientHttpRequestExecution
 import org.springframework.http.client.ClientHttpRequestInterceptor
+import org.springframework.stereotype.Component
 import org.springframework.web.client.RestTemplate
 import org.springframework.web.util.UriComponentsBuilder
 
+@Component
 class RestTemplateHelper(private val restTemplate: RestTemplate = RestTemplate()) {
     private lateinit var url: String
 

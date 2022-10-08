@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 
 @Service
-class AmbitoService {
+class AmbitoService(private val restTemplateHelper: RestTemplateHelper) {
 
     @Value("\${ambito.api.dolar-mep-url}")
     private val DOLAR_MEP_URL = ""
@@ -25,7 +25,9 @@ class AmbitoService {
     }
 
     private fun getRateFrom(url: String): Float {
-        val response = RestTemplateHelper().addUrl(url).getForEntity(Array<Array<Any>>::class.java).body!!
+        val asd = this.restTemplateHelper.addUrl(url)
+        val response2 = asd.getForEntity(Array<Array<String>>::class.java)
+        val response = response2.body!!
         val first = response[1].last().toString().toFloat()
         val last = response.last().last().toString().toFloat()
         return this.getRate(first, last)

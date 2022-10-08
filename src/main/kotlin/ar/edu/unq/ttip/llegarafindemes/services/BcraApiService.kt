@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 
 @Service
-class BcraApiService {
+class BcraApiService(private val restTemplateHelper: RestTemplateHelper) {
 
     @Value("\${bcra.api.base-url}")
     private val BASE_URL = "bcraBaseUrl"
@@ -43,7 +43,7 @@ class BcraApiService {
     }
 
     private fun getFromBcra(resource: String, takeLast: Int = 30): List<LinkedHashMap<*,*>> {
-        return RestTemplateHelper()
+        return this.restTemplateHelper
             .addUrl("$BASE_URL$resource")
             .addBearer(token)
             .getForEntity(Array<Any>::class.java)
