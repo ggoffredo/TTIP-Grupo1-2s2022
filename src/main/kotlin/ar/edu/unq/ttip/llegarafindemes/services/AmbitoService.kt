@@ -21,7 +21,7 @@ class AmbitoService {
 
     fun getDolarAhorroAsInversion(): Inversion {
         val rate = this.getRateFrom(DOLAR_AHORRO_URL)
-        return Inversion("Dolar Ahorro", rate, Periodicidad.MENSUAL, 1, "Dolar")
+        return Inversion("Dolar Turista", rate, Periodicidad.MENSUAL, 1, "Dolar")
     }
 
     private fun getRateFrom(url: String): Float {

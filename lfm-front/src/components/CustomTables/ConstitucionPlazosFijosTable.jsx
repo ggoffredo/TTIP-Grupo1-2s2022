@@ -4,19 +4,11 @@ import Grid from "@mui/material/Grid";
 import StyledTable from "../Core/StyledTable";
 import {getPlazosFijos} from "../../services/PlazosFijosService";
 
-const ConstitucionPlazosFijosTable = ({monto}) => {
+const ConstitucionPlazosFijosTable = ({monto, inversiones}) => {
     const [plazosFijos, setPlazosFijos] = useState([])
 
     const getPlazosFijosTable = (data) => {
         return <StyledTable data={data} headers={['Banco', 'Moneda', 'Monto', 'Plazo', 'Tasa', 'Intereses']}/>
-    }
-
-    const getPlazosFijosData = async () => {
-        let plazosFijosApi = await getPlazosFijos();
-        plazosFijosApi.map(pf => {
-            return doGetPFData(pf);
-        })
-        setPlazosFijos(plazosFijosApi);
     }
 
     function doGetPFData(pf) {
@@ -27,8 +19,12 @@ const ConstitucionPlazosFijosTable = ({monto}) => {
     }
 
     useEffect(() => {
-        getPlazosFijosData()
-    }, [monto]);
+        getPlazosFijos().then(res => {
+            let availablePFs = inversiones["Plazos Fijos"].map(pf => pf.nombre)
+            let pfs = res.filter(pf => availablePFs.includes(pf.banco)).map(pf => doGetPFData(pf))
+            setPlazosFijos(pfs);
+        })
+    }, [monto, inversiones]);
 
     return (
         <Grid item xs={12} sm={12} md={12}>

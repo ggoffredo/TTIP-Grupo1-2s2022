@@ -5,7 +5,7 @@ import StyledTable from "../Core/StyledTable";
 import {getDolarValues} from "../../services/DolarSiService";
 import Utils from "../../helpers/Utils";
 
-const CompraDolaresTable = ({monto}) => {
+const CompraDolaresTable = ({monto, inversiones}) => {
     const [dolares, setDolares] = useState([])
 
     const getCompraDolaresTable = (data) => {
@@ -23,17 +23,18 @@ const CompraDolaresTable = ({monto}) => {
     }
 
     const mapAndSetDolares = (dolaresApi) => {
+        let availableDolars = inversiones["Dolares"].map(dolar => dolar.nombre)
         let dolaresMap = dolaresApi.map(dolar => {
             let name = normalizeName(dolar['casa']['nombre'])
             let value =  normalizeValue(dolar['casa']['venta'])
             return {nombre: name, cotización: value, monto: monto, cantidad: (parseInt(monto) / parseInt(value)).toFixed(2)}
-        })
+        }).filter(mappedDolar => availableDolars.includes(mappedDolar.nombre))
         setDolares(dolaresMap)
     }
 
     useEffect(() => {
         getAndSetDolares()
-    }, [monto])
+    }, [monto, inversiones])
 
     return (
         <Grid item xs={12} sm={12} md={12}>
