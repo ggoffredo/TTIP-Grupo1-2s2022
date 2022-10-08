@@ -25,9 +25,7 @@ class AmbitoService(private val restTemplateHelper: RestTemplateHelper) {
     }
 
     private fun getRateFrom(url: String): Float {
-        val asd = this.restTemplateHelper.addUrl(url)
-        val response2 = asd.getForEntity(Array<Array<String>>::class.java)
-        val response = response2.body!!
+        val response = this.restTemplateHelper.addUrl(url).getForEntity(Array<Array<String>>::class.java).body!!
         val first = response[1].last().toString().toFloat()
         val last = response.last().last().toString().toFloat()
         return this.getRate(first, last)
