@@ -34,7 +34,7 @@ const Navbar = () => {
 
     return (
         <AppBar position="static" sx={{backgroundColor: '#5086c1'}}>
-            <Container maxWidth="xl">
+            <Container maxWidth="xxl">
                 <Toolbar disableGutters>
                     <Link to='/'>
                         <img src={Logo} alt="Llegar a fin de mes logo" style={{height: '50px'}}/>
@@ -69,7 +69,7 @@ const Navbar = () => {
                             ))}
                         </Menu>
                     </Box>
-                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, marginLeft: 5 }}>
                         {user && pages.map((page) => (
                             <Link to={page.link} key={page.link} data-testid={`${page.link}-max`}>
                                 <Button
