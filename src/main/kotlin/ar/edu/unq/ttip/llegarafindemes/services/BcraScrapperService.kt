@@ -4,6 +4,7 @@ import ar.edu.unq.ttip.llegarafindemes.models.PFijo
 import ar.edu.unq.ttip.llegarafindemes.repositories.PFijoRepository
 import org.apache.commons.csv.CSVFormat
 import org.apache.commons.csv.CSVParser
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 import java.io.File
 import java.io.FileOutputStream
@@ -13,15 +14,17 @@ import java.nio.file.Files
 import kotlin.io.path.Path
 
 @Service
-class BCRAService(private val pfijoRepository: PFijoRepository) {
-    private val pfcsvName = "PFIJO.CSV"
-    private val pfcsvPath = "http://www.bcra.gov.ar/pdfs/BCRAyVos/$pfcsvName"
+class BcraScrapperService(private val pfijoRepository: PFijoRepository) {
+    @Value("\${bcra.plazos-fijos.csv-file-name}")
+    private val CSV_FILE_NAME = "PFIJO.CSV"
+    @Value("\${bcra.plazos-fijos.base-url}")
+    private val BASE_URL = "http://www.bcra.gov.ar/pdfs/BCRAyVos/"
 
     fun downloadPFCSVFile() {
-        val url = URL(pfcsvPath)
+        val url = URL("$BASE_URL$CSV_FILE_NAME")
         url.openStream().use {
             Channels.newChannel(it).use { rbc ->
-                FileOutputStream(pfcsvName).use { fos ->
+                FileOutputStream(CSV_FILE_NAME).use { fos ->
                     fos.channel.transferFrom(rbc, 0, Long.MAX_VALUE)
                 }
             }
@@ -29,10 +32,10 @@ class BCRAService(private val pfijoRepository: PFijoRepository) {
     }
 
     fun deletePFCSVFile(){
-        Files.deleteIfExists(Path(pfcsvName))
+        Files.deleteIfExists(Path(CSV_FILE_NAME))
     }
 
-    fun processCSV(path: String = pfcsvName) {
+    fun processCSV(path: String = CSV_FILE_NAME) {
         val bufferedReader = File(path).bufferedReader()
         val csvParser = CSVParser(bufferedReader, CSVFormat.DEFAULT.withDelimiter(';').withHeader())
 

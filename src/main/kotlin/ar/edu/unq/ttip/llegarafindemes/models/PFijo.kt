@@ -17,4 +17,12 @@ data class PFijo(
     @Column(nullable = false) val tasa: String,
     @Column(nullable = false) val territorioDeValidez: String,
     @Column(nullable = false, length = 1024) val masInformacion: String
-)
+) {
+    fun toInversion(): Inversion {
+        return Inversion(descripcionEntidad, getTasaMensual(), Periodicidad.MENSUAL, 1, "PlazoFijo")
+    }
+
+    private fun getTasaMensual(): Float {
+        return (tasa.toFloat() / 365) * 30
+    }
+}

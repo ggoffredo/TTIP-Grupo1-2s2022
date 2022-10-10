@@ -6,7 +6,6 @@ import javax.persistence.*
 
 @MappedSuperclass
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-// TODO: El nombre puede mejorarse
 open class Administrable(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) var id: Int = 0,
     @Column(nullable = false) var descripcion: String,

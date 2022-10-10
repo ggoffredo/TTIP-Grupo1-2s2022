@@ -12,14 +12,14 @@ const CurrentMonthGastos = ({gastosMesEnCurso}) => {
     }
 
     const getLabels = () => {
-        let labels = gastosMesEnCurso?.gastos.map( gasto => getCorrectDate(gasto.fecha))
+        let labels = gastosMesEnCurso?.gastos.map(gasto => getCorrectDate(gasto.fecha))
         return [...new Set(labels)]
     }
 
     const getValues = () => {
         // Muy hackish
         let labels = getLabels()
-        let montos = gastosMesEnCurso?.gastos.map( gasto => gasto.monto)
+        let montos = gastosMesEnCurso?.gastos.map(gasto => gasto.monto)
         let splitIndex = montos?.length - labels.length + 1
         let first = montos?.slice(0, splitIndex).reduce((partialSum, e) => partialSum + e, 0)
         let second = montos?.slice(splitIndex, montos.length)

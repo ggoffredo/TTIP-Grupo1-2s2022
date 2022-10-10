@@ -1,8 +1,8 @@
 import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Grid";
-import ChipCore from "./Core/ChipCore";
+import ChipCore from "../Core/ChipCore";
 
-const ProyeccionYAhorro  = ({proyeccion, ahorros}) => {
+const ProyeccionYAhorrosChips  = ({proyeccion, ahorros}) => {
 
     const getChips = () => {
         return (
@@ -13,11 +13,11 @@ const ProyeccionYAhorro  = ({proyeccion, ahorros}) => {
         )
     }
 
-    return <Grid item xs={12}>
+    return <Grid item xs={12} style={{marginTop: '10px'}}>
         <Stack direction="row" spacing={1}>
             {getChips()}
         </Stack>
     </Grid>
 }
 
-export default ProyeccionYAhorro
+export default ProyeccionYAhorrosChips

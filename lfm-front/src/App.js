@@ -1,7 +1,7 @@
 import './App.css';
 import Navbar from "./components/Navbar/Navbar";
 import Dashboard from "./components/Dashboard/Dashboard";
-import OpcionesSimulator from "./components/OpcionesSimulator";
+import OpcionesSimulator from "./components/OpcionesDeInversion/OpcionesSimulator";
 import PlazoFijoSimulator from "./components/PlazoFijoSimulator/PlazoFijoSimulator";
 import Container from '@mui/material/Container';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
