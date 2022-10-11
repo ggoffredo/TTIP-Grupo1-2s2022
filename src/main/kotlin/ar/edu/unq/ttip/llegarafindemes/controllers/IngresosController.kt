@@ -5,7 +5,10 @@ import ar.edu.unq.ttip.llegarafindemes.models.Ingreso
 import ar.edu.unq.ttip.llegarafindemes.services.IngresosService
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Controller
-import org.springframework.web.bind.annotation.*
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.ResponseBody
+import org.springframework.web.bind.annotation.ResponseStatus
 
 @Controller
 class IngresosController(private val ingresosService: IngresosService) {

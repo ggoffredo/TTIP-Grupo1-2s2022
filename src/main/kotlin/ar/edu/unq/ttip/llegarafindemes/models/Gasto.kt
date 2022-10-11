@@ -1,7 +1,10 @@
 package ar.edu.unq.ttip.llegarafindemes.models
 
 import java.time.LocalDate
-import javax.persistence.*
+import javax.persistence.CascadeType
+import javax.persistence.Entity
+import javax.persistence.JoinColumn
+import javax.persistence.OneToOne
 
 @Entity
 class Gasto(

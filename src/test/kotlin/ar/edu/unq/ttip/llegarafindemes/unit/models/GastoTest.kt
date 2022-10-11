@@ -4,7 +4,8 @@ import ar.edu.unq.ttip.llegarafindemes.models.Gasto
 import ar.edu.unq.ttip.llegarafindemes.models.MedioDePago
 import ar.edu.unq.ttip.llegarafindemes.models.Periodicidad
 import ar.edu.unq.ttip.llegarafindemes.models.Usuario
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import java.time.LocalDate
 

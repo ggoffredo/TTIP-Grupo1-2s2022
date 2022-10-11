@@ -1,7 +1,6 @@
 package ar.edu.unq.ttip.llegarafindemes.unit.services
 
 import ar.edu.unq.ttip.llegarafindemes.helpers.RestTemplateHelper
-import ar.edu.unq.ttip.llegarafindemes.models.Periodicidad
 import ar.edu.unq.ttip.llegarafindemes.services.CotizacionesService
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals

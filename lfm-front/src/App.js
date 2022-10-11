@@ -4,7 +4,7 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import OpcionesSimulator from "./components/OpcionesDeInversion/OpcionesSimulator";
 import PlazoFijoSimulator from "./components/PlazoFijoSimulator/PlazoFijoSimulator";
 import Container from '@mui/material/Container';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {UserProvider} from "./components/Contexts/UserContext";
 import Landing from "./components/Landing";
 import PrivateRoute from "./components/Router/PrivateRoute";
