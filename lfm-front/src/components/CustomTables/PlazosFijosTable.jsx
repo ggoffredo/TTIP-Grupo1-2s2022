@@ -7,22 +7,18 @@ import {getPlazosFijos} from "../../services/PlazosFijosService";
 const PlazosFijosTable = () => {
     const [plazosFijos, setPlazosFijos] = useState([])
 
-    const getPlazosFijosTable = (data) => {
-        return <StyledTable data={data} headers={['Banco', 'Moneda', 'Monto', 'Plazo', 'Tasa']}/>
-    }
-
-    const getPlazosFijosData = async () => {
-        let plazosFijosApi = await getPlazosFijos();
-        setPlazosFijos(plazosFijosApi);
-    }
-
     useEffect(() => {
-        getPlazosFijosData()
+        getPlazosFijos().then(res => setPlazosFijos(res))
     }, []);
 
     return (
         <Grid item xs={12} sm={12} md={12}>
-            <ChartCard chart={getPlazosFijosTable(plazosFijos)} title={'Plazos Fijos'}/>
+            <ChartCard
+                Chart={StyledTable}
+                chartData={plazosFijos}
+                headers={['Banco', 'Moneda', 'Monto', 'Plazo', 'Tasa']}
+                title={'Plazos Fijos'}
+            />
         </Grid>
     );
 }

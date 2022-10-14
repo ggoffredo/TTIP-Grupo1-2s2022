@@ -7,10 +7,6 @@ import {getPlazosFijos} from "../../services/PlazosFijosService";
 const ConstitucionPlazosFijosTable = ({monto, inversiones}) => {
     const [plazosFijos, setPlazosFijos] = useState([])
 
-    const getPlazosFijosTable = (data) => {
-        return <StyledTable data={data} headers={['Banco', 'Moneda', 'Monto', 'Plazo', 'Tasa', 'Intereses']}/>
-    }
-
     function doGetPFData(pf) {
         pf.monto = monto;
         // TODO: Cambiar plazo
@@ -28,7 +24,12 @@ const ConstitucionPlazosFijosTable = ({monto, inversiones}) => {
 
     return (
         <Grid item xs={12} sm={12} md={12}>
-            <ChartCard chart={getPlazosFijosTable(plazosFijos)} title={'Constitución de Plazos Fijos'}/>
+            <ChartCard
+                Chart={StyledTable}
+                chartData={plazosFijos}
+                headers={['Banco', 'Moneda', 'Monto', 'Plazo', 'Tasa', 'Intereses']}
+                title={'Constitución de Plazos Fijos'}
+            />
         </Grid>
     );
 }

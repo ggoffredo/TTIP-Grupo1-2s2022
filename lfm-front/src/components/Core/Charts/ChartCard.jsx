@@ -4,8 +4,9 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box'
 import Divider from "@mui/material/Divider";
+import {CircularProgress} from "@material-ui/core";
 
-export default function ChartCard({chart, title, label}) {
+export default function ChartCard({Chart, title, label, chartData, headers}) {
 
     const labelComponent = () => {
         return label
@@ -25,7 +26,11 @@ export default function ChartCard({chart, title, label}) {
                 </Typography>
                 <div style={{margin: 5}}> <Divider/> </div>
                 {labelComponent()}
-                {chart}
+                {
+                    chartData && Object.keys(chartData).length !== 0
+                        ? <Chart data={chartData} {...(headers && {headers: headers})}/>
+                        : <CircularProgress/>
+                }
             </CardContent>
         </Card>
     </>

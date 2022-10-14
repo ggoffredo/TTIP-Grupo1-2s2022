@@ -8,10 +8,6 @@ import Utils from "../../helpers/Utils";
 const IPCTable = () => {
     const [ipcs, setIpcs] = useState([])
 
-    const getIPCTable = (data) => {
-        return <StyledTable data={data} headers={['Mes', 'Valor']}/>
-    }
-
     const getIPCs = () => {getIPCMensuales().then(res => mapAndSetIPCs(res))}
 
     const mapAndSetIPCs = (ipcs) => {
@@ -29,7 +25,12 @@ const IPCTable = () => {
 
     return (
         <Grid item xs={12} sm={12} md={12}>
-            <ChartCard chart={getIPCTable(ipcs)} title={'Inflación mensual'}/>
+            <ChartCard
+                Chart={StyledTable}
+                chartData={ipcs}
+                headers={['Mes', 'Valor']}
+                title={'Inflación mensual'}
+            />
         </Grid>
     );
 }

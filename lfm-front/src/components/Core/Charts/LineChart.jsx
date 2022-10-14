@@ -10,7 +10,7 @@ import {
 } from 'chart.js';
 import {Line} from 'react-chartjs-2';
 
-export default function LineChart({datasetData}) {
+export default function LineChart({data}) {
     ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
     const options = {
@@ -22,14 +22,14 @@ export default function LineChart({datasetData}) {
         }
     };
 
-    const labels = datasetData.labels;
+    const labels = data.labels;
 
     const chartData = {
         labels,
         datasets: [
             {
-                label: datasetData.title,
-                data: datasetData.values,
+                label: data.title,
+                data: data.values,
                 borderColor: 'rgb(255, 99, 132)',
                 backgroundColor: 'rgba(255, 99, 132, 0.5)',
             }

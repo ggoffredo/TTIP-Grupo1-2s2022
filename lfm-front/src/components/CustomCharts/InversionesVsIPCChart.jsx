@@ -25,10 +25,7 @@ const InversionesVsIPCChart = ({inversiones, title}) => {
     }, [inversiones])
 
     return <Grid item xs={12} sm={12} md={12}>
-        <ChartCard
-            chart={<BarChart data={barChartData}/>}
-            title={title}
-        />
+        <ChartCard Chart={BarChart} title={title} chartData={barChartData}/>
     </Grid>
 }
 

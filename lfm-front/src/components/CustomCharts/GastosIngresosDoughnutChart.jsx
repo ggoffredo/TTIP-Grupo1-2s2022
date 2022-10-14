@@ -9,18 +9,13 @@ const getDoughnutChartData = (ingresos, gastos) => {
     };
 }
 
-const getDoughnutChart = (ingresos, gastos) => {
-    return <DoughnutChart
-        data={getDoughnutChartData(ingresos, gastos)}
-    />
-}
-
 const GastosIngresosDoughnutChart = ({ingresos, gastos, title}) => {
     return <Grid item xs={12} sm={8} md={5} lg={4}>
         <ChartCard
-            chart={getDoughnutChart(ingresos, gastos)}
+            Chart={DoughnutChart}
             label={`Ingresos: ${ingresos}`}
             title={title}
+            chartData={getDoughnutChartData(ingresos, gastos)}
         />
     </Grid>
 }
