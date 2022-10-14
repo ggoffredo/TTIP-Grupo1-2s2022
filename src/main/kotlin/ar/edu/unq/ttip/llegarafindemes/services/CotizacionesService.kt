@@ -18,9 +18,8 @@ class CotizacionesService(private val restTemplateHelper: RestTemplateHelper) {
         return response.map {
             it as LinkedHashMap<*,*>
             Cotizacion(
-                (it["casa"] as LinkedHashMap<String,String>)!!["nombre"] ?: "",
-                (it["casa"] as LinkedHashMap<String,String>)!!["compra"]?.replace(",",".") ?: "",
-                (it["casa"] as LinkedHashMap<String,String>)!!["venta"]?.replace(",",".") ?: ""
+                (it["casa"] as LinkedHashMap<String,String>)!!["nombre"]!!,
+                (it["casa"] as LinkedHashMap<String,String>)!!["venta"]!!.replace(",", ".").toFloat()
             )
         }.filter {cotizacion -> cotizacion.nombre in (dolaresHabilitados)}
     }
