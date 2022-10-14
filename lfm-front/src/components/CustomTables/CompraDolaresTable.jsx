@@ -7,10 +7,6 @@ import {getDolarValues} from "../../services/CotizacionService";
 const CompraDolaresTable = ({monto, inversiones}) => {
     const [dolares, setDolares] = useState([])
 
-    const getCompraDolaresTable = (data) => {
-        return <StyledTable data={data} headers={['Nombre', 'Cotización', 'Monto', 'Cantidad']}/>
-    }
-
     const getAndSetDolares = () => {getDolarValues().then(res => mapAndSetDolares(res))}
 
     const mapAndSetDolares = (dolaresApi) => {
@@ -29,7 +25,12 @@ const CompraDolaresTable = ({monto, inversiones}) => {
 
     return (
         <Grid item xs={12} sm={12} md={12}>
-            <ChartCard chart={getCompraDolaresTable(dolares)} title={'Compra de Dólares'}/>
+            <ChartCard
+                Chart={StyledTable}
+                chartData={dolares}
+                headers={['Nombre', 'Cotización', 'Monto', 'Cantidad']}
+                title={'Compra de Dólares'}
+            />
         </Grid>
     );
 }
