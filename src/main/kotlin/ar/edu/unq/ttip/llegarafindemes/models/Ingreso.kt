@@ -1,7 +1,7 @@
 package ar.edu.unq.ttip.llegarafindemes.models
 
 import java.time.LocalDate
-import javax.persistence.*
+import javax.persistence.Entity
 
 @Entity
 class Ingreso(

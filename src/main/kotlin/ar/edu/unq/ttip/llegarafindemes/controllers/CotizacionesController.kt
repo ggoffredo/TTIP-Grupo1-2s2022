@@ -1,7 +1,7 @@
 package ar.edu.unq.ttip.llegarafindemes.controllers
 
-import ar.edu.unq.ttip.llegarafindemes.models.Inversion
-import ar.edu.unq.ttip.llegarafindemes.services.InversionesService
+import ar.edu.unq.ttip.llegarafindemes.models.Cotizacion
+import ar.edu.unq.ttip.llegarafindemes.services.CotizacionesService
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.ResponseBody
 import org.springframework.web.bind.annotation.ResponseStatus
 
 @Controller
-class InversionesController(private val inversionesService: InversionesService) {
+class CotizacionesController(private val cotizacionesApiService: CotizacionesService) {
 
-    @GetMapping(value = ["/inversiones"])
+    @GetMapping(value = ["/cotizacionDolares"])
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
-    fun getInversiones(): HashMap<String, List<Inversion>> {
-        return inversionesService.getInversiones()
+    fun getCotizacionDolares(): List<Cotizacion> {
+        return cotizacionesApiService.getDolares()
     }
 }

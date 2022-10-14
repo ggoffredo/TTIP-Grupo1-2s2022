@@ -2,8 +2,7 @@ import {useEffect, useState} from 'react';
 import ChartCard from "../Core/Charts/ChartCard";
 import Grid from "@mui/material/Grid";
 import StyledTable from "../Core/StyledTable";
-import {getDolarValues} from "../../services/DolarSiService";
-import Utils from "../../helpers/Utils";
+import {getDolarValues} from "../../services/CotizacionService";
 
 const CompraDolaresTable = ({monto, inversiones}) => {
     const [dolares, setDolares] = useState([])
@@ -14,19 +13,11 @@ const CompraDolaresTable = ({monto, inversiones}) => {
 
     const getAndSetDolares = () => {getDolarValues().then(res => mapAndSetDolares(res))}
 
-    const normalizeName = (name) => {
-        return name.split(" ").map(namePart => {return Utils.capitalize(namePart)}).join(" ")
-    }
-
-    const normalizeValue = (value) => {
-        return Number(value.replace(",", ".")).toFixed(2).replace(".", ",")
-    }
-
     const mapAndSetDolares = (dolaresApi) => {
         let availableDolars = inversiones["Dolares"].map(dolar => dolar.nombre)
         let dolaresMap = dolaresApi.map(dolar => {
-            let name = normalizeName(dolar['casa']['nombre'])
-            let value =  normalizeValue(dolar['casa']['venta'])
+            let name = dolar['nombre']
+            let value =  dolar['venta']
             return {nombre: name, cotización: value, monto: monto, cantidad: (parseInt(monto) / parseInt(value)).toFixed(2)}
         }).filter(mappedDolar => availableDolars.includes(mappedDolar.nombre))
         setDolares(dolaresMap)

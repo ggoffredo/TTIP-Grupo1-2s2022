@@ -1,9 +1,8 @@
 import Stack from "@mui/material/Stack";
 import Chip from "@mui/material/Chip";
 import Grid from "@mui/material/Grid";
-import {getDolarValues} from "../../services/DolarSiService";
+import {getDolarValues} from "../../services/CotizacionService";
 import {useEffect, useState} from "react";
-import Utils from "../../helpers/Utils";
 
 const DolarValues = () => {
     const [dolares, setDolares] = useState([])
@@ -17,18 +16,10 @@ const DolarValues = () => {
         setDolares(dolaresApi)
     }
 
-    const normalizeName = (name) => {
-        return name.split(" ").map(namePart => {return Utils.capitalize(namePart)}).join(" ")
-    }
-
-    const normalizeValue = (value) => {
-        return Number(value.replace(",", ".")).toFixed(2).replace(".", ",")
-    }
-
     const getChips = () => {
         return dolares.map(dolar => {
-            let name = normalizeName(dolar['casa']['nombre'])
-            let value = normalizeValue(dolar['casa']['venta'])
+            let name = dolar['nombre']
+            let value = dolar['venta']
             return <Chip label={`${name}: $${value}`} variant="outlined" key={name} sx={{color: '#152377', border: '1px solid #152377'}}/>
         })
     }
