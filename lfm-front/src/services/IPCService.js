@@ -1,11 +1,11 @@
 import {getFromLFMApi} from '../helpers/AxiosHelper'
 
 const getIPCValue = async () => {
-    return await getFromLFMApi(`ipc`)
+    return getFromLFMApi(`ipc`)
 }
 
 const getIPCMensuales = async () => {
-    return await getFromLFMApi(`ipcMensuales`)
+    return getFromLFMApi(`ipcMensuales`)
 }
 
 export {getIPCValue, getIPCMensuales}

@@ -8,6 +8,7 @@ import {getIPCValue} from "../../services/IPCService";
 import Divider from "@mui/material/Divider";
 import {getFromLFMApi} from "../../helpers/AxiosHelper";
 import ClickableChip from "../ClickableChip";
+import {getInversionesAndIpc} from "../../services/InversionesService";
 
 export default function OpcionesSimulator() {
     const [chartChips, setChartChips] = useState([])
@@ -52,23 +53,16 @@ export default function OpcionesSimulator() {
         setChartChips(chips)
     }
 
-    useEffect(()=> {
-        Promise.all([
-            getIPCValue().then(res => Number(res.value.replace(",", "."))),
-            getFromLFMApi("inversiones")
-        ]).then(res => {
-            let [ipc, inversiones] = res;
-            inversiones['Inflación'] = [{
-                "nombre": "Inflación",
-                "tasaDeVariacion": ipc,
-                "periodo": "MENSUAL",
-                "cantidadDePeriodos": 1,
-                "tipoDeInversion": "Inflación"
-            }]
-            inversionesAndIpc.current = inversiones
+    const doGetInversionesAndIpc = () => {
+        getInversionesAndIpc().then(res => {
+            inversionesAndIpc.current = res;
             enabledChips.current = getNamesFromInversiones()
             updateFilteredInversiones()
         })
+    }
+
+    useEffect(() => {
+        doGetInversionesAndIpc()
     }, []);
 
     return <Grid container spacing={{ xs: 2 }}>

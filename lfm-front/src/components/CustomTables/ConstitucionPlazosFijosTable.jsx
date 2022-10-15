@@ -16,8 +16,8 @@ const ConstitucionPlazosFijosTable = ({monto, inversiones}) => {
 
     useEffect(() => {
         getPlazosFijos().then(res => {
-            let availablePFs = inversiones["Plazos Fijos"].map(pf => pf.nombre)
-            let pfs = res.filter(pf => availablePFs.includes(pf.banco)).map(pf => doGetPFData(pf))
+            const availablePFs = inversiones["Plazos Fijos"]?.map(pf => pf.nombre)
+            const pfs = res.filter(pf => availablePFs?.includes(pf.banco)).map(pf => doGetPFData(pf))
             setPlazosFijos(pfs);
         })
     }, [monto, inversiones]);
