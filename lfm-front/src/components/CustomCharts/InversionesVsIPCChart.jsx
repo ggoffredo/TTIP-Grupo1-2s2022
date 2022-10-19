@@ -11,13 +11,17 @@ const InversionesVsIPCChart = ({inversiones, title}) => {
     }
 
     const getBarChartData = () => {
-        return Object.values(inversiones).flat()
-            .reduce((obj, key) => {
-                return {
-                    ...obj,
-                    [key.nombre]: key.tasaDeVariacion
-                };
-            }, {})
+        let inversionesCopy = {...inversiones}
+        let inf = inversionesCopy?.["Inflación"]?.shift()
+        let res = Object.values(inversionesCopy).flat().sort((a, b) => {
+            return b.tasaDeVariacion - a.tasaDeVariacion
+        }).reduce((obj, key) => {
+            return {
+                ...obj,
+                [key.nombre]: key.tasaDeVariacion
+            };
+        }, {})
+        return {["Inflación"]: inf?.tasaDeVariacion, ...res}
     }
 
     useEffect(() => {

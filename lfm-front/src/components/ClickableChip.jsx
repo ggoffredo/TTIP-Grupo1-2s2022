@@ -14,7 +14,15 @@ const ClickableChip = ({chartLabel, onPressClick, onPressDelete}) => {
         setIsClicked(false)
     }
 
-    return <Chip key={chartLabel} sx={{margin: '5px'}} variant={isClicked ? "filled" : "outlined" } label={chartLabel} onClick={handleClick} onDelete={handleDelete}/>
+    return <Chip
+        data-testid={`clickable-chip-${chartLabel}`}
+        key={chartLabel}
+        sx={{margin: '5px'}}
+        variant={isClicked ? "filled" : "outlined"}
+        label={chartLabel}
+        onClick={handleClick}
+        onDelete={handleDelete}
+    />
 }
 
 export default ClickableChip

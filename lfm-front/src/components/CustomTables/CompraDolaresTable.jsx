@@ -10,12 +10,12 @@ const CompraDolaresTable = ({monto, inversiones}) => {
     const getAndSetDolares = () => {getDolarValues().then(res => mapAndSetDolares(res))}
 
     const mapAndSetDolares = (dolaresApi) => {
-        let availableDolars = inversiones["Dolares"].map(dolar => dolar.nombre)
-        let dolaresMap = dolaresApi.map(dolar => {
-            let name = dolar['nombre']
-            let value =  dolar['venta']
+        const availableDolars = inversiones["Dolares"]?.map(dolar => dolar.nombre)
+        const dolaresMap = dolaresApi.map(dolar => {
+            const name = dolar['nombre']
+            const value =  dolar['venta']
             return {nombre: name, cotización: value, monto: monto, cantidad: (parseInt(monto) / parseInt(value)).toFixed(2)}
-        }).filter(mappedDolar => availableDolars.includes(mappedDolar.nombre))
+        }).filter(mappedDolar => availableDolars?.includes(mappedDolar.nombre))
         setDolares(dolaresMap)
     }
 
