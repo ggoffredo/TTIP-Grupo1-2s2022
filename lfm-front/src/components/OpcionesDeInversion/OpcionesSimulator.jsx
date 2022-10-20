@@ -15,7 +15,7 @@ export default function OpcionesSimulator() {
     const [filteredInversiones, setFilteredInversiones] = useState({})
     const inversionesAndIpc= useRef({})
     const enabledChips = useRef([])
-    const chipTooltipText = "Se pueden habilitar o deshabilitar las  diferentes opciones de inversión, de manera que se viasualicen u oculten en la página para su comparación."
+    const chipTooltipText = "Se pueden habilitar o deshabilitar las diferentes opciones de inversión, de manera que se visualicen u oculten en la página para su comparación."
 
     const getNamesFromInversiones = () => {
         return Object.values(inversionesAndIpc.current).flat().map(inv => inv.nombre)
