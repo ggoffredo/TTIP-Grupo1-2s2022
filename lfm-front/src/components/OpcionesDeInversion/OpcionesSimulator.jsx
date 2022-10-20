@@ -4,17 +4,18 @@ import ProyeccionYAhorros from "./ProyeccionYAhorros";
 import {useEffect, useRef, useState} from "react";
 import InversionesVsIPCChart from "../CustomCharts/InversionesVsIPCChart";
 import IPCTable from "../CustomTables/IPCTable";
-import {getIPCValue} from "../../services/IPCService";
 import Divider from "@mui/material/Divider";
-import {getFromLFMApi} from "../../helpers/AxiosHelper";
 import ClickableChip from "../ClickableChip";
 import {getInversionesAndIpc} from "../../services/InversionesService";
+import Interrogate from "../../resources/interrogate.png";
+import {Tooltip} from "@material-ui/core";
 
 export default function OpcionesSimulator() {
     const [chartChips, setChartChips] = useState([])
     const [filteredInversiones, setFilteredInversiones] = useState({})
     const inversionesAndIpc= useRef({})
     const enabledChips = useRef([])
+    const chipTooltipText = "Se pueden habilitar o deshabilitar las diferentes opciones de inversión, de manera que se visualicen u oculten en la página para su comparación."
 
     const getNamesFromInversiones = () => {
         return Object.values(inversionesAndIpc.current).flat().map(inv => inv.nombre)
@@ -67,7 +68,12 @@ export default function OpcionesSimulator() {
 
     return <Grid container spacing={{ xs: 2 }}>
         <ViewTitle title={"Opciones de Inversión"}/>
-        <Grid container justifyContent="center"> { chartChips } </Grid>
+        <Grid container justifyContent="center">
+            {  chartChips }
+            <Tooltip title= {chipTooltipText} placement="right-start">
+                <img src={Interrogate} alt="Ayuda" style={{height: '18px', margin: '0.5%' }}/>
+            </Tooltip>
+        </Grid>
         <Grid container justifyContent="center">
             <Grid item xs={12} sm={12} lg={6}>
                 <InversionesVsIPCChart
