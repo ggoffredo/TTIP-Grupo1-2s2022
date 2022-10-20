@@ -71,7 +71,7 @@ export default function OpcionesSimulator() {
         <Grid container justifyContent="center">
             {  chartChips }
             <Tooltip title= {chipTooltipText} placement="right-start">
-                <img src={Interrogate} alt="Llegar a fin de mes logo" style={{height: '18px', margin: '0.5%' }}/>
+                <img src={Interrogate} alt="Ayuda" style={{height: '18px', margin: '0.5%' }}/>
             </Tooltip>
         </Grid>
         <Grid container justifyContent="center">
