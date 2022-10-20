@@ -15,7 +15,7 @@ const ProyeccionYAhorrosChips  = ({proyeccion, ahorros}) => {
                 <ChipCore labelContent={`Ahorros: $${ahorros}`} key="ahorros"/>
 
                 <Tooltip title= {chipTooltipText} placement="right-start">
-                    <img src={Interrogate} alt="Llegar a fin de mes logo" style={{height: '18px', margin: '0.5%' }}/>
+                    <img src={Interrogate} alt="Ayuda" style={{height: '18px', margin: '0.5%' }}/>
                 </Tooltip>
             </>
         )
