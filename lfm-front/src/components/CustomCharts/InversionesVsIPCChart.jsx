@@ -12,8 +12,8 @@ const InversionesVsIPCChart = ({inversiones, title}) => {
 
     const getBarChartData = () => {
         let inversionesCopy = {...inversiones}
-        let inf = inversionesCopy?.["Inflación"]?.shift()
-        let res = Object.values(inversionesCopy).flat().sort((a, b) => {
+        const inf = inversionesCopy?.["Inflación"]?.shift()
+        const res = Object.values(inversionesCopy).flat().sort((a, b) => {
             return b.tasaDeVariacion - a.tasaDeVariacion
         }).reduce((obj, key) => {
             return {
@@ -21,7 +21,10 @@ const InversionesVsIPCChart = ({inversiones, title}) => {
                 [key.nombre]: key.tasaDeVariacion
             };
         }, {})
-        return {["Inflación"]: inf?.tasaDeVariacion, ...res}
+        return {
+            ...(inf && {["Inflación"]: inf?.tasaDeVariacion}),
+            ...res
+        }
     }
 
     useEffect(() => {
