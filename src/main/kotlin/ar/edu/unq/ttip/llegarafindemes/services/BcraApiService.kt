@@ -63,7 +63,7 @@ class BcraApiService(private val restTemplateHelper: RestTemplateHelper) {
         return ((last - first) * 100) / first
     }
 
-    fun getInflacionEsperadabyMonth(): Ipc {
-        return this.getFromBcra(INFLACION_ESPERADA_PATH, 1).map { Ipc(it["d"]!!.toString(), it["v"]!!.toString()) }.first()
+    fun getInflacionEsperada(): String {
+        return this.getFromBcra(INFLACION_ESPERADA_PATH, 1).map { it["v"]!!.toString() }.first()
     }
 }

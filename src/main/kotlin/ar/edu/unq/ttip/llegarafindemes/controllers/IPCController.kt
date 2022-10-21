@@ -24,4 +24,11 @@ class IPCController(private val bcraApiService: BcraApiService) {
     fun getIPCMensuales(): List<Ipc> {
         return bcraApiService.getIPCByMonth()
     }
+
+    @GetMapping(value = ["/inflacionEsperada"])
+    @ResponseBody
+    @ResponseStatus(HttpStatus.OK)
+    fun getInflacionEsperada(): String {
+        return bcraApiService.getInflacionEsperada()
+    }
 }

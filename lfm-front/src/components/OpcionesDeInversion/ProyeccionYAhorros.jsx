@@ -8,6 +8,7 @@ import Utils from "../../helpers/Utils";
 import {getGastosForUserId, getGastosForUserIdPerMonth} from "../../services/GastosService";
 import useUser from "../CustomHooks/UseUser";
 import ProyeccionYAhorrosChips from "./ProyeccionYAhorrosChips";
+import InflacionEsperadaChip from "./InflacionEsperadaChip";
 
 const ProyeccionYAhorros = ({inversiones}) => {
     const [ahorros, setAhorros] = useState(0)
@@ -50,6 +51,7 @@ const ProyeccionYAhorros = ({inversiones}) => {
 
     return <Grid container>
         <ProyeccionYAhorrosChips proyeccion={proyeccionMensual} ahorros={ahorros}/>
+        <InflacionEsperadaChip/>
         <Grid item xs={12} sm={12} lg={6}>
             <ViewSubTitle subTitle={'En base a proyección mensual'}/>
             <ConstitucionPlazosFijosTable monto={proyeccionMensual} inversiones={inversiones}/>

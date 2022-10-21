@@ -5,7 +5,6 @@ import ar.edu.unq.ttip.llegarafindemes.models.Periodicidad
 import ar.edu.unq.ttip.llegarafindemes.services.BcraApiService
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.mockito.*
@@ -76,9 +75,8 @@ class BcraApiTest {
     @Test
     fun enBaseALaApiDeEstadisticaBCRASeObtieneLaInflacionEsperadaOficial(){
         this.setUpInflacionEsperadaMock()
-        val inflacionesEsperadasMensual = bcraApiService.getInflacionEsperadabyMonth()
-        assertEquals(inflacionesEsperadasMensual.month, "30-09-2022")
-        assertEquals(inflacionesEsperadasMensual.value, "94.1")
+        val inflacionesEsperadasMensual = bcraApiService.getInflacionEsperada()
+        assertEquals(inflacionesEsperadasMensual, "94.1")
     }
 
     private fun setUpDolarBlueMock() {
