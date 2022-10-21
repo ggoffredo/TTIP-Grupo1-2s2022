@@ -7,8 +7,7 @@ import IPCTable from "../CustomTables/IPCTable";
 import Divider from "@mui/material/Divider";
 import ClickableChip from "../ClickableChip";
 import {getInversionesAndIpc} from "../../services/InversionesService";
-import Interrogate from "../../resources/interrogate.png";
-import {Tooltip} from "@material-ui/core";
+import HelpTooltip from "../HelpTooltip";
 
 export default function OpcionesSimulator() {
     const [chartChips, setChartChips] = useState([])
@@ -70,9 +69,7 @@ export default function OpcionesSimulator() {
         <ViewTitle title={"Opciones de Inversión"}/>
         <Grid container justifyContent="center">
             {  chartChips }
-            <Tooltip title= {chipTooltipText} placement="right-start">
-                <img src={Interrogate} alt="Ayuda" style={{height: '18px', margin: '0.5%' }}/>
-            </Tooltip>
+            { chartChips.length !== 0 && <HelpTooltip tooltipText={chipTooltipText}/> }
         </Grid>
         <Grid container justifyContent="center">
             <Grid item xs={12} sm={12} lg={6}>
