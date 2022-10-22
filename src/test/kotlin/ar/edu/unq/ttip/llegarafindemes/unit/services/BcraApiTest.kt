@@ -71,6 +71,14 @@ class BcraApiTest {
         assertEquals(14.957251f, inversion.tasaDeVariacion)
     }
 
+
+    @Test
+    fun enBaseALaApiDeEstadisticaBCRASeObtieneLaInflacionEsperadaOficial(){
+        this.setUpInflacionEsperadaMock()
+        val inflacionesEsperadasMensual = bcraApiService.getInflacionEsperada()
+        assertEquals(inflacionesEsperadasMensual, "94.1")
+    }
+
     private fun setUpDolarBlueMock() {
         val response = ResponseEntity(
             arrayOf(
@@ -87,6 +95,18 @@ class BcraApiTest {
             arrayOf(
                 linkedMapOf("d" to "07-10-2022", "v" to "155.07"),
                 linkedMapOf("d" to "08-10-2022", "v" to "157.18"),
+            ) as Array<Any>,
+            HttpStatus.OK
+        )
+        `when`(restTemplateHelper.addUrl(anyString()).addBearer(anyString()).getForEntity((Array<Any>::class.java))).thenReturn(response)
+    }
+
+    private fun setUpInflacionEsperadaMock() {
+        val response = ResponseEntity(
+            arrayOf(
+                linkedMapOf("d" to "31-07-2022", "v" to "83.7"),
+                linkedMapOf("d" to "31-08-2022", "v" to "90.5"),
+                linkedMapOf("d" to "30-09-2022", "v" to "94.1")
             ) as Array<Any>,
             HttpStatus.OK
         )

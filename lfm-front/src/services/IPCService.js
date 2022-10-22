@@ -8,4 +8,8 @@ const getIPCMensuales = async () => {
     return getFromLFMApi(`ipcMensuales`)
 }
 
-export {getIPCValue, getIPCMensuales}
+const getInflacionEsperadaValue = async () => {
+    return getFromLFMApi(`inflacionEsperada`)
+}
+
+export {getIPCValue, getIPCMensuales, getInflacionEsperadaValue}

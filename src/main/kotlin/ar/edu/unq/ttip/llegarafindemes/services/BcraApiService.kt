@@ -14,6 +14,8 @@ class BcraApiService(private val restTemplateHelper: RestTemplateHelper) {
     private val BASE_URL = "bcraBaseUrl"
     @Value("\${bcra.api.inflacion-mensual}")
     private val INFLACION_MENSUAL_PATH = "inflacion_mensual_oficial"
+    @Value("\${bcra.api.inflacion-esperada}")
+    private val INFLACION_ESPERADA_PATH = "inflacion_esperada_oficial"
     @Value("\${bcra.api.token}")
     private var token = "someToken"
 
@@ -59,5 +61,9 @@ class BcraApiService(private val restTemplateHelper: RestTemplateHelper) {
 
     private fun getRate(first: Float, last: Float): Float {
         return ((last - first) * 100) / first
+    }
+
+    fun getInflacionEsperada(): String {
+        return this.getFromBcra(INFLACION_ESPERADA_PATH, 1).map { it["v"]!!.toString() }.first()
     }
 }
