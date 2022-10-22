@@ -1,8 +1,7 @@
 import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Grid";
 import ChipCore from "../Core/ChipCore";
-import {Tooltip} from "@material-ui/core";
-import Interrogate from "../../resources/interrogate.png";
+import HelpTooltip from "../HelpTooltip";
 
 const ProyeccionYAhorrosChips  = ({proyeccion, ahorros}) => {
 
@@ -14,9 +13,7 @@ const ProyeccionYAhorrosChips  = ({proyeccion, ahorros}) => {
                 <ChipCore labelContent={`Proyección: $${proyeccion}`} key="proyeccion"/>
                 <ChipCore labelContent={`Ahorros: $${ahorros}`} key="ahorros"/>
 
-                <Tooltip title= {chipTooltipText} placement="right-start">
-                    <img src={Interrogate} alt="Ayuda" style={{height: '18px', margin: '0.5%' }}/>
-                </Tooltip>
+                <HelpTooltip tooltipText={chipTooltipText}/>
             </>
         )
     }
