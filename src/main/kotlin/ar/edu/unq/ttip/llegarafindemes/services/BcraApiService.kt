@@ -15,7 +15,7 @@ class BcraApiService(private val restTemplateHelper: RestTemplateHelper) {
     @Value("\${bcra.api.inflacion-mensual}")
     private val INFLACION_MENSUAL_PATH = "inflacion_mensual_oficial"
     @Value("\${bcra.api.inflacion-esperada}")
-    private val INFLACION_ESPERADA_PATH = "inflacion_mensual_oficial"
+    private val INFLACION_ESPERADA_PATH = "inflacion_esperada_oficial"
     @Value("\${bcra.api.token}")
     private var token = "someToken"
 
