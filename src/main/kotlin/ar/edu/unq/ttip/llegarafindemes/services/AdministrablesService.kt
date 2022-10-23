@@ -14,15 +14,15 @@ class AdministrablesService {
     private var monthsToCalculate = mutableListOf<LocalDate>()
     private var administrables = listOf<Administrable>()
 
-    fun getAdministrablesPerMonth(administrables: List<Administrable>): AdministrablesService {
+    fun getAdministrablesPerMonth(administrables: List<Administrable>, from: LocalDate? = null, to: LocalDate? = null): AdministrablesService {
         this.administrables = administrables
         if (this.administrables.isEmpty()) return this
-        val administrableMasViejo = this.administrables.first()
-        val fechaInicial = administrableMasViejo.fecha
-        val fechaFinal = LocalDate.now().plusMonths(1)
+        val fechaAdministrableMasViejo = this.administrables.first().fecha.withDayOfMonth(1)
+        val fechaInicial = from ?: fechaAdministrableMasViejo
+        val fechaFinal = to ?: LocalDate.now().plusMonths(1)
         this.monthsToCalculate = Stream
             .iterate(
-                fechaInicial.withDayOfMonth(1)
+                fechaInicial
             ) { date: LocalDate -> date.plusMonths(1) }
             .limit(ChronoUnit.MONTHS.between(fechaInicial, fechaFinal))
             .collect(Collectors.toList())
