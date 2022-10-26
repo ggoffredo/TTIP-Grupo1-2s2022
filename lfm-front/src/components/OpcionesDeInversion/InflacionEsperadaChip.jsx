@@ -22,7 +22,7 @@ const InflacionEsperadaChip = () => {
     const getChips = () => {
         return (
             <>
-                <ChipCore labelContent={`Inflación Esperada: %${inflacionEsperada}`} key="inflacionEsperada"/>
+                <ChipCore labelContent={`Inflación Esperada: ${inflacionEsperada}%`} key="inflacionEsperada"/>
 
                 <HelpTooltip tooltipText={chipTooltipText}/>
             </>
