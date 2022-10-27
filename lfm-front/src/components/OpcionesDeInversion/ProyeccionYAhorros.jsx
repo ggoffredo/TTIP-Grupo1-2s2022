@@ -9,6 +9,8 @@ import {getGastosForUserId, getGastosForUserIdPerMonth} from "../../services/Gas
 import useUser from "../CustomHooks/UseUser";
 import ProyeccionYAhorrosChips from "./ProyeccionYAhorrosChips";
 import InflacionEsperadaChip from "./InflacionEsperadaChip";
+import Divider from "@mui/material/Divider";
+import AhorroYProyeccionChart from "../CustomCharts/AhorroYProyeccionChart";
 
 const ProyeccionYAhorros = ({inversiones}) => {
     const [ahorros, setAhorros] = useState(0)
@@ -50,6 +52,8 @@ const ProyeccionYAhorros = ({inversiones}) => {
     }, []);
 
     return <Grid container>
+        <AhorroYProyeccionChart></AhorroYProyeccionChart>
+        <Grid item xs={12}> <Divider sx={{borderColor: '#0FC2C0'}}/> </Grid>
         <ProyeccionYAhorrosChips proyeccion={proyeccionMensual} ahorros={ahorros}/>
         <InflacionEsperadaChip/>
         <Grid item xs={12} sm={12} lg={6}>
