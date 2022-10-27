@@ -1,4 +1,4 @@
-package ar.edu.unq.ttip.llegarafindemes.integration
+package ar.edu.unq.ttip.llegarafindemes.unit.controllers
 
 import ar.edu.unq.ttip.llegarafindemes.controllers.IPCController
 import ar.edu.unq.ttip.llegarafindemes.models.Ipc
@@ -13,7 +13,7 @@ import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.get
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
 
-class ControllerTest {
+class IpcTest {
     @Mock
     private lateinit var bcraApiServiceMock: BcraApiService
 
