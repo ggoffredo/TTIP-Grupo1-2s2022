@@ -35,14 +35,8 @@ const AhorroYProyeccionChart = () => {
 
     const options = {
         scales: {
-            beginAtZero: true,
             y: {
-                beginAtZero: true,
-                min: 0,
-                ticks: {
-                    beginAtZero: true,
-                    min: 0
-                }
+                beginAtZero: true
             }
         }
     }

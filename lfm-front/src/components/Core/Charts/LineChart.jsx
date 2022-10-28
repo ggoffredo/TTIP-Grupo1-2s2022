@@ -10,7 +10,7 @@ import {
 } from 'chart.js';
 import {Line} from 'react-chartjs-2';
 
-export default function LineChart({data}) {
+export default function LineChart({data, customOptions}) {
     ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
     const options = {
@@ -19,7 +19,8 @@ export default function LineChart({data}) {
             legend: {
                 position: 'top',
             }
-        }
+        },
+        ... customOptions
     };
 
     const labels = data.labels;

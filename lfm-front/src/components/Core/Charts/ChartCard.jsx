@@ -28,7 +28,7 @@ export default function ChartCard({options, Chart, title, label, chartData, head
                 {labelComponent()}
                 {
                     chartData && Object.keys(chartData).length !== 0
-                        ? <Chart options={options} data={chartData} {...(headers && {headers: headers})}/>
+                        ? <Chart customOptions={options} data={chartData} {...(headers && {headers: headers})}/>
                         : <CircularProgress/>
                 }
             </CardContent>
