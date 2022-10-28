@@ -33,8 +33,22 @@ const AhorroYProyeccionChart = () => {
         }
     }
 
+    const options = {
+        scales: {
+            beginAtZero: true,
+            y: {
+                beginAtZero: true,
+                min: 0,
+                ticks: {
+                    beginAtZero: true,
+                    min: 0
+                }
+            }
+        }
+    }
+
     return <Grid item xs={12} sm={12} md={12}>
-        <ChartCard Chart={LineChart} chartData={getData()} title={"Liquidéz y proyección de inversiones"} />
+        <ChartCard options={options} Chart={LineChart} chartData={getData()} title={"Liquidéz y proyección de inversiones"} />
     </Grid>
 }
 

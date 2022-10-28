@@ -6,7 +6,7 @@ import Box from '@mui/material/Box'
 import Divider from "@mui/material/Divider";
 import {CircularProgress} from "@material-ui/core";
 
-export default function ChartCard({Chart, title, label, chartData, headers}) {
+export default function ChartCard({options, Chart, title, label, chartData, headers}) {
 
     const labelComponent = () => {
         return label
@@ -28,7 +28,7 @@ export default function ChartCard({Chart, title, label, chartData, headers}) {
                 {labelComponent()}
                 {
                     chartData && Object.keys(chartData).length !== 0
-                        ? <Chart data={chartData} {...(headers && {headers: headers})}/>
+                        ? <Chart options={options} data={chartData} {...(headers && {headers: headers})}/>
                         : <CircularProgress/>
                 }
             </CardContent>
