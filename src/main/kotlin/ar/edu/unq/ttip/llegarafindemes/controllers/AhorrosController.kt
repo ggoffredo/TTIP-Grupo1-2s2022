@@ -15,4 +15,16 @@ class AhorrosController(private val ahorrosService: AhorrosService) {
     fun getAhorros(@PathVariable userId: Int, @RequestParam(name = "meses") cantidadDeMeses: Int?): List<Ahorro> {
         return ahorrosService.getAhorros(userId, cantidadDeMeses ?: 1)
     }
+
+    @GetMapping(value = ["/users/{userId}/ahorrosInvertidos"])
+    @ResponseBody
+    @ResponseStatus(HttpStatus.OK)
+    fun getAhorrosInvertidos(
+        @PathVariable userId: Int,
+        @RequestParam(name = "tipo") tipo: String,
+        @RequestParam(name = "nombre") nombre: String,
+        @RequestParam(name = "meses") cantidadDeMeses: Int?
+    ): List<Ahorro> {
+        return ahorrosService.getAhorrosConInversionAplicada(userId, cantidadDeMeses ?: 1, tipo, nombre)
+    }
 }
