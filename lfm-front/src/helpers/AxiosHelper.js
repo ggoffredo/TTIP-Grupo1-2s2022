@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const getFromLFMApi = (path) => {
-    return get(`${process.env.REACT_APP_BACKEND_API}${path}`);
+const getFromLFMApi = (path, params) => {
+    return get(`${process.env.REACT_APP_BACKEND_API}${path}`, params);
 }
 
 const logInToLFM = (userEmail, userPassword) => {
@@ -28,10 +28,13 @@ const registerToLFM = (userName, userLastname, userEmail, userPassword) => {
     })
 }
 
-const get = (fullPath) => {
+const get = (fullPath, params) => {
     return axios({
         method: 'get',
         url: fullPath,
+        params: {
+            ...params
+        }
     }).then(response => response.data);
 }
 

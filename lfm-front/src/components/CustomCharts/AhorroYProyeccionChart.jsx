@@ -4,20 +4,27 @@ import MultiChart from "../Core/Charts/MultiChart";
 import {useEffect, useState} from "react";
 import {getAhorrosForUserId} from "../../services/AhorrosService";
 import useUser from "../CustomHooks/UseUser";
+import {FormControl, FormControlLabel, FormLabel, Radio, RadioGroup} from "@mui/material";
 
 const AhorroYProyeccionChart = () => {
+    const periodosDisponibles = [
+        { label: '1 mes', value: 1 },
+        { label: '3 meses', value: 3 },
+        { label: '6 meses', value: 6 },
+        { label: '12 meses', value: 12 }
+    ]
     const [ahorros, setAhorros] = useState([])
+    const [periodoSeleccionado, setPeriodoSeleccionado] = useState(1)
     const {user} = useUser()
 
 
-    async function getAhorros() {
-        let ahorrosApi = await getAhorrosForUserId(user.id);
-        setAhorros(ahorrosApi)
+    function getAhorros() {
+        getAhorrosForUserId(user.id, {meses: periodoSeleccionado}).then(res => setAhorros(res))
     }
 
     useEffect(() => {
         getAhorros()
-    }, []);
+    }, [periodoSeleccionado]);
 
     const getLabels = () => {
         return ahorros.map((a) => a.fecha)
@@ -110,7 +117,22 @@ const AhorroYProyeccionChart = () => {
         }
     }
 
+    function handleClick(event) {
+        console.log(event.target.value)
+        setPeriodoSeleccionado(event.target.value)
+    }
+
+    const getPeriodosRadioButtons = () => {
+        return <FormControl>
+            <FormLabel id="demo-row-radio-buttons-group-label">Período</FormLabel>
+            <RadioGroup row aria-labelledby="demo-row-radio-buttons-group-label" name="row-radio-buttons-group" defaultValue={periodoSeleccionado} onChange={handleClick}>
+                { periodosDisponibles.map(periodo => <FormControlLabel value={periodo.value} control={<Radio/>} label={periodo.label} />)}
+            </RadioGroup>
+        </FormControl>
+    }
+
     return <Grid item xs={12} sm={12} md={12}>
+        { getPeriodosRadioButtons() }
         <ChartCard options={options} Chart={MultiChart} chartData={getData()} title={"Ahorros y proyección de inversiones"} />
     </Grid>
 }
