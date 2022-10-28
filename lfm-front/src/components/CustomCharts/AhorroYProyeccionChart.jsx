@@ -2,23 +2,17 @@ import Grid from "@mui/material/Grid";
 import ChartCard from "../Core/Charts/ChartCard";
 import MultiChart from "../Core/Charts/MultiChart";
 import {useEffect, useState} from "react";
+import {getAhorrosForUserId} from "../../services/AhorrosService";
+import useUser from "../CustomHooks/UseUser";
 
 const AhorroYProyeccionChart = () => {
     const [ahorros, setAhorros] = useState([])
+    const {user} = useUser()
 
 
     async function getAhorros() {
-        //TODO: Deshardcodear
-        setAhorros( [{
-            fecha: "2022-09-01",
-            actual: 82500,
-            acumulado: 430000
-            },{
-            fecha: "2022-10-01",
-            actual: 103000,
-            acumulado: 533000
-            }]
-        )
+        let ahorrosApi = await getAhorrosForUserId(user.id);
+        setAhorros(ahorrosApi)
     }
 
     useEffect(() => {
@@ -55,7 +49,7 @@ const AhorroYProyeccionChart = () => {
                 fill: false,
                 labels: ahorrosData.labels,
                 values: ahorrosData.values,
-                title: "Ahorros",
+                title: "Ahorros mensuales",
                 borderColor: 'rgb(255, 99, 132)',
                 backgroundColor: 'rgba(255, 99, 132, 0.5)'
             },
@@ -64,7 +58,7 @@ const AhorroYProyeccionChart = () => {
                 fill: true,
                 labels: proyeccionData.labels,
                 values: proyeccionData.values,
-                title: "Proyección de ahorros",
+                title: "Ahorros acumulados",
                 borderColor: 'rgb(53, 162, 235)',
                 backgroundColor: 'rgba(53, 162, 235, 0.5)'
             }]
@@ -79,7 +73,7 @@ const AhorroYProyeccionChart = () => {
     }
 
     return <Grid item xs={12} sm={12} md={12}>
-        <ChartCard options={options} Chart={MultiChart} chartData={getData()} title={"Liquidéz y proyección de inversiones"} />
+        <ChartCard options={options} Chart={MultiChart} chartData={getData()} title={"Ahorros y proyección de inversiones"} />
     </Grid>
 }
 
