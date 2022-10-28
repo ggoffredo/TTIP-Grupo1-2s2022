@@ -1,17 +1,37 @@
 import Grid from "@mui/material/Grid";
 import ChartCard from "../Core/Charts/ChartCard";
 import MultiChart from "../Core/Charts/MultiChart";
+import {useEffect, useState} from "react";
 
 const AhorroYProyeccionChart = () => {
+    const [ahorros, setAhorros] = useState([])
+
+
+    async function getAhorros() {
+        //TODO: Deshardcodear
+        setAhorros( [{
+            fecha: "2022-09-01",
+            actual: 82500,
+            acumulado: 430000
+            },{
+            fecha: "2022-10-01",
+            actual: 103000,
+            acumulado: 533000
+            }]
+        )
+    }
+
+    useEffect(() => {
+        getAhorros()
+    }, []);
 
     const getLabels = () => {
-        //TODO: Obtener desde el back
-        return ['Septiembre', 'Octubre']
+        return ahorros.map((a) => a.fecha)
     }
 
     const getAhorrosValues = () => {
         let labels = getLabels()
-        let values = [100,200]
+        let values = ahorros.map((a)=> a.actual)
         return {
             labels: labels,
             values: values
@@ -20,7 +40,7 @@ const AhorroYProyeccionChart = () => {
 
     const getProyeccionValues = () => {
         let labels = getLabels()
-        let values = [90,200]
+        let values = ahorros.map((a) => a.acumulado)
         return {
             labels: labels,
             values: values
