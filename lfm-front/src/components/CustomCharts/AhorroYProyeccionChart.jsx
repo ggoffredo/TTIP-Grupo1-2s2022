@@ -25,14 +25,33 @@ const AhorroYProyeccionChart = () => {
 
     const getAhorrosValues = () => {
         let labels = getLabels()
-        let values = ahorros.map((a)=> a.actual)
+        let values = ahorros.filter((a)=> (Date.parse(a.fecha) <= Date.now())).map((a)=> a.actual)
         return {
             labels: labels,
             values: values
         }
     }
 
-    const getProyeccionValues = () => {
+    const getAhorrosProyectadosValues = () => {
+        let ahorrosProyectados = ahorros
+        let labels = ahorrosProyectados.map((a) => a.fecha)
+        let values = ahorrosProyectados.map((a)=> a.actual)
+        return {
+            labels: labels,
+            values: values
+        }
+    }
+
+    const getAhorrosAcumuladosValues = () => {
+        let labels = getLabels()
+        let values = ahorros.filter((a)=> (Date.parse(a.fecha) <= Date.now())).map((a) => a.acumulado)
+        return {
+            labels: labels,
+            values: values
+        }
+    }
+
+    const getAhorrosAcumuladosProyectadosValues = () => {
         let labels = getLabels()
         let values = ahorros.map((a) => a.acumulado)
         return {
@@ -43,7 +62,9 @@ const AhorroYProyeccionChart = () => {
 
     const getData = () => {
         let ahorrosData = getAhorrosValues()
-        let proyeccionData = getProyeccionValues()
+        let ahorrosProyectadosData = getAhorrosProyectadosValues()
+        let ahorrosAcumuladosData = getAhorrosAcumuladosValues()
+        let ahorrosAcumuladosProyectadosData = getAhorrosAcumuladosProyectadosValues()
         return [{
                 type: 'line',
                 fill: false,
@@ -51,16 +72,33 @@ const AhorroYProyeccionChart = () => {
                 values: ahorrosData.values,
                 title: "Ahorros mensuales",
                 borderColor: 'rgb(255, 99, 132)',
-                backgroundColor: 'rgba(255, 99, 132, 0.5)'
+                backgroundColor: 'rgb(255, 99, 132)'
+            },{
+                type: 'line',
+                fill: false,
+                labels: ahorrosProyectadosData.labels,
+                values: ahorrosProyectadosData.values,
+                title: "Ahorros mensuales proyectados",
+                borderColor: 'rgb(255,193,99)',
+                backgroundColor: 'rgb(255,193,99)'
             },
             {
                 type: 'line',
                 fill: true,
-                labels: proyeccionData.labels,
-                values: proyeccionData.values,
+                labels: ahorrosAcumuladosData.labels,
+                values: ahorrosAcumuladosData.values,
                 title: "Ahorros acumulados",
                 borderColor: 'rgb(53, 162, 235)',
-                backgroundColor: 'rgba(53, 162, 235, 0.5)'
+                backgroundColor: 'rgb(53, 162, 235)'
+            },
+            {
+                type: 'line',
+                fill: true,
+                labels: ahorrosAcumuladosProyectadosData.labels,
+                values: ahorrosAcumuladosProyectadosData.values,
+                title: "Ahorros acumulados proyectados",
+                borderColor: 'rgb(53,235,180)',
+                backgroundColor: 'rgb(53,235,180)'
             }]
     }
 
