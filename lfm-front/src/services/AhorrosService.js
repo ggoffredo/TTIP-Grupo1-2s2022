@@ -4,4 +4,8 @@ const getAhorrosForUserId = (userId, params) => {
     return getFromLFMApi(`users/${userId}/ahorros`, params);
 }
 
-export {getAhorrosForUserId}
+const getAhorrosInvertidosForUserId = (userId, params) => {
+    return getFromLFMApi(`users/${userId}/ahorrosInvertidos`, params);
+}
+
+export {getAhorrosForUserId, getAhorrosInvertidosForUserId}

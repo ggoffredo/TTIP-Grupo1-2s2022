@@ -20,7 +20,7 @@ export default function LineChart({data, customOptions}) {
                 position: 'top',
             }
         },
-        ... customOptions
+        ...customOptions
     };
 
     const labels = data.labels;

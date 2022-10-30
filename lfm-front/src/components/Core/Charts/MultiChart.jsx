@@ -6,12 +6,13 @@ import {
     LineElement,
     PointElement,
     Title,
-    Tooltip
+    Tooltip,
+    Filler
 } from 'chart.js';
 import {Chart} from 'react-chartjs-2';
 
 export default function MultiChart({data, customOptions}) {
-    ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
+    ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler);
 
     const options = {
         responsive: true,
@@ -20,7 +21,7 @@ export default function MultiChart({data, customOptions}) {
                 position: 'top',
             }
         },
-        ... customOptions
+        ...customOptions
     };
 
     const labels = data[0].labels;
@@ -29,7 +30,7 @@ export default function MultiChart({data, customOptions}) {
         labels,
         datasets: data.map((d) => { return {
             type: d.type,
-            fill: d.fill, //TODO: Revisar
+            fill: d.fill,
             label: d.title,
             data: d.values,
             borderColor: d.borderColor,
