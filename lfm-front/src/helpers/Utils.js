@@ -54,4 +54,8 @@ export default class Utils {
         }
         return true
     }
+
+    static removeFutureValues = (arr) => {
+        return arr.filter((a) => (Date.parse(a.fecha) <= Date.now()))
+    }
 }
