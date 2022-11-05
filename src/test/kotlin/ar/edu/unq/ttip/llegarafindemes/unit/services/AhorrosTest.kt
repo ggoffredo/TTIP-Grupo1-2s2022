@@ -145,7 +145,7 @@ class AhorrosTest {
         // Ahorros = Mes 1: $21.000 Mes 2: $26.000 Mes 3: $28.000
         // Promedio ahorro mes 4 = $75.000 / 3 -> 25.000
         // Cantidad de meses 2 -> 2 meses para atrás + mes actual + 2 meses siguientes
-        val result = this.ahorrosService.getAhorrosConInversionAplicada(1, 2, "Plazos Fijos", "Plazo Fijo Galicia", false)
+        val result = this.ahorrosService.getAhorrosConInversionAplicada(1, 2, "Plazo Fijo Galicia", false)
         assertEquals(5, result.size)
         assertEquals(21000, result[0].acumulado)
         assertEquals(48470, result[1].acumulado) // $26.000 + 7% de $21.000 ($1.470)
@@ -180,7 +180,7 @@ class AhorrosTest {
         // Ahorros = Mes 1: $21.000 Mes 2: $26.000 Mes 3: $28.000
         // Promedio ahorro mes 4 = $75.000 / 3 -> 25.000
         // Cantidad de meses 2 -> 2 meses para atrás + mes actual + 2 meses siguientes
-        val result = this.ahorrosService.getAhorrosConInversionAplicada(1, 2, "Plazos Fijos", "Plazo Fijo Galicia")
+        val result = this.ahorrosService.getAhorrosConInversionAplicada(1, 2, "Plazo Fijo Galicia")
         assertEquals(5, result.size)
         assertEquals(21000, result[0].acumulado) // Mes pasado no se invierte
         assertEquals(47000, result[1].acumulado) // Mes pasado no se invierte
@@ -217,7 +217,7 @@ class AhorrosTest {
         // Ahorros = Mes 1: $30.000 Mes 2: $21.000 Mes 3: $26.000 Mes 4: $28.000
         // Promedio ahorro mes 5, 6 y 7 = $105.000 / 4 -> 26.250
         // Cantidad de meses 3 -> 3 meses para atrás + mes actual + 3 meses siguientes
-        val result = this.ahorrosService.getAhorrosConInversionAplicada(1, 3, "Plazos Fijos", "Plazo Fijo Uva", false)
+        val result = this.ahorrosService.getAhorrosConInversionAplicada(1, 3, "Plazo Fijo Uva", false)
         assertEquals(7, result.size)
         assertEquals(30000, result[0].acumulado) // Este monto se invierte
         assertEquals(51000, result[1].acumulado) // $30.000 + $21.000 (30 días)
@@ -253,7 +253,7 @@ class AhorrosTest {
         // Ahorros = Mes 1: $30.000 Mes 2: $21.000 Mes 3: $26.000 Mes 4: $28.000
         // Promedio ahorro mes 5, 6 y 7 = $105.000 / 4 -> 26.250
         // Cantidad de meses 3 -> 3 meses para atrás + mes actual + 3 meses siguientes
-        val result = this.ahorrosService.getAhorrosConInversionAplicada(1, 3, "Plazos Fijos", "Plazo Fijo Uva")
+        val result = this.ahorrosService.getAhorrosConInversionAplicada(1, 3, "Plazo Fijo Uva")
         assertEquals(7, result.size)
         assertEquals(30000, result[0].acumulado) // Mes pasado no se invierte
         assertEquals(51000, result[1].acumulado) // Mes pasado no se invierte
@@ -265,23 +265,13 @@ class AhorrosTest {
     }
 
     @Test
-    fun dadoUnaListaDeInversionesCuandoSePideUnTipoDeInversionInexistenteSeLanzaLaExceptionInvestmentNotFound() {
+    fun dadoUnaListaDeInversionesCuandoSePideUnNombreInexistenteSeLanzaLaExceptionInvestmentNotFound() {
         `when`(inversionesService.getInversiones()).thenReturn(
             hashMapOf(
                 "Plazos Fijos" to listOf(Inversion("Plazo Fijo Galicia", 7f, Periodicidad.MENSUAL, 1, "PlazoFijo"))
             )
         )
-        assertThrows<InvestmentNotFoundException> { this.ahorrosService.getAhorrosConInversionAplicada(1, 2, "Cripto", "nuArs") }
-    }
-
-    @Test
-    fun dadoUnaListaDeInversionesCuandoSePideUnTipoDeInversionExistentePeroUnNombreInexistenteSeLanzaLaExceptionInvestmentNotFound() {
-        `when`(inversionesService.getInversiones()).thenReturn(
-            hashMapOf(
-                "Plazos Fijos" to listOf(Inversion("Plazo Fijo Galicia", 7f, Periodicidad.MENSUAL, 1, "PlazoFijo"))
-            )
-        )
-        assertThrows<InvestmentNotFoundException> { this.ahorrosService.getAhorrosConInversionAplicada(1, 2, "Plazos Fijos", "Banco Pepe") }
+        assertThrows<InvestmentNotFoundException> { this.ahorrosService.getAhorrosConInversionAplicada(1, 2, "Banco Pepe") }
     }
 
     private fun buildGastos(monto1: Int = 1000, monto2: Int = 5000, monto3: Int = 8000): List<Gasto> {

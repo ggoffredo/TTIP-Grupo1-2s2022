@@ -39,7 +39,7 @@ class AhorrosService(
         return ahorros
     }
 
-    fun getAhorrosConInversionAplicada(userId: Int, cantidadDeMeses: Int = 1, tipoDeInversion: String, nombreDeInversion: String, invertirMesesFuturos: Boolean = true): List<Ahorro> {
+    fun getAhorrosConInversionAplicada(userId: Int, cantidadDeMeses: Int = 1, nombreDeInversion: String, invertirMesesFuturos: Boolean = true): List<Ahorro> {
         val inversiones = inversionesService.getInversiones().values.flatten()
         val inversion = inversiones.find { it.nombre == nombreDeInversion } ?: throw InvestmentNotFoundException()
         if (nombreDeInversion == "Plazo Fijo Uva") {
