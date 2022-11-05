@@ -1,8 +1,8 @@
 import {useState} from "react";
 import Chip from "@mui/material/Chip";
 
-const ClickableChip = ({chartLabel, onPressClick, onPressDelete}) => {
-    const [isClicked, setIsClicked] = useState(true)
+const ClickableChip = ({chartLabel, onPressClick, onPressDelete, initialState}) => {
+    const [isClicked, setIsClicked] = useState(initialState)
 
     const handleClick = () => {
         !isClicked && onPressClick(chartLabel)

@@ -8,6 +8,9 @@ import {FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, Switch} fro
 import Utils from "../../helpers/Utils";
 import {CircularProgress, FormGroup} from "@material-ui/core";
 import CustomPopover from "../OpcionesDeInversion/CustomPopover";
+import HelpTooltip from "../HelpTooltip";
+import ClickableChip from "../ClickableChip";
+import {getFromLFMApi} from '../../helpers/AxiosHelper'
 
 const AhorroYProyeccionChart = () => {
     const periodosDisponibles = [
@@ -20,9 +23,14 @@ const AhorroYProyeccionChart = () => {
     const [invertirMesesPasados, setInvertirMesesPasados] = useState(true)
     const [ahorrosInvertidos, setAhorrosInvertidos] = useState([])
     const [periodoSeleccionado, setPeriodoSeleccionado] = useState(1)
+    const inversionesForChips= useRef({})
+    const [chartChips, setChartChips] = useState([])
+    const enabledChips = useRef([])
     const isLoading = useRef(true)
     const [ingresosYGastos, setIngresosYGastos] = useState({})
     const {user} = useUser()
+    const chipTooltipText = "Para la proyección de las inversiones se emplea la taza correspondiente a los últimos 30 días."
+
 
     useEffect(() => {
         isLoading.current = true
@@ -36,25 +44,38 @@ const AhorroYProyeccionChart = () => {
         }).finally(() => {
             isLoading.current = false
         })
-    }, [periodoSeleccionado, ingresosYGastos, invertirMesesPasados]);
+    }, [periodoSeleccionado, ingresosYGastos, invertirMesesPasados, enabledChips.current]);
+
+    const getInversionesForChips = async () => {
+        const inversiones = await getFromLFMApi("inversiones")
+        inversionesForChips.current = inversiones;
+        updateFilteredInversiones()
+    }
 
     const getAhorros = () => {
         return getAhorrosForUserId(user.id, {meses: periodoSeleccionado}, {'ediciones': {...ingresosYGastos}})
     }
 
-    const getAhorrosInvertidos = (tipo = "Plazos Fijos", nombre = "PF Banco Galicia") => {
-        return getAhorrosInvertidosForUserId(
-            user.id,
-            {
-                meses: periodoSeleccionado,
-                tipo: tipo,
-                nombre: nombre,
-                proyecciones: invertirMesesPasados
-            },
-            {
-                'ediciones': {...ingresosYGastos}
-            }
-        )
+    const getAhorrosInvertidos = async (tipo = "Plazos Fijos", nombre = "PF Banco Galicia") => {
+        await getInversionesForChips()
+        const nombres = enabledChips.current
+        let ahorrosInv = []
+        for (let nombre of nombres) {
+            const ahorroInvertido = await getAhorrosInvertidosForUserId(
+                user.id,
+                {
+                    meses: periodoSeleccionado,
+                    nombre: nombre,
+                	proyecciones: invertirMesesPasados
+                },
+            	{
+                	'ediciones': {...ingresosYGastos}
+            	}
+            )
+            ahorrosInv.push({values: ahorroInvertido, nombre: nombre})
+        }
+
+        return ahorrosInv
     }
 
     const getLabels = () => {
@@ -70,7 +91,16 @@ const AhorroYProyeccionChart = () => {
     }
 
     const getAhorrosInvertidosValues = () => {
-        return doGetMappedFormatedData(ahorrosInvertidos, "acumulado")
+        let ahorrosInvertidosValues = []
+        for (let ahorroInvertido of ahorrosInvertidos) {
+            const data = doGetMappedFormatedData(ahorroInvertido.values, "acumulado")
+            ahorrosInvertidosValues.push({
+                values: data,
+                nombre: ahorroInvertido.nombre
+            })
+        }
+        return ahorrosInvertidosValues
+        //return ahorrosInvertidos.map(ahorroInvertido => doGetMappedFormatedData(ahorroInvertido.values, "acumulado"))
     }
 
     const getAhorrosAcumuladosProyectadosValues = () => {
@@ -100,14 +130,15 @@ const AhorroYProyeccionChart = () => {
         const ahorrosProyectadosData = getAhorrosProyectadosValues()
         const ahorrosAcumuladosData = getAhorrosAcumuladosValues()
         const ahorrosAcumuladosProyectadosData = getAhorrosAcumuladosProyectadosValues()
-        const ahorrosInvertidosData = getAhorrosInvertidosValues()
-        return [
-            doGetData(ahorrosData, "Ahorros mensuales", 'rgb(255, 99, 132)'),
+        const ahorrosInvertidosData = getAhorrosInvertidosValues().map(ahorroInvertidoValue => doGetData(ahorroInvertidoValue.values, `Ahorros acumulados proyectados invertidos ${ahorroInvertidoValue.nombre}`, 'rgb(6, 51, 241)', true))
+        let data = [
+            doGetData(ahorrosData, "Ahorros mensuales", 'rgb(255,161,99)'),
             doGetData(ahorrosProyectadosData, "Ahorros mensuales proyectados", 'rgb(255, 193, 99)'),
             doGetData(ahorrosAcumuladosData, "Ahorros acumulados", 'rgb(53, 162, 235)', true),
             doGetData(ahorrosAcumuladosProyectadosData, "Ahorros acumulados proyectados", 'rgb(53, 235, 180)', true),
-            doGetData(ahorrosInvertidosData, "Ahorros acumulados invertidos proyectados", 'rgb(6, 51, 241)', true),
+            ...ahorrosInvertidosData
         ]
+        return data
     }
 
     const doGetData = (data, title, color, fill = false, type = 'line') => {
@@ -138,6 +169,32 @@ const AhorroYProyeccionChart = () => {
         setInvertirMesesPasados(!event.target.checked);
     };
 
+    const updateFilteredInversiones = () => {
+        initChartChips()
+    }
+
+    function getMultiChart() {
+        return <ChartCard options={options} Chart={MultiChart} chartData={getData()} title={"Ahorros y proyección de inversiones"} />
+    }
+
+    const handleChipClick = (chipKey) => {
+        enabledChips.current = enabledChips.current.concat(chipKey)
+        updateFilteredInversiones()
+    }
+
+    const handleChipDelete = (chipKey) => {
+        enabledChips.current = enabledChips.current.filter(key => key !== chipKey)
+        updateFilteredInversiones()
+    }
+
+    const initChartChips = () => {
+        if (!inversionesForChips.current) return
+        let chips = Object.values(inversionesForChips.current).flat().map(
+            inv => <ClickableChip key={inv.nombre} chartLabel={inv.nombre} onPressClick={handleChipClick} onPressDelete={handleChipDelete} initialState={false}/>
+        )
+        setChartChips(chips)
+    }
+
     const getPeriodosRadioButtons = () => {
         return <FormControl>
             <FormLabel id="period-label">Período</FormLabel>
@@ -148,6 +205,10 @@ const AhorroYProyeccionChart = () => {
                     <FormControlLabel control={<Switch onChange={handleChange}/>} label="Invertir meses pasados" />
                 </FormGroup>
             </RadioGroup>
+            <Grid container justifyContent="center">
+                {  chartChips }
+                { chartChips.length !== 0 && <HelpTooltip tooltipText={chipTooltipText}/> }
+            </Grid>
         </FormControl>
     }
 
@@ -156,7 +217,7 @@ const AhorroYProyeccionChart = () => {
             { getPeriodosRadioButtons() }
         </Grid>
         <Grid item xs={12} sm={12} md={12}>
-            { isLoading.current ? <CircularProgress/> : <ChartCard options={options} Chart={MultiChart} chartData={getData()} title={"Ahorros y proyección de inversiones"} />}
+            { isLoading.current ? <CircularProgress/> :  getMultiChart() }
             <CustomPopover ingresosYGastos={ingresosYGastos} setIngresosYGastosCallback={setIngresosYGastos}/>
         </Grid>
     </Grid>
