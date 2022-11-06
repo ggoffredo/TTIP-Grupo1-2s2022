@@ -19,13 +19,8 @@ const PlazoFijoSimulator = () => {
     const [interest, setInterest] = useState("");
     const [toDate, setToDate] = useState(Utils.todayStringFormatted());
 
-    const getPlazosFijosData = async () => {
-        let response = await getPlazosFijos();
-        setPlazosFijos(response);
-    }
-
     useEffect(() => {
-        getPlazosFijosData()
+        getPlazosFijos().then(res => setPlazosFijos(res))
     }, []);
 
     const handleBankSelect = (event) => {

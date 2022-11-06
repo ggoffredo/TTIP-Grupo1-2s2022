@@ -7,8 +7,9 @@ import useUser from "../CustomHooks/UseUser";
 import {FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, Switch} from "@mui/material";
 import Utils from "../../helpers/Utils";
 import {CircularProgress, FormGroup} from "@material-ui/core";
+import CustomPopover from "../OpcionesDeInversion/CustomPopover";
 
-const AhorroYProyeccionChart = ({inversiones}) => {
+const AhorroYProyeccionChart = () => {
     const periodosDisponibles = [
         { label: '1 mes', value: 1 },
         { label: '3 meses', value: 3 },
@@ -20,6 +21,7 @@ const AhorroYProyeccionChart = ({inversiones}) => {
     const [ahorrosInvertidos, setAhorrosInvertidos] = useState([])
     const [periodoSeleccionado, setPeriodoSeleccionado] = useState(1)
     const isLoading = useRef(true)
+    const ingresosYGastos = useRef({})
     const {user} = useUser()
 
     useEffect(() => {
@@ -127,15 +129,16 @@ const AhorroYProyeccionChart = ({inversiones}) => {
     const handleClick = (event) => {
         setPeriodoSeleccionado(event.target.value)
     }
+
     const handleChange = (event) => {
         setInvertirMesesPasados(!event.target.checked);
     };
 
     const getPeriodosRadioButtons = () => {
         return <FormControl>
-            <FormLabel id="demo-row-radio-buttons-group-label">Período</FormLabel>
-            <RadioGroup row aria-labelledby="demo-row-radio-buttons-group-label" name="row-radio-buttons-group" defaultValue={periodoSeleccionado} onChange={handleClick}>
-                { periodosDisponibles.map(periodo => <FormControlLabel value={periodo.value} control={<Radio/>} label={periodo.label} />)}
+            <FormLabel id="period-label">Período</FormLabel>
+            <RadioGroup row aria-labelledby="period-label" defaultValue={periodoSeleccionado} onChange={handleClick}>
+                { periodosDisponibles.map(periodo => <FormControlLabel key={periodo.label} value={periodo.value} control={<Radio/>} label={periodo.label}/>) }
 
                 <FormGroup style={{margin: 25}}>
                     <FormControlLabel control={<Switch onChange={handleChange}/>} label="Invertir meses pasados" />
@@ -150,6 +153,7 @@ const AhorroYProyeccionChart = ({inversiones}) => {
         </Grid>
         <Grid item xs={12} sm={12} md={12}>
             { isLoading.current ? <CircularProgress/> : <ChartCard options={options} Chart={MultiChart} chartData={getData()} title={"Ahorros y proyección de inversiones"} />}
+            <CustomPopover ingresosYGastosRef={ingresosYGastos}/>
         </Grid>
     </Grid>
 }

@@ -10,9 +10,13 @@ import {
     Filler
 } from 'chart.js';
 import {Chart} from 'react-chartjs-2';
+import {useRef} from "react";
+import {trigger} from "../../../helpers/Events";
 
 export default function MultiChart({data, customOptions}) {
     ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler);
+
+    const chartRef = useRef(null);
 
     const options = {
         responsive: true,
@@ -38,5 +42,15 @@ export default function MultiChart({data, customOptions}) {
         }})
     }
 
-    return <Chart options={options} data={chartData}/>;
+    const handleClick = (e) => {
+        const points = chartRef.current.getElementsAtEventForMode(e, 'nearest', { intersect: true }, true);
+        if (points.length) {
+            const firstPoint = points[0];
+            const label = chartRef.current.data.labels[firstPoint.index];
+            const value = chartRef.current.data.datasets[firstPoint.datasetIndex].data[firstPoint.index];
+            trigger('chartClick', {label: label, value: value, clientX: e.clientX, clientY: e.clientY})
+        }
+    }
+
+    return <Chart ref={chartRef} options={options} data={chartData} onClick={handleClick}/>;
 }

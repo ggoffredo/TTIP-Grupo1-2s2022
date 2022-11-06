@@ -52,7 +52,7 @@ const ProyeccionYAhorros = ({inversiones}) => {
     }, []);
 
     return <Grid container>
-        <AhorroYProyeccionChart inversiones={inversiones}/>
+        <AhorroYProyeccionChart/>
         <Grid item xs={12}> <Divider sx={{borderColor: '#0FC2C0'}}/> </Grid>
         <ProyeccionYAhorrosChips proyeccion={proyeccionMensual} ahorros={ahorros}/>
         <InflacionEsperadaChip/>
