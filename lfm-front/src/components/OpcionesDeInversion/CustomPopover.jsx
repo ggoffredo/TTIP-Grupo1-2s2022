@@ -7,7 +7,7 @@ import SubmitButton from "../Forms/SubmitButton";
 import {useEffect, useRef, useState} from "react";
 import {on} from "../../helpers/Events";
 
-const CustomPopover = ({ingresosYGastosRef}) => {
+const CustomPopover = ({ingresosYGastos, setIngresosYGastosCallback}) => {
     const [tipo, setTipo] = useState('ingreso')
     const [open, setOpen] = useState(false)
     const [monto, setMonto] = useState(0)
@@ -36,10 +36,13 @@ const CustomPopover = ({ingresosYGastosRef}) => {
 
     const handleAgregar = (e) => {
         e.preventDefault()
-        const nuevoMonto = tipo === 'ingreso' ? Number(monto) : -monto
-        const currentMonto = ingresosYGastosRef.current[selectedMonth.current] ?? 0
-        ingresosYGastosRef.current[selectedMonth.current] = currentMonto + nuevoMonto
-        console.log(ingresosYGastosRef.current)
+        const nuevoMonto = tipo === 'ingreso' ? monto : -monto
+        const currentMonto = ingresosYGastos?.[selectedMonth.current] ?? 0
+        const ingresosYGastosEditados = {
+            ...ingresosYGastos,
+            [selectedMonth.current]: (currentMonto + Number(nuevoMonto))
+        }
+        setIngresosYGastosCallback(ingresosYGastosEditados)
     }
 
     return <Popover

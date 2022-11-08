@@ -21,10 +21,11 @@ const AhorroYProyeccionChart = () => {
     const [ahorrosInvertidos, setAhorrosInvertidos] = useState([])
     const [periodoSeleccionado, setPeriodoSeleccionado] = useState(1)
     const isLoading = useRef(true)
-    const ingresosYGastos = useRef({})
+    const [ingresosYGastos, setIngresosYGastos] = useState({})
     const {user} = useUser()
 
     useEffect(() => {
+        isLoading.current = true
         Promise.all([
             getAhorros(),
             getAhorrosInvertidos()
@@ -35,10 +36,10 @@ const AhorroYProyeccionChart = () => {
         }).finally(() => {
             isLoading.current = false
         })
-    }, [periodoSeleccionado, invertirMesesPasados]);
+    }, [periodoSeleccionado, ingresosYGastos, invertirMesesPasados]);
 
     const getAhorros = () => {
-        return getAhorrosForUserId(user.id, {meses: periodoSeleccionado})
+        return getAhorrosForUserId(user.id, {meses: periodoSeleccionado}, {'ediciones': {...ingresosYGastos}})
     }
 
     const getAhorrosInvertidos = (tipo = "Plazos Fijos", nombre = "Banco Galicia") => {
@@ -49,6 +50,9 @@ const AhorroYProyeccionChart = () => {
                 tipo: tipo,
                 nombre: nombre,
                 proyecciones: invertirMesesPasados
+            },
+            {
+                'ediciones': {...ingresosYGastos}
             }
         )
     }
@@ -153,7 +157,7 @@ const AhorroYProyeccionChart = () => {
         </Grid>
         <Grid item xs={12} sm={12} md={12}>
             { isLoading.current ? <CircularProgress/> : <ChartCard options={options} Chart={MultiChart} chartData={getData()} title={"Ahorros y proyección de inversiones"} />}
-            <CustomPopover ingresosYGastosRef={ingresosYGastos}/>
+            <CustomPopover ingresosYGastos={ingresosYGastos} setIngresosYGastosCallback={setIngresosYGastos}/>
         </Grid>
     </Grid>
 }

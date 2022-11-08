@@ -1,11 +1,11 @@
 import {getFromLFMApi} from '../helpers/AxiosHelper'
 
-const getAhorrosForUserId = (userId, params) => {
-    return getFromLFMApi(`users/${userId}/ahorros`, params);
+const getAhorrosForUserId = (userId, params, body) => {
+    return getFromLFMApi(`users/${userId}/ahorros`, params, body);
 }
 
-const getAhorrosInvertidosForUserId = (userId, params) => {
-    return getFromLFMApi(`users/${userId}/ahorrosInvertidos`, params);
+const getAhorrosInvertidosForUserId = (userId, params, body) => {
+    return getFromLFMApi(`users/${userId}/ahorrosInvertidos`, params, body);
 }
 
 export {getAhorrosForUserId, getAhorrosInvertidosForUserId}
