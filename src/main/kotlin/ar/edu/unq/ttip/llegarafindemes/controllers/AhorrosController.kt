@@ -22,8 +22,9 @@ class AhorrosController(private val ahorrosService: AhorrosService) {
     fun getAhorrosInvertidos(
         @PathVariable userId: Int,
         @RequestParam(name = "nombre") nombre: String,
-        @RequestParam(name = "meses") cantidadDeMeses: Int?
+        @RequestParam(name = "meses") cantidadDeMeses: Int?,
+        @RequestParam(name = "proyecciones") proyecciones: Boolean
     ): List<Ahorro> {
-        return ahorrosService.getAhorrosConInversionAplicada(userId, cantidadDeMeses ?: 1, nombre)
+        return ahorrosService.getAhorrosConInversionAplicada(userId, cantidadDeMeses ?: 1, nombre,proyecciones)
     }
 }

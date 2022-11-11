@@ -4,9 +4,9 @@ import MultiChart from "../Core/Charts/MultiChart";
 import {useEffect, useRef, useState} from "react";
 import {getAhorrosForUserId, getAhorrosInvertidosForUserId} from "../../services/AhorrosService";
 import useUser from "../CustomHooks/UseUser";
-import {FormControl, FormControlLabel, FormLabel, Radio, RadioGroup} from "@mui/material";
+import {FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, Switch} from "@mui/material";
 import Utils from "../../helpers/Utils";
-import {CircularProgress} from "@material-ui/core";
+import {CircularProgress, FormGroup} from "@material-ui/core";
 
 const AhorroYProyeccionChart = ({inversiones}) => {
     const periodosDisponibles = [
@@ -16,6 +16,7 @@ const AhorroYProyeccionChart = ({inversiones}) => {
         { label: '12 meses', value: 12 }
     ]
     const [ahorros, setAhorros] = useState([])
+    const [invertirMesesPasados, setInvertirMesesPasados] = useState(true)
     const [ahorrosInvertidos, setAhorrosInvertidos] = useState([])
     const [periodoSeleccionado, setPeriodoSeleccionado] = useState(1)
     const isLoading = useRef(true)
@@ -32,7 +33,7 @@ const AhorroYProyeccionChart = ({inversiones}) => {
         }).finally(() => {
             isLoading.current = false
         })
-    }, [periodoSeleccionado]);
+    }, [periodoSeleccionado, invertirMesesPasados]);
 
     const getAhorros = () => {
         return getAhorrosForUserId(user.id, {meses: periodoSeleccionado})
@@ -44,7 +45,8 @@ const AhorroYProyeccionChart = ({inversiones}) => {
             {
                 meses: periodoSeleccionado,
                 tipo: tipo,
-                nombre: nombre
+                nombre: nombre,
+                proyecciones: invertirMesesPasados
             }
         )
     }
@@ -125,12 +127,19 @@ const AhorroYProyeccionChart = ({inversiones}) => {
     const handleClick = (event) => {
         setPeriodoSeleccionado(event.target.value)
     }
+    const handleChange = (event) => {
+        setInvertirMesesPasados(!event.target.checked);
+    };
 
     const getPeriodosRadioButtons = () => {
         return <FormControl>
             <FormLabel id="demo-row-radio-buttons-group-label">Período</FormLabel>
             <RadioGroup row aria-labelledby="demo-row-radio-buttons-group-label" name="row-radio-buttons-group" defaultValue={periodoSeleccionado} onChange={handleClick}>
                 { periodosDisponibles.map(periodo => <FormControlLabel value={periodo.value} control={<Radio/>} label={periodo.label} />)}
+
+                <FormGroup style={{margin: 25}}>
+                    <FormControlLabel control={<Switch onChange={handleChange}/>} label="Invertir meses pasados" />
+                </FormGroup>
             </RadioGroup>
         </FormControl>
     }
