@@ -19,7 +19,7 @@ data class PFijo(
     @Column(nullable = false, length = 1024) val masInformacion: String
 ) {
     fun toInversion(): Inversion {
-        return Inversion(descripcionEntidad, getTasaMensual(), Periodicidad.MENSUAL, 1, "PlazoFijo")
+        return Inversion("PF $descripcionEntidad", getTasaMensual(), Periodicidad.MENSUAL, 1, "PlazoFijo")
     }
 
     private fun getTasaMensual(): Float {
