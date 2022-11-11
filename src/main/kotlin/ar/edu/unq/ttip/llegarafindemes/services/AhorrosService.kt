@@ -3,6 +3,7 @@ package ar.edu.unq.ttip.llegarafindemes.services
 import ar.edu.unq.ttip.llegarafindemes.exceptions.InvestmentNotFoundException
 import ar.edu.unq.ttip.llegarafindemes.helpers.DateHelper
 import ar.edu.unq.ttip.llegarafindemes.models.Ahorro
+import ar.edu.unq.ttip.llegarafindemes.models.Ediciones
 import ar.edu.unq.ttip.llegarafindemes.models.Inversion
 import org.springframework.stereotype.Service
 import java.time.LocalDate
@@ -14,7 +15,7 @@ class AhorrosService(
     private val inversionesService: InversionesService
 ) {
 
-    fun getAhorros(userId: Int, cantidadDeMeses: Int = 1): List<Ahorro> {
+    fun getAhorros(userId: Int, cantidadDeMeses: Int = 1, ediciones: Ediciones? = null): List<Ahorro> {
         val today = LocalDate.now().withDayOfMonth(1)
         val from = today.minusMonths(cantidadDeMeses.toLong())
         val to = today.plusMonths(1)
@@ -26,32 +27,38 @@ class AhorrosService(
         val ahorros = mutableListOf<Ahorro>()
         ingresos.zip(gastos).forEach {
                 (ingreso, gasto) ->
-                    val ahorroActual = ingreso.montoTotal - gasto.montoTotal
+                    val ahorroActual = ingreso.montoTotal - gasto.montoTotal + (ediciones?.getValueFromDate(ingreso.mes) ?: 0)
                     mesesConIngresosOGastos += if (ingreso.montoTotal != 0 || gasto.montoTotal != 0) 1 else 0
                     ahorroAcumulado += ahorroActual
                     ahorros.add(Ahorro(ingreso.mes, ahorroActual, ahorroAcumulado))
         }
         val promedioDeAhorros = ahorroAcumulado / mesesConIngresosOGastos
         DateHelper.getMonthsAsArray(to, to.plusMonths((cantidadDeMeses).toLong())).forEach {
-            ahorroAcumulado += promedioDeAhorros
+            ahorroAcumulado += promedioDeAhorros + (ediciones?.getValueFromDate(it) ?: 0)
             ahorros.add(Ahorro(it, promedioDeAhorros, ahorroAcumulado))
         }
         return ahorros
     }
 
-    fun getAhorrosConInversionAplicada(userId: Int, cantidadDeMeses: Int = 1, nombreDeInversion: String, invertirMesesFuturos: Boolean = true): List<Ahorro> {
+    fun getAhorrosConInversionAplicada(
+        userId: Int,
+        cantidadDeMeses: Int = 1,
+        nombreDeInversion: String,
+        invertirMesesFuturos: Boolean = true,
+        ediciones: Ediciones? = null
+    ): List<Ahorro> {
         val inversiones = inversionesService.getInversiones().values.flatten()
         val inversion = inversiones.find { it.nombre == nombreDeInversion } ?: throw InvestmentNotFoundException()
         if (nombreDeInversion == "Plazo Fijo Uva") {
-            return this.getAhorrosConInversionUva(userId, cantidadDeMeses, inversion, invertirMesesFuturos)
+            return this.getAhorrosConInversionUva(userId, cantidadDeMeses, inversion, invertirMesesFuturos, ediciones)
         }
-        return this.doGetAhorrosConInversionAplicada(userId, cantidadDeMeses, inversion, invertirMesesFuturos)
+        return this.doGetAhorrosConInversionAplicada(userId, cantidadDeMeses, inversion, invertirMesesFuturos, ediciones)
     }
 
-    private fun doGetAhorrosConInversionAplicada(userId: Int, cantidadDeMeses: Int = 1, inversion: Inversion, invertirMesesFuturos: Boolean): List<Ahorro> {
+    private fun doGetAhorrosConInversionAplicada(userId: Int, cantidadDeMeses: Int = 1, inversion: Inversion, invertirMesesFuturos: Boolean, ediciones: Ediciones?): List<Ahorro> {
         var ahorroAcumulado = 0
         val ahorrosInvertidos = mutableListOf<Ahorro>()
-        this.getAhorros(userId, cantidadDeMeses).forEach {
+        this.getAhorros(userId, cantidadDeMeses, ediciones).forEach {
             if (invertirMesesFuturos && it.fecha < LocalDate.now().withDayOfMonth(1)) {
                 ahorrosInvertidos.add(it)
                 return@forEach
@@ -63,12 +70,12 @@ class AhorrosService(
         return ahorrosInvertidos
     }
 
-    private fun getAhorrosConInversionUva(userId: Int, cantidadDeMeses: Int = 1, inversion: Inversion, invertirMesesFuturos: Boolean): List<Ahorro> {
+    private fun getAhorrosConInversionUva(userId: Int, cantidadDeMeses: Int = 1, inversion: Inversion, invertirMesesFuturos: Boolean, ediciones: Ediciones?): List<Ahorro> {
         var contadorMeses = 0
         var intereses = 0
         var agregarIntereses = false
         val ahorrosInvertidos = mutableListOf<Ahorro>()
-        this.getAhorros(userId, cantidadDeMeses).forEach {
+        this.getAhorros(userId, cantidadDeMeses, ediciones).forEach {
             if (invertirMesesFuturos && it.fecha < LocalDate.now().withDayOfMonth(1)) {
                 ahorrosInvertidos.add(it)
                 return@forEach
