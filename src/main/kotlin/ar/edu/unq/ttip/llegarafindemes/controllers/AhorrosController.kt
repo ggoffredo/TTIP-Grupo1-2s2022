@@ -37,7 +37,7 @@ class AhorrosController(private val ahorrosService: AhorrosService) {
         @RequestParam(name = "meses") cantidadDeMeses: Int?,
         @RequestParam(name = "proyecciones") proyecciones: Boolean
     ): List<Ahorro> {
-        return ahorrosService.getAhorrosConInversionAplicada(userId, cantidadDeMeses ?: 1, nombre,proyecciones)
+        return ahorrosService.getAhorrosConInversionAplicada(userId, cantidadDeMeses ?: 1, nombre, proyecciones)
     }
 
     @PostMapping(value = ["/users/{userId}/ahorrosInvertidos"])
@@ -47,8 +47,9 @@ class AhorrosController(private val ahorrosService: AhorrosService) {
         @PathVariable userId: Int,
         @RequestParam(name = "nombre") nombre: String,
         @RequestParam(name = "meses") cantidadDeMeses: Int?,
-        @RequestBody ediciones: Ediciones?
+        @RequestBody ediciones: Ediciones?,
+        @RequestParam(name = "proyecciones") proyecciones: Boolean
     ): List<Ahorro> {
-        return ahorrosService.getAhorrosConInversionAplicada(userId, cantidadDeMeses ?: 1, nombre, true, ediciones)
+        return ahorrosService.getAhorrosConInversionAplicada(userId, cantidadDeMeses ?: 1, nombre, proyecciones, ediciones)
     }
 }

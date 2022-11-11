@@ -190,6 +190,41 @@ class AhorrosTest {
     }
 
     @Test
+    fun dadoTresMesesConIngresosYGastosYUnMesConResultadoNegativoCuandoSePidenLosAhorrosConInversionConUnaAmplitudDe2MesesSeAgreganDosMesesFuturosConLosAhorrosFuturosInvertidos() {
+        `when`(inversionesService.getInversiones()).thenReturn(
+            hashMapOf(
+                "Plazos Fijos" to listOf(Inversion("Plazo Fijo Galicia", 7f, Periodicidad.MENSUAL, 1, "PlazoFijo"))
+            )
+        )
+        // Gastos = Mes 1: $14.000 Mes 2: $9.000 Mes 3: $7.000
+        `when`(gastosService.getGastosForUserPerMonth(anyInt(), any(), any())).thenReturn(
+            listOf(
+                GastosMensualizados(LocalDate.now().minusMonths(2), buildGastos()),
+                GastosMensualizados(LocalDate.now().minusMonths(1), buildGastos(2000, 3000, 40000)),
+                GastosMensualizados(LocalDate.now(), buildGastos(1000, 1000, 5000))
+            )
+        )
+        // Ingresos = Mes 1,2,3: $35.000
+        `when`(ingresosService.getIngresosForUserPerMonth(anyInt(), any(), any())).thenReturn(
+            listOf(
+                IngresosMensualizados(LocalDate.now().minusMonths(2), buildIngresos()),
+                IngresosMensualizados(LocalDate.now().minusMonths(1), buildIngresos()),
+                IngresosMensualizados(LocalDate.now(), buildIngresos())
+            )
+        )
+        // Ahorros = Mes 1: $21.000 Mes 2: -$10.000 Mes 3: $28.000
+        // Promedio ahorro mes 4 y 5 = $39.000 / 3 -> $13.000
+        // Cantidad de meses 2 -> 2 meses para atrás + mes actual + 2 meses siguientes
+        val result = this.ahorrosService.getAhorrosConInversionAplicada(1, 2, "Plazo Fijo Galicia")
+        assertEquals(5, result.size)
+        assertEquals(21000, result[0].acumulado) // Mes pasado no se invierte
+        assertEquals(11000, result[1].acumulado) // Mes pasado no se invierte
+        assertEquals(39000, result[2].acumulado) // Este acumulado es invertido (mes actual)
+        assertEquals(54730, result[3].acumulado) // $13.000 + $39.000 + 7% de $39.000 ($2.730)
+        assertEquals(71561, result.last().acumulado) // $13.000 + $54.730 + 7% de $54.730 ($3.831)
+    }
+
+    @Test
     fun dadoTresMesesConIngresosYGastosCuandoSePidenLosAhorrosConInversionUvaYAmplitudDe3MesesSeAgreganTresMesesFuturosConLosAhorrosInvertidos() {
         `when`(inversionesService.getInversiones()).thenReturn(
             hashMapOf(

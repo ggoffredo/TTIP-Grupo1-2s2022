@@ -42,7 +42,7 @@ const AhorroYProyeccionChart = () => {
         return getAhorrosForUserId(user.id, {meses: periodoSeleccionado}, {'ediciones': {...ingresosYGastos}})
     }
 
-    const getAhorrosInvertidos = (tipo = "Plazos Fijos", nombre = "Banco Galicia") => {
+    const getAhorrosInvertidos = (tipo = "Plazos Fijos", nombre = "PF Banco Galicia") => {
         return getAhorrosInvertidosForUserId(
             user.id,
             {

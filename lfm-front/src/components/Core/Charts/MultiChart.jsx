@@ -42,6 +42,18 @@ export default function MultiChart({data, customOptions}) {
         }})
     }
 
+    const plugin = {
+        id: "custom_canvas_background_color",
+        beforeDraw: (chart) => {
+            const ctx = chart.canvas.getContext("2d");
+            ctx.save();
+            ctx.globalCompositeOperation = "destination-over";
+            ctx.fillStyle = "lightGrey";
+            ctx.fillRect(chart.chartArea.left, chart.chartArea.top, (chart.chartArea.width/2), (chart.chartArea.height));
+            ctx.restore();
+        }
+    };
+
     const handleClick = (e) => {
         const points = chartRef.current.getElementsAtEventForMode(e, 'nearest', { intersect: true }, true);
         if (points.length) {
@@ -51,6 +63,5 @@ export default function MultiChart({data, customOptions}) {
             trigger('chartClick', {label: label, value: value, clientX: e.clientX, clientY: e.clientY})
         }
     }
-
-    return <Chart ref={chartRef} options={options} data={chartData} onClick={handleClick}/>;
+    return <Chart ref={chartRef} options={options} data={chartData} onClick={handleClick} plugins={[plugin]}/>
 }
