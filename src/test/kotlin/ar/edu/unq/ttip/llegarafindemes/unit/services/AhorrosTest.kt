@@ -35,7 +35,7 @@ class AhorrosTest {
     }
 
     @Test
-    fun dadoTresMesesConIngresosYGastosCuandoSePidenLosAhorrosConUnaAmplitudDe2MesesSeAgreganDosMesesFuturoConLosAhorrosEsperados() {
+    fun dadoTresMesesConIngresosYGastosCuandoSePidenLosAhorrosConUnaAmplitudDe2MesesSeAgreganDosMesesFuturosConLosAhorrosEsperados() {
         // Gastos = Mes 1: $14.000 Mes 2: $9.000 Mes 3: $7.000
         `when`(gastosService.getGastosForUserPerMonth(anyInt(), any(), any())).thenReturn(
             listOf(
@@ -66,7 +66,7 @@ class AhorrosTest {
     }
 
     @Test
-    fun dadoDosMesesConIngresosYGastosCuandoSePidenLosAhorrosConUnaAmplitudDe2MesesSeAgreganDosMesesFuturoConLosAhorrosEsperados() {
+    fun dadoDosMesesConIngresosYGastosCuandoSePidenLosAhorrosConUnaAmplitudDe2MesesSeAgreganDosMesesFuturosConLosAhorrosEsperados() {
         // Gastos = Mes 1: $0 Mes 2: $9.000 Mes 3: $7.000
         `when`(gastosService.getGastosForUserPerMonth(anyInt(), any(), any())).thenReturn(
             listOf(
@@ -93,7 +93,7 @@ class AhorrosTest {
     }
 
     @Test
-    fun dadoTresMesesConIngresosYGastosPeroSinAhorrosElPrimerMesCuandoSePidenLosAhorrosConUnaAmplitudDe2MesesSeAgreganDosMesesFuturoConLosAhorrosEsperados() {
+    fun dadoTresMesesConIngresosYGastosPeroSinAhorrosElPrimerMesCuandoSePidenLosAhorrosConUnaAmplitudDe2MesesSeAgreganDosMesesFuturosConLosAhorrosEsperados() {
         // Gastos = Mes 1: $6000 Mes 2: $9.000 Mes 3: $7.000
         `when`(gastosService.getGastosForUserPerMonth(anyInt(), any(), any())).thenReturn(
             listOf(
@@ -120,7 +120,7 @@ class AhorrosTest {
     }
 
     @Test
-    fun dadoTresMesesConIngresosYGastosCuandoSePidenLosAhorrosConInversionConUnaAmplitudDe2MesesSeAgreganDosMesesFuturoConLosAhorrosEsperadosInvertidos() {
+    fun dadoTresMesesConIngresosYGastosCuandoSePidenLosAhorrosConInversionConUnaAmplitudDe2MesesSeAgreganDosMesesFuturosConLosAhorrosEsperadosInvertidos() {
         `when`(inversionesService.getInversiones()).thenReturn(
             hashMapOf(
                 "Plazos Fijos" to listOf(Inversion("Plazo Fijo Galicia", 7f, Periodicidad.MENSUAL, 1, "PlazoFijo"))
@@ -155,7 +155,7 @@ class AhorrosTest {
     }
 
     @Test
-    fun dadoTresMesesConIngresosYGastosCuandoSePidenLosAhorrosConInversionConUnaAmplitudDe2MesesSeAgreganDosMesesFuturoConLosAhorrosFuturosInvertidos() {
+    fun dadoTresMesesConIngresosYGastosCuandoSePidenLosAhorrosConInversionConUnaAmplitudDe2MesesSeAgreganDosMesesFuturosConLosAhorrosFuturosInvertidos() {
         `when`(inversionesService.getInversiones()).thenReturn(
             hashMapOf(
                 "Plazos Fijos" to listOf(Inversion("Plazo Fijo Galicia", 7f, Periodicidad.MENSUAL, 1, "PlazoFijo"))
@@ -190,7 +190,7 @@ class AhorrosTest {
     }
 
     @Test
-    fun dadoTresMesesConIngresosYGastosCuandoSePidenLosAhorrosConInversionUvaYAmplitudDe3MesesSeAgreganTresMesesFuturoConLosAhorrosInvertidos() {
+    fun dadoTresMesesConIngresosYGastosCuandoSePidenLosAhorrosConInversionUvaYAmplitudDe3MesesSeAgreganTresMesesFuturosConLosAhorrosInvertidos() {
         `when`(inversionesService.getInversiones()).thenReturn(
             hashMapOf(
                 "Plazos Fijos" to listOf(Inversion("Plazo Fijo Uva", 7f, Periodicidad.MENSUAL, 1, "PlazoFijo"))
@@ -226,7 +226,7 @@ class AhorrosTest {
     }
 
     @Test
-    fun dadoTresMesesConIngresosYGastosCuandoSePidenLosAhorrosConInversionUvaYAmplitudDe3MesesSeAgreganTresMesesFuturoConLosAhorrosFuturosInvertidos() {
+    fun dadoTresMesesConIngresosYGastosCuandoSePidenLosAhorrosConInversionUvaYAmplitudDe3MesesSeAgreganTresMesesFuturosConLosAhorrosFuturosInvertidos() {
         `when`(inversionesService.getInversiones()).thenReturn(
             hashMapOf(
                 "Plazos Fijos" to listOf(Inversion("Plazo Fijo Uva", 7f, Periodicidad.MENSUAL, 1, "PlazoFijo"))
@@ -262,6 +262,119 @@ class AhorrosTest {
         assertEquals(131250, result[4].acumulado) // $105.000 + $26.250 (30 días)
         assertEquals(157500, result[5].acumulado) // $131.250 + $26.250 (60 días)
         assertEquals(205800, result[6].acumulado) // $157.500 + $26.250 + $22.050 (21% $105.000) (90 días)
+    }
+
+    @Test
+    fun dadoTresMesesConIngresosYGastosCuandoSePidenLosAhorrosConInversionUvaYAmplitudDe3MesesYUnMesEditadoSeAgreganTresMesesFuturosConLosAhorrosFuturosInvertidosEditados() {
+        `when`(inversionesService.getInversiones()).thenReturn(
+            hashMapOf(
+                "Plazos Fijos" to listOf(Inversion("Plazo Fijo Uva", 7f, Periodicidad.MENSUAL, 1, "PlazoFijo"))
+            )
+        )
+        // Gastos = Mes 1: $5.000 Mes 2: $14.000 Mes 3: $9.000 Mes 4: $7.000
+        `when`(gastosService.getGastosForUserPerMonth(anyInt(), any(), any())).thenReturn(
+            listOf(
+                GastosMensualizados(LocalDate.now().minusMonths(3), buildGastos(2000, 1000, 2000)),
+                GastosMensualizados(LocalDate.now().minusMonths(2), buildGastos()),
+                GastosMensualizados(LocalDate.now().minusMonths(1), buildGastos(2000, 3000, 4000)),
+                GastosMensualizados(LocalDate.now(), buildGastos(1000, 1000, 5000))
+            )
+        )
+        // Ingresos = Mes 1,2,3,4: $35.000
+        `when`(ingresosService.getIngresosForUserPerMonth(anyInt(), any(), any())).thenReturn(
+            listOf(
+                IngresosMensualizados(LocalDate.now().minusMonths(3), buildIngresos()),
+                IngresosMensualizados(LocalDate.now().minusMonths(2), buildIngresos()),
+                IngresosMensualizados(LocalDate.now().minusMonths(1), buildIngresos()),
+                IngresosMensualizados(LocalDate.now(), buildIngresos())
+            )
+        )
+
+        val ediciones = Ediciones(hashMapOf(LocalDate.now().plusMonths(1).withDayOfMonth(1) to 10000))
+        // Ahorros = Mes 1: $30.000 Mes 2: $21.000 Mes 3: $26.000 Mes 4: $28.000
+        // Promedio ahorro mes 5, 6 y 7 = $105.000 / 4 -> 26.250
+        // Cantidad de meses 3 -> 3 meses para atrás + mes actual + 3 meses siguientes
+        val result = this.ahorrosService.getAhorrosConInversionAplicada(1, 3, "Plazo Fijo Uva", true, ediciones)
+        assertEquals(7, result.size)
+        assertEquals(30000, result[0].acumulado) // Mes pasado no se invierte
+        assertEquals(51000, result[1].acumulado) // Mes pasado no se invierte
+        assertEquals(77000, result[2].acumulado) // Mes pasado no se invierte
+        assertEquals(105000, result[3].acumulado) // Mes actual se invierte
+        assertEquals(141250, result[4].acumulado) // $105.000 + $26.250 (30 días) + $10.000 (agregado)
+        assertEquals(167500, result[5].acumulado) // $131.250 + $26.250 (60 días)
+        assertEquals(215800, result[6].acumulado) // $157.500 + $26.250 + $22.050 (21% $105.000) (90 días)
+    }
+
+    @Test
+    fun dadoDosMesesConIngresosYGastosCuandoSePidenLosAhorrosConPlazoFijoYAmplitudDe2MesesYUnMesEditadoSeAgreganDosMesesFuturosConLosAhorrosFuturosInvertidosEditados() {
+        `when`(inversionesService.getInversiones()).thenReturn(
+            hashMapOf(
+                "Plazos Fijos" to listOf(Inversion("Plazo Fijo Galicia", 7f, Periodicidad.MENSUAL, 1, "PlazoFijo"))
+            )
+        )
+        // Gastos = Mes 1: $14.000 Mes 2: $9.000 Mes 3: $7.000
+        `when`(gastosService.getGastosForUserPerMonth(anyInt(), any(), any())).thenReturn(
+            listOf(
+                GastosMensualizados(LocalDate.now().minusMonths(2), buildGastos()),
+                GastosMensualizados(LocalDate.now().minusMonths(1), buildGastos(2000, 3000, 4000)),
+                GastosMensualizados(LocalDate.now(), buildGastos(1000, 1000, 5000))
+            )
+        )
+        // Ingresos = Mes 1,2,3: $35.000
+        `when`(ingresosService.getIngresosForUserPerMonth(anyInt(), any(), any())).thenReturn(
+            listOf(
+                IngresosMensualizados(LocalDate.now().minusMonths(2), buildIngresos()),
+                IngresosMensualizados(LocalDate.now().minusMonths(1), buildIngresos()),
+                IngresosMensualizados(LocalDate.now(), buildIngresos())
+            )
+        )
+        val ediciones = Ediciones(hashMapOf(LocalDate.now().plusMonths(1).withDayOfMonth(1) to 10000))
+        // Ahorros = Mes 1: $21.000 Mes 2: $26.000 Mes 3: $28.000
+        // Promedio ahorro mes 4 = $75.000 / 3 -> 25.000
+        // Cantidad de meses 2 -> 2 meses para atrás + mes actual + 2 meses siguientes
+        val result = this.ahorrosService.getAhorrosConInversionAplicada(1, 2, "Plazo Fijo Galicia", true, ediciones)
+        assertEquals(5, result.size)
+        assertEquals(21000, result[0].acumulado) // Mes pasado no se invierte
+        assertEquals(47000, result[1].acumulado) // Mes pasado no se invierte
+        assertEquals(75000, result[2].acumulado) // Este acumulado es invertido (mes actual)
+        assertEquals(115250, result[3].acumulado) // $25.000 + $75.000 + 7% de $75.000 (5.250) + $10.000 (editado)
+        assertEquals(148317, result.last().acumulado) // $25.000 + $115.250 + 7% de $105.250 ($8.067)
+    }
+
+    @Test
+    fun dadoDosMesesConIngresosYGastosCuandoSePidenLosAhorrosConPlazoFijoYAmplitudDe2MesesYUnMesEditadoSeAgreganDosMesesFuturosConLosAhorrosFuturosInvertidosEditadosRestados() {
+        `when`(inversionesService.getInversiones()).thenReturn(
+            hashMapOf(
+                "Plazos Fijos" to listOf(Inversion("Plazo Fijo Galicia", 7f, Periodicidad.MENSUAL, 1, "PlazoFijo"))
+            )
+        )
+        // Gastos = Mes 1: $14.000 Mes 2: $9.000 Mes 3: $7.000
+        `when`(gastosService.getGastosForUserPerMonth(anyInt(), any(), any())).thenReturn(
+            listOf(
+                GastosMensualizados(LocalDate.now().minusMonths(2), buildGastos()),
+                GastosMensualizados(LocalDate.now().minusMonths(1), buildGastos(2000, 3000, 4000)),
+                GastosMensualizados(LocalDate.now(), buildGastos(1000, 1000, 5000))
+            )
+        )
+        // Ingresos = Mes 1,2,3: $35.000
+        `when`(ingresosService.getIngresosForUserPerMonth(anyInt(), any(), any())).thenReturn(
+            listOf(
+                IngresosMensualizados(LocalDate.now().minusMonths(2), buildIngresos()),
+                IngresosMensualizados(LocalDate.now().minusMonths(1), buildIngresos()),
+                IngresosMensualizados(LocalDate.now(), buildIngresos())
+            )
+        )
+        val ediciones = Ediciones(hashMapOf(LocalDate.now().plusMonths(1).withDayOfMonth(1) to -10000))
+        // Ahorros = Mes 1: $21.000 Mes 2: $26.000 Mes 3: $28.000
+        // Promedio ahorro mes 4 = $75.000 / 3 -> 25.000
+        // Cantidad de meses 2 -> 2 meses para atrás + mes actual + 2 meses siguientes
+        val result = this.ahorrosService.getAhorrosConInversionAplicada(1, 2, "Plazo Fijo Galicia", true, ediciones)
+        assertEquals(5, result.size)
+        assertEquals(21000, result[0].acumulado) // Mes pasado no se invierte
+        assertEquals(47000, result[1].acumulado) // Mes pasado no se invierte
+        assertEquals(75000, result[2].acumulado) // Este acumulado es invertido (mes actual)
+        assertEquals(95250, result[3].acumulado) // $25.000 + $75.000 + 7% de $75.000 (5.250) + $10.000 (editado)
+        assertEquals(126917, result.last().acumulado) // $25.000 + $95.250 + 7% de $95.250 ($6.667)
     }
 
     @Test
