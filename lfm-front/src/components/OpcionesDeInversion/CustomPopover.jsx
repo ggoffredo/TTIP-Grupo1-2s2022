@@ -12,8 +12,8 @@ const CustomPopover = ({ingresosYGastos, setIngresosYGastosCallback}) => {
     const [open, setOpen] = useState(false)
     const [monto, setMonto] = useState(0)
     const selectedMonth = useRef('')
-    const mouseX = useRef()
-    const mouseY = useRef()
+    const mouseX = useRef(0)
+    const mouseY = useRef(0)
     const id = open ? 'simple-popover' : undefined
 
     useEffect( () => {
@@ -36,12 +36,15 @@ const CustomPopover = ({ingresosYGastos, setIngresosYGastosCallback}) => {
 
     const handleAgregar = (e) => {
         e.preventDefault()
-        const nuevoMonto = tipo === 'ingreso' ? monto : -monto
-        const currentMonto = ingresosYGastos?.[selectedMonth.current] ?? 0
-        const ingresosYGastosEditados = {
-            ...ingresosYGastos,
-            [selectedMonth.current]: (currentMonto + Number(nuevoMonto))
+        const montoIngresado = tipo === 'ingreso' ? monto : -monto
+        const entry = {
+            fecha: selectedMonth.current,
+            monto: Number(montoIngresado)
         }
+        const ingresosYGastosEditados = [
+            ...ingresosYGastos,
+            entry
+        ]
         setIngresosYGastosCallback(ingresosYGastosEditados)
     }
 
