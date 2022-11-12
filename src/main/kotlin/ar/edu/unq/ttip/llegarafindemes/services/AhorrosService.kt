@@ -73,6 +73,7 @@ class AhorrosService(
     private fun getAhorrosConInversionUva(userId: Int, cantidadDeMeses: Int = 1, inversion: Inversion, invertirMesesFuturos: Boolean, ediciones: Ediciones?): List<Ahorro> {
         var contadorMeses = 0
         var intereses = 0
+        var nuevoAcum = 0
         var agregarIntereses = false
         val ahorrosInvertidos = mutableListOf<Ahorro>()
         this.getAhorros(userId, cantidadDeMeses, ediciones).forEach {
@@ -83,6 +84,7 @@ class AhorrosService(
             if (contadorMeses == 0) {
                 contadorMeses = 2
                 if (agregarIntereses) {
+                    nuevoAcum += intereses
                     val ahorro = Ahorro(it.fecha, it.actual, it.acumulado + intereses)
                     ahorrosInvertidos.add(ahorro)
                     intereses = (ahorro.acumulado * (inversion.tasaDeVariacion * 3) / 100).toInt()
@@ -92,7 +94,7 @@ class AhorrosService(
                 }
                 agregarIntereses = true
             } else {
-                ahorrosInvertidos.add(it)
+                ahorrosInvertidos.add(Ahorro(it.fecha, it.actual, it.acumulado + nuevoAcum))
                 contadorMeses -= 1
             }
         }

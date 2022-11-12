@@ -341,6 +341,50 @@ class AhorrosTest {
     }
 
     @Test
+    fun dadoTresMesesConIngresosYGastosCuandoSePidenLosAhorrosConInversionUvaYAmplitudDe6MesesYUnMesEditadoSeAgreganSeisMesesFuturosConLosAhorrosFuturosInvertidosEditados() {
+        `when`(inversionesService.getInversiones()).thenReturn(
+            hashMapOf(
+                "Plazos Fijos" to listOf(Inversion("Plazo Fijo Uva", 7f, Periodicidad.MENSUAL, 1, "PlazoFijo"))
+            )
+        )
+        // Gastos = Mes 1: $5.000 Mes 2: $14.000 Mes 3: $9.000 Mes 4: $7.000
+        `when`(gastosService.getGastosForUserPerMonth(anyInt(), any(), any())).thenReturn(
+            listOf(
+                GastosMensualizados(LocalDate.now().minusMonths(3), buildGastos(2000, 1000, 2000)),
+                GastosMensualizados(LocalDate.now().minusMonths(2), buildGastos()),
+                GastosMensualizados(LocalDate.now().minusMonths(1), buildGastos(2000, 3000, 4000)),
+                GastosMensualizados(LocalDate.now(), buildGastos(1000, 1000, 5000))
+            )
+        )
+        // Ingresos = Mes 1,2,3,4: $35.000
+        `when`(ingresosService.getIngresosForUserPerMonth(anyInt(), any(), any())).thenReturn(
+            listOf(
+                IngresosMensualizados(LocalDate.now().minusMonths(3), buildIngresos()),
+                IngresosMensualizados(LocalDate.now().minusMonths(2), buildIngresos()),
+                IngresosMensualizados(LocalDate.now().minusMonths(1), buildIngresos()),
+                IngresosMensualizados(LocalDate.now(), buildIngresos())
+            )
+        )
+
+        val ediciones = Ediciones(hashMapOf(LocalDate.now().plusMonths(1).withDayOfMonth(1) to 10000))
+        // Ahorros = Mes 1: $30.000 Mes 2: $21.000 Mes 3: $26.000 Mes 4: $28.000
+        // Promedio ahorro mes 5, 6 y 7 = $105.000 / 4 -> 26.250
+        // Cantidad de meses 3 -> 3 meses para atrás + mes actual + 3 meses siguientes
+        val result = this.ahorrosService.getAhorrosConInversionAplicada(1, 6, "Plazo Fijo Uva", true, ediciones)
+        assertEquals(10, result.size)
+        assertEquals(30000, result[0].acumulado) // Mes pasado no se invierte
+        assertEquals(51000, result[1].acumulado) // Mes pasado no se invierte
+        assertEquals(77000, result[2].acumulado) // Mes pasado no se invierte
+        assertEquals(105000, result[3].acumulado) // Mes actual se invierte
+        assertEquals(141250, result[4].acumulado) // $105.000 + $26.250 (30 días) + $10.000 (agregado)
+        assertEquals(167500, result[5].acumulado) // $131.250 + $26.250 (60 días)
+        assertEquals(215800, result[6].acumulado) // $157.500 + $26.250 + $22.050 (21% $105.000) (90 días)
+        assertEquals(242050, result[7].acumulado)
+        assertEquals(268300, result[8].acumulado)
+        assertEquals(317818, result[9].acumulado)
+    }
+
+    @Test
     fun dadoDosMesesConIngresosYGastosCuandoSePidenLosAhorrosConPlazoFijoYAmplitudDe2MesesYUnMesEditadoSeAgreganDosMesesFuturosConLosAhorrosFuturosInvertidosEditados() {
         `when`(inversionesService.getInversiones()).thenReturn(
             hashMapOf(

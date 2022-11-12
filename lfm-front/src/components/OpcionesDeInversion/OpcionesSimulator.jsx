@@ -48,7 +48,7 @@ export default function OpcionesSimulator() {
     const initChartChips = () => {
         if (!inversionesAndIpc.current) return
         let chips = Object.values(inversionesAndIpc.current).flat().map(
-            inv => <ClickableChip key={inv.nombre} chartLabel={inv.nombre} onPressClick={handleClick} onPressDelete={handleDelete}/>
+            inv => <ClickableChip key={inv.nombre} chartLabel={inv.nombre} onPressClick={handleClick} onPressDelete={handleDelete} initialState={true}/>
         )
         setChartChips(chips)
     }
