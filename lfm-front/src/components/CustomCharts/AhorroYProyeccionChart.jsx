@@ -47,8 +47,7 @@ const AhorroYProyeccionChart = () => {
     }, [periodoSeleccionado, ingresosYGastos, invertirMesesPasados, enabledChips.current]);
 
     const getInversionesForChips = async () => {
-        const inversiones = await getFromLFMApi("inversiones")
-        inversionesForChips.current = inversiones;
+        inversionesForChips.current = await getFromLFMApi("inversiones")
         updateFilteredInversiones()
     }
 
@@ -56,7 +55,7 @@ const AhorroYProyeccionChart = () => {
         return getAhorrosForUserId(user.id, {meses: periodoSeleccionado}, {'ediciones': {...ingresosYGastos}})
     }
 
-    const getAhorrosInvertidos = async (tipo = "Plazos Fijos", nombre = "PF Banco Galicia") => {
+    const getAhorrosInvertidos = async () => {
         await getInversionesForChips()
         const nombres = enabledChips.current
         let ahorrosInv = []
@@ -100,7 +99,6 @@ const AhorroYProyeccionChart = () => {
             })
         }
         return ahorrosInvertidosValues
-        //return ahorrosInvertidos.map(ahorroInvertido => doGetMappedFormatedData(ahorroInvertido.values, "acumulado"))
     }
 
     const getAhorrosAcumuladosProyectadosValues = () => {
@@ -131,14 +129,13 @@ const AhorroYProyeccionChart = () => {
         const ahorrosAcumuladosData = getAhorrosAcumuladosValues()
         const ahorrosAcumuladosProyectadosData = getAhorrosAcumuladosProyectadosValues()
         const ahorrosInvertidosData = getAhorrosInvertidosValues().map(ahorroInvertidoValue => doGetData(ahorroInvertidoValue.values, `Ahorros acumulados proyectados invertidos ${ahorroInvertidoValue.nombre}`, 'rgb(6, 51, 241)', true))
-        let data = [
+        return [
             doGetData(ahorrosData, "Ahorros mensuales", 'rgb(255,161,99)'),
             doGetData(ahorrosProyectadosData, "Ahorros mensuales proyectados", 'rgb(255, 193, 99)'),
             doGetData(ahorrosAcumuladosData, "Ahorros acumulados", 'rgb(53, 162, 235)', true),
             doGetData(ahorrosAcumuladosProyectadosData, "Ahorros acumulados proyectados", 'rgb(53, 235, 180)', true),
             ...ahorrosInvertidosData
         ]
-        return data
     }
 
     const doGetData = (data, title, color, fill = false, type = 'line') => {
