@@ -11,6 +11,7 @@ import CustomPopover from "../OpcionesDeInversion/CustomPopover";
 import HelpTooltip from "../HelpTooltip";
 import ClickableChip from "../ClickableChip";
 import {getFromLFMApi} from '../../helpers/AxiosHelper'
+import EdicionesJournal from "./EdicionesJournal";
 
 const AhorroYProyeccionChart = () => {
     const periodosDisponibles = [
@@ -27,7 +28,7 @@ const AhorroYProyeccionChart = () => {
     const [chartChips, setChartChips] = useState([])
     const enabledChips = useRef([])
     const isLoading = useRef(true)
-    const [ingresosYGastos, setIngresosYGastos] = useState({})
+    const [ingresosYGastos, setIngresosYGastos] = useState([])
     const {user} = useUser()
     const chipTooltipText = "Para la proyección de las inversiones se emplea la taza correspondiente a los últimos 30 días."
 
@@ -52,7 +53,17 @@ const AhorroYProyeccionChart = () => {
     }
 
     const getAhorros = () => {
-        return getAhorrosForUserId(user.id, {meses: periodoSeleccionado}, {'ediciones': {...ingresosYGastos}})
+        return getAhorrosForUserId(user.id, {meses: periodoSeleccionado}, {'ediciones': formatIngresosYGastos()})
+    }
+
+    const formatIngresosYGastos = () => {
+        return ingresosYGastos.reduce((previous, current) => {
+            const currentMonto = previous?.[current.fecha] ?? 0
+            return {
+                ...previous,
+                [current.fecha]: (currentMonto + Number(current.monto))
+            }
+        }, {})
     }
 
     const getAhorrosInvertidos = async () => {
@@ -67,8 +78,8 @@ const AhorroYProyeccionChart = () => {
                     nombre: nombre,
                 	proyecciones: invertirMesesPasados
                 },
-            	{
-                	'ediciones': {...ingresosYGastos}
+                {
+                	'ediciones': formatIngresosYGastos()
             	}
             )
             ahorrosInv.push({values: ahorroInvertido, nombre: nombre})
@@ -171,7 +182,9 @@ const AhorroYProyeccionChart = () => {
     }
 
     function getMultiChart() {
-        return <ChartCard options={options} Chart={MultiChart} chartData={getData()} title={"Ahorros y proyección de inversiones"} />
+        return <ChartCard options={options} Chart={MultiChart} chartData={getData()} title={"Ahorros y proyección de inversiones"}>
+            <EdicionesJournal ingresosYGastos={ingresosYGastos} setIngresosYGastosCallback={setIngresosYGastos}/>
+        </ChartCard>
     }
 
     const handleChipClick = (chipKey) => {
