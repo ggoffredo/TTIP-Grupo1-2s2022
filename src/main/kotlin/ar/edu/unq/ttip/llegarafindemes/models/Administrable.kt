@@ -13,7 +13,7 @@ open class Administrable(
     @Column(nullable = false) var periodicidad: Periodicidad,
     @Column(nullable = false) var duracion: Int,
     @Column(nullable = false) var fecha: LocalDate,
-    @JsonIgnore @ManyToOne(cascade = [CascadeType.ALL]) @JoinColumn(referencedColumnName = "id", nullable = false) var usuario: Usuario
+    @JsonIgnore @ManyToOne(cascade = [CascadeType.MERGE]) @JoinColumn(referencedColumnName = "id", nullable = false) var usuario: Usuario
 ) {
     fun correspondsToMonth(referenceDate: LocalDate): Boolean {
         val initialReferenceDate = referenceDate.withDayOfMonth(1)

@@ -27,7 +27,7 @@ class GastosController(private val gastosService: GastosService) {
 
     @PostMapping(value = ["/users/{userId}/gastos"])
     @ResponseBody
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.CREATED)
     fun createGastoForUser(@PathVariable userId: Int, @RequestBody gastoDto: GastoDto): Gasto {
         return gastosService.createGastoForUser(userId, gastoDto)
     }

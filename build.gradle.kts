@@ -24,6 +24,7 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-security:2.7.3")
 	implementation("org.springframework.boot:spring-boot-starter-web:2.7.3")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.3")
+	implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.4")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("org.postgresql:postgresql:42.5.0")

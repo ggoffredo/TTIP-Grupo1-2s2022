@@ -27,7 +27,7 @@ class IngresosController(private val ingresosService: IngresosService) {
 
     @PostMapping(value = ["/users/{userId}/ingresos"])
     @ResponseBody
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.CREATED)
     fun createIngresoForUser(@PathVariable userId: Int, @RequestBody ingreso: IngresoDto): Ingreso {
         return ingresosService.createIngresoForUser(userId, ingreso)
     }

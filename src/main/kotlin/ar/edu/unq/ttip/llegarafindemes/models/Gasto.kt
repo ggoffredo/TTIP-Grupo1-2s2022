@@ -1,10 +1,7 @@
 package ar.edu.unq.ttip.llegarafindemes.models
 
 import java.time.LocalDate
-import javax.persistence.CascadeType
-import javax.persistence.Entity
-import javax.persistence.JoinColumn
-import javax.persistence.OneToOne
+import javax.persistence.*
 
 @Entity
 class Gasto(
@@ -14,6 +11,6 @@ class Gasto(
     periodicidad: Periodicidad,
     duracion: Int,
     fecha: LocalDate,
-    @OneToOne(cascade = [CascadeType.ALL]) @JoinColumn(referencedColumnName = "id", nullable = false) var medioDePago: MedioDePago,
+    @OneToOne(cascade = [CascadeType.MERGE]) @JoinColumn(referencedColumnName = "id", nullable = false) var medioDePago: MedioDePago,
     usuario: Usuario
 ) : Administrable(id, descripcion, monto, periodicidad, duracion, fecha, usuario)
