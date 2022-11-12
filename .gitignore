@@ -25,3 +25,5 @@ out/
 !**/src/test/**/out/
 .vscode/
 node_modules/
+
+*.env
