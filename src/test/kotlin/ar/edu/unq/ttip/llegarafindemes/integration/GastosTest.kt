@@ -1,13 +1,21 @@
 package ar.edu.unq.ttip.llegarafindemes.integration
 
 import ar.edu.unq.ttip.llegarafindemes.controllers.GastosController
+import ar.edu.unq.ttip.llegarafindemes.dtos.GastoDto
+import ar.edu.unq.ttip.llegarafindemes.models.Periodicidad
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.get
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
+import java.time.LocalDate
 
 @SpringBootTest
 class GastosTest {
@@ -43,8 +51,6 @@ class GastosTest {
 
     @Test
     fun alPedirLosGastosMensualizadosDeUnUsuarioSeObtienenLosGastosSeparadosPorCadaMesHastaElMesActual() {
-        // TODO: Deberíamos mockear el LocalDate.now para evitar que el test rompa más adelante
-        // https://stackoverflow.com/questions/32792000/how-can-i-mock-java-time-localdate-now
         this.mockMvc.get("/users/1/gastosMensualizados").andExpect {
             status { isOk() }
             content {
@@ -71,6 +77,36 @@ class GastosTest {
                 jsonPath("$.[2].gastos.[5].descripcion")    { value("Gimnasio") }
             }
         }
+    }
+
+    @Test
+    fun alCrearUnGastoSeRetornaUn201() {
+        val gastoDto = GastoDto("Coto", 15000, Periodicidad.MENSUAL, 1, LocalDate.now())
+        this.mockMvc.perform(
+            MockMvcRequestBuilders.post("/users/1/gastos")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(ObjectMapper().registerModule(JavaTimeModule()).writeValueAsString(gastoDto))
+        )
+        .andExpect(MockMvcResultMatchers.status().isCreated)
+        .andExpect(MockMvcResultMatchers.jsonPath("$.id").isNumber)
+        .andExpect(MockMvcResultMatchers.jsonPath("$.descripcion").value("Coto"))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.monto").value(15000))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.periodicidad").value("MENSUAL"))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.duracion").value(1))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.fecha").isArray)
+        .andExpect(MockMvcResultMatchers.jsonPath("$.medioDePago.id").isNumber)
+        .andExpect(MockMvcResultMatchers.jsonPath("$.medioDePago.nombre").value("Visa"))
+    }
+
+    @Test
+    fun alCrearUnGastoParaUnUsuarioInexistenteSeRetorna404() {
+        val gastoDto = GastoDto("Coto", 15000, Periodicidad.MENSUAL, 1, LocalDate.now())
+        this.mockMvc.perform(
+            MockMvcRequestBuilders.post("/users/1123/gastos")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(ObjectMapper().registerModule(JavaTimeModule()).writeValueAsString(gastoDto))
+        )
+        .andExpect(MockMvcResultMatchers.status().isNotFound)
     }
 
     @Test

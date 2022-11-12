@@ -1,13 +1,21 @@
 package ar.edu.unq.ttip.llegarafindemes.integration
 
 import ar.edu.unq.ttip.llegarafindemes.controllers.IngresosController
+import ar.edu.unq.ttip.llegarafindemes.dtos.IngresoDto
+import ar.edu.unq.ttip.llegarafindemes.models.Periodicidad
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.get
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
+import java.time.LocalDate
 
 @SpringBootTest
 class IngresosTest {
@@ -64,6 +72,34 @@ class IngresosTest {
                 jsonPath("$.[2].ingresos.[1].descripcion")  { value("Alquiler") }
             }
         }
+    }
+
+    @Test
+    fun alCrearUnIngresoSeRetornaUn201() {
+        val ingresoDto = IngresoDto("Freelo", 150000, Periodicidad.MENSUAL, 1, LocalDate.now())
+        this.mockMvc.perform(
+            MockMvcRequestBuilders.post("/users/1/ingresos")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(ObjectMapper().registerModule(JavaTimeModule()).writeValueAsString(ingresoDto))
+        )
+        .andExpect(MockMvcResultMatchers.status().isCreated)
+        .andExpect(MockMvcResultMatchers.jsonPath("$.id").isNumber)
+        .andExpect(MockMvcResultMatchers.jsonPath("$.descripcion").value("Freelo"))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.monto").value(150000))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.periodicidad").value("MENSUAL"))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.duracion").value(1))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.fecha").isArray)
+    }
+
+    @Test
+    fun alCrearUnIngresoParaUnUsuarioInexistenteSeRetorna404() {
+        val ingresoDto = IngresoDto("Freelo", 150000, Periodicidad.MENSUAL, 1, LocalDate.now())
+        this.mockMvc.perform(
+            MockMvcRequestBuilders.post("/users/123123/ingresos")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(ObjectMapper().registerModule(JavaTimeModule()).writeValueAsString(ingresoDto))
+        )
+        .andExpect(MockMvcResultMatchers.status().isNotFound)
     }
 
     @Test

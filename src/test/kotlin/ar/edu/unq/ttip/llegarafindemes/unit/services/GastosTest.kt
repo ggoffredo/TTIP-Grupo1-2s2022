@@ -7,6 +7,8 @@ import ar.edu.unq.ttip.llegarafindemes.models.Usuario
 import ar.edu.unq.ttip.llegarafindemes.repositories.GastosRepository
 import ar.edu.unq.ttip.llegarafindemes.services.AdministrablesService
 import ar.edu.unq.ttip.llegarafindemes.services.GastosService
+import ar.edu.unq.ttip.llegarafindemes.services.MedioDePagoService
+import ar.edu.unq.ttip.llegarafindemes.services.UserService
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -19,10 +21,10 @@ import java.time.LocalDate
 
 class GastosTest {
 
-    @Mock
-    lateinit var gastosRepositoryMock: GastosRepository
-    @Spy
-    lateinit var administrablesService: AdministrablesService
+    @Mock lateinit var gastosRepositoryMock: GastosRepository
+    @Mock lateinit var userServiceMock: UserService
+    @Mock lateinit var medioDePagoServiceMock: MedioDePagoService
+    @Spy lateinit var administrablesService: AdministrablesService
 
     @InjectMocks
     lateinit var subject: GastosService

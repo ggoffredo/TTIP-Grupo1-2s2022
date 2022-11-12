@@ -1,14 +1,12 @@
 package ar.edu.unq.ttip.llegarafindemes.controllers
 
+import ar.edu.unq.ttip.llegarafindemes.dtos.GastoDto
 import ar.edu.unq.ttip.llegarafindemes.dtos.GastosMensualizados
 import ar.edu.unq.ttip.llegarafindemes.models.Gasto
 import ar.edu.unq.ttip.llegarafindemes.services.GastosService
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Controller
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.ResponseBody
-import org.springframework.web.bind.annotation.ResponseStatus
+import org.springframework.web.bind.annotation.*
 
 @Controller
 class GastosController(private val gastosService: GastosService) {
@@ -25,5 +23,12 @@ class GastosController(private val gastosService: GastosService) {
     @ResponseStatus(HttpStatus.OK)
     fun getGastosForUserPerMonth(@PathVariable userId: Int): List<GastosMensualizados> {
         return gastosService.getGastosForUserPerMonth(userId)
+    }
+
+    @PostMapping(value = ["/users/{userId}/gastos"])
+    @ResponseBody
+    @ResponseStatus(HttpStatus.CREATED)
+    fun createGastoForUser(@PathVariable userId: Int, @RequestBody gastoDto: GastoDto): Gasto {
+        return gastosService.createGastoForUser(userId, gastoDto)
     }
 }
