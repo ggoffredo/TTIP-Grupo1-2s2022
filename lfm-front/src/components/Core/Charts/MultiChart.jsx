@@ -48,7 +48,7 @@ export default function MultiChart({data, customOptions}) {
             const ctx = chart.canvas.getContext("2d");
             ctx.save();
             ctx.globalCompositeOperation = "destination-over";
-            ctx.fillStyle = "lightGrey";
+            ctx.fillStyle = 'rgba(255,193,99,0.32)';
             ctx.fillRect(chart.chartArea.left, chart.chartArea.top, (chart.chartArea.width/2), (chart.chartArea.height));
             ctx.restore();
         }
