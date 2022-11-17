@@ -8,6 +8,7 @@ const token = process.env.TELEGRAM_TOKEN;
 const baseApiPath = process.env.BASE_API_PATH;
 const bot = new TelegramBot(token, {polling: true});
 
+let lastMessage = "";
 let currentStrategy = null;
 const strategy = {
     gasto: {
@@ -81,6 +82,7 @@ const runStrategyTimeout = () => {
 }
 
 bot.onText(/^\/start/, function(msg){
+    lastMessage = "";
     let chatId = msg.chat.id;
     let nameUser = msg.from.first_name;
 
@@ -88,21 +90,24 @@ bot.onText(/^\/start/, function(msg){
 });
 
 bot.onText(/^\/dolares/, async function(msg){
-    const result = await get('http://localhost:8080/cotizacionDolares');
+    lastMessage = "";
+    const result = await get(`${baseApiPath}/cotizacionDolares`);
     const [blue, mep, turista] = result
-    bot.sendMessage(msg.chat.id, formatCotizaciones(blue.venta, mep.venta, turista.venta), { parse_mode: "HTML" });
+    await bot.sendMessage(msg.chat.id, formatCotizaciones(blue.venta, mep.venta, turista.venta), {parse_mode: "HTML"});
 });
 
 bot.onText(/^\/gasto/, async function(msg){
+    lastMessage = msg.text;
     currentStrategy = strategy.gasto
     runStrategyTimeout()
-    bot.sendMessage(msg.chat.id, getMessage(), { parse_mode: "HTML" });
+    await bot.sendMessage(msg.chat.id, getMessage(), {parse_mode: "HTML"});
 });
 
 bot.onText(/^\/ingreso/, async function(msg){
+    lastMessage = msg.text;
     currentStrategy = strategy.ingreso
     runStrategyTimeout()
-    bot.sendMessage(msg.chat.id, getMessage(), { parse_mode: "HTML" });
+    await bot.sendMessage(msg.chat.id, getMessage(), {parse_mode: "HTML"});
 });
 
 // Hay mejores maneras de esperar una respuesta del usuario
@@ -121,9 +126,10 @@ bot.on('message', (msg) => {
         .catch(() => bot.sendMessage(chatId, currentStrategy.errorMsg))
         .finally(() => currentStrategy = null)
     }
-    if (!comandosDisponibles.includes(msg.text)){
+    if (!comandosDisponibles.includes(msg.text) && !comandosDisponibles.includes(lastMessage)  ){
         bot.sendMessage(chatId, retryMessage())
     }
+    lastMessage = msg.text;
 });
 
 bot.on('polling_error', function(error){
