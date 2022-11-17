@@ -64,7 +64,7 @@ Por ejemplo: ${currentStrategy.exampleMsg}`
 const retryMessage = () => {
     return `
 Te olvidaste de enviar el comando? ${"\u{1F914}"}
-Si pasan más de 15 segundos, tendrás que enviar el comando nuevamente`
+Si pasan más de 30 segundos, tendrás que enviar el comando nuevamente`
 }
 
 const formatCotizaciones = (blue, mep, turista) => {
@@ -110,7 +110,6 @@ bot.onText(/^\/ingreso/, async function(msg){
     await bot.sendMessage(msg.chat.id, getMessage(), {parse_mode: "HTML"});
 });
 
-// Hay mejores maneras de esperar una respuesta del usuario
 bot.on('message', (msg) => {
     const chatId = msg.chat.id;
     if (currentStrategy) {

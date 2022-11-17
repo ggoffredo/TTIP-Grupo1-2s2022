@@ -4,7 +4,7 @@ import MultiChart from "../Core/Charts/MultiChart";
 import {useEffect, useRef, useState} from "react";
 import {getAhorrosForUserId, getAhorrosInvertidosForUserId} from "../../services/AhorrosService";
 import useUser from "../CustomHooks/UseUser";
-import {FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, Switch} from "@mui/material";
+import {FormControl, FormControlLabel, FormLabel, Hidden, Radio, RadioGroup, Switch} from "@mui/material";
 import Utils from "../../helpers/Utils";
 import {CircularProgress, FormGroup} from "@material-ui/core";
 import CustomPopover from "../OpcionesDeInversion/CustomPopover";
@@ -12,6 +12,8 @@ import HelpTooltip from "../HelpTooltip";
 import ClickableChip from "../ClickableChip";
 import {getFromLFMApi} from '../../helpers/AxiosHelper'
 import EdicionesJournal from "./EdicionesJournal";
+import Typography from "@mui/material/Typography";
+import Divider from "@mui/material/Divider";
 
 const AhorroYProyeccionChart = () => {
     const periodosDisponibles = [
@@ -206,20 +208,37 @@ const AhorroYProyeccionChart = () => {
     }
 
     const getPeriodosRadioButtons = () => {
-        return <FormControl>
-            <FormLabel id="period-label">Período</FormLabel>
-            <RadioGroup row aria-labelledby="period-label" defaultValue={periodoSeleccionado} onChange={handleClick}>
-                { periodosDisponibles.map(periodo => <FormControlLabel key={periodo.label} value={periodo.value} control={<Radio/>} label={periodo.label}/>) }
-
-                <FormGroup style={{margin: 25}}>
-                    <FormControlLabel control={<Switch onChange={handleChange}/>} label="Invertir meses pasados" />
-                </FormGroup>
-            </RadioGroup>
-            <Grid container justifyContent="center">
-                {  chartChips }
-                { chartChips.length !== 0 && <HelpTooltip tooltipText={chipTooltipText}/> }
+        return <Grid container sx={{marginTop: '10px', marginBottom: '10px'}} justifyContent="space-evenly">
+            <Grid item xs={12} sm={12} md={12} sx={{marginBottom: '10px'}}>
+                <Typography textAlign="center" variant="h5" component="div">Filtros disponibles</Typography>
             </Grid>
-        </FormControl>
+            <Grid item xs={12} sm={12} md={6} lg={4} xl={6} sx={{border: "1px solid #025c96", margin: '5px', borderRadius: '5px', padding: '5px'}}>
+                <FormControl>
+                    <Grid container>
+                        <Grid item>
+                            <FormLabel id="period-label">Período</FormLabel>
+                            <RadioGroup row aria-labelledby="period-label" defaultValue={periodoSeleccionado} onChange={handleClick}>
+                                { periodosDisponibles.map(periodo => <FormControlLabel key={periodo.label} value={periodo.value} control={<Radio/>} label={periodo.label}/>) }
+                            </RadioGroup>
+                        </Grid>
+                        <Hidden xlDown>
+                            <Divider orientation="vertical" flexItem />
+                        </Hidden>
+                        <Grid item>
+                            <FormGroup style={{margin: 25}}>
+                                <FormControlLabel control={<Switch onChange={handleChange}/>} label="Invertir meses pasados" />
+                            </FormGroup>
+                        </Grid>
+                    </Grid>
+                </FormControl>
+            </Grid>
+            <Grid item xs={12} sm={12} md={5} lg={7} xl={5} sx={{border: "1px solid #025c96", margin: '5px', borderRadius: '5px', padding: '5px'}}>
+                <Grid container justifyContent="flex-start" alignItems="center">
+                    {  chartChips }
+                    { chartChips.length !== 0 && <HelpTooltip tooltipText={chipTooltipText}/> }
+                </Grid>
+            </Grid>
+        </Grid>
     }
 
     return <Grid container>
