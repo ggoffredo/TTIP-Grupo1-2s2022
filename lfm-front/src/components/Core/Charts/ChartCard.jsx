@@ -27,7 +27,7 @@ export default function ChartCard({options, Chart, title, label, chartData, head
                 </Typography>
                 <div style={{margin: 5}}> <Divider/> </div>
                 <Grid container direction="row">
-                    <Grid item xs={12} md={9} lg={10}>
+                    <Grid item xs={12} md={children ? 9 : 12} lg={children ? 10 : 12}>
                         {labelComponent()}
                         {
                             chartData && Object.keys(chartData).length !== 0
@@ -35,9 +35,9 @@ export default function ChartCard({options, Chart, title, label, chartData, head
                                 : <CircularProgress/>
                         }
                     </Grid>
-                    <Grid item xs={12} md={3} lg={2}>
+                    {children && <Grid item xs={12} md={3} lg={2}>
                         {children}
-                    </Grid>
+                    </Grid>}
                 </Grid>
             </CardContent>
         </Card>
