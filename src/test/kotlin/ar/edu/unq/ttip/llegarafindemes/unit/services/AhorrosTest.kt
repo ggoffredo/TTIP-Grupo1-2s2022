@@ -381,7 +381,7 @@ class AhorrosTest {
         assertEquals(215800, result[6].acumulado) // $157.500 + $26.250 + $22.050 (21% $105.000) (90 días)
         assertEquals(242050, result[7].acumulado)
         assertEquals(268300, result[8].acumulado)
-        assertEquals(317818, result[9].acumulado)
+        assertEquals(339868, result[9].acumulado)
     }
 
     @Test
