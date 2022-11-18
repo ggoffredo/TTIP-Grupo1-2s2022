@@ -85,7 +85,7 @@ class AhorrosService(
                 contadorMeses = 2
                 if (agregarIntereses) {
                     nuevoAcum += intereses
-                    val ahorro = Ahorro(it.fecha, it.actual, it.acumulado + intereses)
+                    val ahorro = Ahorro(it.fecha, it.actual, it.acumulado + nuevoAcum)
                     ahorrosInvertidos.add(ahorro)
                     intereses = (ahorro.acumulado * (inversion.tasaDeVariacion * 3) / 100).toInt()
                 } else {
