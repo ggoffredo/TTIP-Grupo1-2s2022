@@ -136,12 +136,33 @@ const AhorroYProyeccionChart = () => {
         return { labels: labels, values: values }
     }
 
+    function getColor(nombreInversion) {
+        switch (nombreInversion) {
+            case `PF Banco Galicia`:
+                return 'rgb(241,139,6)'
+            case `PF Banco Nación`:
+                return 'rgb(241,194,6)'
+            case `PF Banco Provincia`:
+                return 'rgb(218,241,6)'
+            case `Plazo Fijo Uva`:
+                return 'rgb(155,241,6)'
+            case `Dolar Blue`:
+                return 'rgb(84,241,6)'
+            case `Dolar Bolsa`:
+                return 'rgb(6,241,143)'
+            case `Dolar Turista`:
+                return 'rgb(6,221,241)'
+            default:
+                return 'rgb(6, 51, 241)'
+        }
+    }
+
     const getData = () => {
         const ahorrosData = getAhorrosValues()
         const ahorrosProyectadosData = getAhorrosProyectadosValues()
         const ahorrosAcumuladosData = getAhorrosAcumuladosValues()
         const ahorrosAcumuladosProyectadosData = getAhorrosAcumuladosProyectadosValues()
-        const ahorrosInvertidosData = getAhorrosInvertidosValues().map(ahorroInvertidoValue => doGetData(ahorroInvertidoValue.values, `Ahorros acumulados proyectados invertidos ${ahorroInvertidoValue.nombre}`, 'rgb(6, 51, 241)', true))
+        const ahorrosInvertidosData = getAhorrosInvertidosValues().map(ahorroInvertidoValue => doGetData(ahorroInvertidoValue.values, `Ahorros acumulados proyectados invertidos ${ahorroInvertidoValue.nombre}`, getColor(ahorroInvertidoValue.nombre), true))
         return [
             doGetData(ahorrosData, "Ahorros mensuales", 'rgb(255,161,99)'),
             doGetData(ahorrosProyectadosData, "Ahorros mensuales proyectados", 'rgb(255, 193, 99)'),
