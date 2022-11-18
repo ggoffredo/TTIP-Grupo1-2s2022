@@ -1,6 +1,5 @@
 import Grid from "@mui/material/Grid";
 import ViewSubTitle from "../ViewSubTitle";
-import ConstitucionPlazosFijosTable from "../CustomTables/ConstitucionPlazosFijosTable";
 import CompraDolares from "../CustomTables/CompraDolaresTable";
 import {useEffect, useState} from "react";
 import {getIngresosForUserId} from "../../services/IngresosService";
@@ -58,12 +57,10 @@ const ProyeccionYAhorros = ({inversiones}) => {
         <InflacionEsperadaChip/>
         <Grid item xs={12} sm={12} lg={6}>
             <ViewSubTitle subTitle={'En base a proyección mensual'}/>
-            <ConstitucionPlazosFijosTable monto={proyeccionMensual} inversiones={inversiones}/>
             <CompraDolares monto={proyeccionMensual} inversiones={inversiones}/>
         </Grid>
         <Grid item xs={12} sm={12} lg={6}>
             <ViewSubTitle subTitle={'En base a ahorros'}/>
-            <ConstitucionPlazosFijosTable monto={ahorros} inversiones={inversiones}/>
             <CompraDolares monto={ahorros} inversiones={inversiones}/>
         </Grid>
     </Grid>
