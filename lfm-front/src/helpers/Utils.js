@@ -58,4 +58,19 @@ export default class Utils {
     static removeFutureValues = (arr) => {
         return arr.filter((a) => (Date.parse(a.fecha) <= Date.now()))
     }
+
+    static formatToCurrentMonth = (arr) => {
+        const newArr = []
+        const stringToday = Utils.firstDayOfMonthStringFormatted()
+        const firstDayOfMonth = Date.parse(stringToday)
+        arr.forEach( e => {
+            const isPreviousToFirstDay = Date.parse(e.fecha) <=firstDayOfMonth
+            if (isPreviousToFirstDay) {
+                newArr[stringToday] = newArr[stringToday] ? newArr[stringToday] + e.monto : e.monto
+            } else {
+                newArr[e.fecha] = newArr[e.fecha] ? newArr[e.fecha] + e.monto : e.monto
+            }
+        })
+        return newArr
+    }
 }
