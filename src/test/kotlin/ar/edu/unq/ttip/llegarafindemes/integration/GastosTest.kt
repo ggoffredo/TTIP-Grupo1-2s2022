@@ -39,10 +39,10 @@ class GastosTest {
                 jsonPath("$.[0].periodicidad")          { value("MENSUAL") }
                 jsonPath("$.[0].duracion")              { value(0) }
                 jsonPath("$.[0].medioDePago.nombre")    { value("Efectivo") }
-                jsonPath("$.[5].descripcion")           { value("Pava Electrica") }
-                jsonPath("$.[5].monto")                 { value(4000) }
+                jsonPath("$.[5].descripcion")           { value("Supermercado") }
+                jsonPath("$.[5].monto")                 { value(8000) }
                 jsonPath("$.[5].periodicidad")          { value("MENSUAL") }
-                jsonPath("$.[5].duracion")              { value(12) }
+                jsonPath("$.[5].duracion")              { value(1) }
                 jsonPath("$.[5].medioDePago.nombre")    { value("Visa") }
                 jsonPath("$.[5].fecha")                 { isArray() }
             }
@@ -57,24 +57,23 @@ class GastosTest {
                 jsonPath("$.[0].mes")                       { isArray() }
                 jsonPath("$.[0].montoTotal")                { value(35000) }
                 jsonPath("$.[0].gastos.length()")           { value(2) }
-                jsonPath("$.[0].gastos.[0].descripcion")    { value("Expensas") }
-                jsonPath("$.[0].gastos.[1].descripcion")    { value("Alquiler") }
+                jsonPath("$.[0].gastos.[0].descripcion")    { value("Alquiler") }
+                jsonPath("$.[0].gastos.[1].descripcion")    { value("Expensas") }
                 jsonPath("$.[1].mes")                       { isArray() }
                 jsonPath("$.[1].montoTotal")                { value(43000) }
                 jsonPath("$.[1].gastos.length()")           { value(4) }
-                jsonPath("$.[1].gastos.[0].descripcion")    { value("Expensas") }
-                jsonPath("$.[1].gastos.[1].descripcion")    { value("Alquiler") }
+                jsonPath("$.[1].gastos.[0].descripcion")    { value("Alquiler") }
+                jsonPath("$.[1].gastos.[1].descripcion")    { value("Expensas") }
                 jsonPath("$.[1].gastos.[2].descripcion")    { value("Pava Electrica") }
                 jsonPath("$.[1].gastos.[3].descripcion")    { value("Telecentro") }
                 jsonPath("$.[2].mes")                       { isArray() }
-                jsonPath("$.[2].montoTotal")                { value(49500) }
-                jsonPath("$.[2].gastos.length()")           { value(6) }
-                jsonPath("$.[2].gastos.[0].descripcion")    { value("Expensas") }
-                jsonPath("$.[2].gastos.[1].descripcion")    { value("Alquiler") }
+                jsonPath("$.[2].montoTotal")                { value(47000) }
+                jsonPath("$.[2].gastos.length()")           { value(5) }
+                jsonPath("$.[2].gastos.[0].descripcion")    { value("Alquiler") }
+                jsonPath("$.[2].gastos.[1].descripcion")    { value("Expensas") }
                 jsonPath("$.[2].gastos.[2].descripcion")    { value("Pava Electrica") }
                 jsonPath("$.[2].gastos.[3].descripcion")    { value("Telecentro") }
-                jsonPath("$.[2].gastos.[4].descripcion")    { value("Rappi") }
-                jsonPath("$.[2].gastos.[5].descripcion")    { value("Gimnasio") }
+                jsonPath("$.[2].gastos.[4].descripcion")    { value("Gimnasio") }
             }
         }
     }
