@@ -38,7 +38,7 @@ class GastosTest {
         val gastoFijo1 = buildGasto(Periodicidad.MENSUAL, 0, LocalDate.now(), "Alquiler", 40000)
         val gastoFijo2 = buildGasto(Periodicidad.MENSUAL, 0, LocalDate.now(), "Expensas", 5000)
         this.gastos = listOf(gastoOcasional1, gastoOcasional2, gastoFijo1, gastoFijo2)
-        `when`(gastosRepositoryMock.findByUsuarioIdOrderByFechaAsc(1)).thenReturn(this.gastos)
+        `when`(gastosRepositoryMock.findByUsuarioIdOrderByFechaAscDescripcionAsc(1)).thenReturn(this.gastos)
     }
 
     @Test
@@ -61,7 +61,7 @@ class GastosTest {
     @Test
     fun cuandoSePidenLosGastosMensualizadosDeUnUsuarioSinGastosSeRetornaUnaListaVaciaDeGastosMensualizados() {
         val emptyList = listOf<Gasto>()
-        `when`(gastosRepositoryMock.findByUsuarioIdOrderByFechaAsc(2)).thenReturn(emptyList)
+        `when`(gastosRepositoryMock.findByUsuarioIdOrderByFechaAscDescripcionAsc(2)).thenReturn(emptyList)
         val gastosMensualizados = this.subject.getGastosForUserPerMonth(2)
         verify(administrablesService, times(1)).getAdministrablesPerMonth(emptyList)
         assertEquals(gastosMensualizados.size, 0)

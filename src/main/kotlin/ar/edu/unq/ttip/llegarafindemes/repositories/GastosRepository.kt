@@ -6,6 +6,5 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface GastosRepository : JpaRepository<Gasto, Int> {
-    fun findByUsuarioId(userId: Int): List<Gasto>
-    fun findByUsuarioIdOrderByFechaAsc(userId: Int): List<Gasto>
+    fun findByUsuarioIdOrderByFechaAscDescripcionAsc(userId: Int): List<Gasto>
 }

@@ -16,11 +16,11 @@ class GastosService(
 ) {
 
     fun getGastosForUser(userId: Int): List<Gasto> {
-        return gastosRepository.findByUsuarioId(userId)
+        return gastosRepository.findByUsuarioIdOrderByFechaAscDescripcionAsc(userId)
     }
 
     fun getGastosForUserPerMonth(userId: Int, from: LocalDate? = null, to: LocalDate? = null): List<GastosMensualizados> {
-        val gastos = gastosRepository.findByUsuarioIdOrderByFechaAsc(userId)
+        val gastos = gastosRepository.findByUsuarioIdOrderByFechaAscDescripcionAsc(userId)
         return administrablesService.getAdministrablesPerMonth(gastos, from, to).mapToGastosMensualizados()
     }
 

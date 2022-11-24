@@ -1,0 +1,25 @@
+{
+  "name": "ttip-grupo1-2s2022",
+  "version": "1.0.0",
+  "description": "",
+  "main": "",
+  "devDependencies": {
+    "concurrently": "^7.6.0"
+  },
+  "scripts": {
+    "dev": "concurrently --kill-others \\\"npm:front\\\" \\\"npm:telegram_bot\\\" \\\"npm:mocks\\\"",
+    "front": "npm --prefix ./lfm-front/ run start",
+    "telegram_bot": "npm --prefix ./telegram_bot/ run start",
+    "mocks": "json-server --watch -p 4000 mocks/db.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ggoffredo/TTIP-Grupo1-2s2022.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ggoffredo/TTIP-Grupo1-2s2022/issues"
+  },
+  "homepage": "https://github.com/ggoffredo/TTIP-Grupo1-2s2022#readme"
+}

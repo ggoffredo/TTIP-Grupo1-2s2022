@@ -16,12 +16,16 @@ INSERT INTO gasto (descripcion, monto, duracion, periodicidad, fecha, medio_de_p
 INSERT INTO gasto (descripcion, monto, duracion, periodicidad, fecha, medio_de_pago_id, usuario_id) VALUES ('Movistar', 3000, 0, 2, '2022-09-01', 1, 4), ('Spotify', 1000, 0, 2, '2022-09-01', 2, 4);
 
 -- Gastos ocasionales
-INSERT INTO gasto (descripcion, monto, duracion, periodicidad, fecha, medio_de_pago_id, usuario_id) VALUES ('Rappi', 2500, 1, 2, '2022-08-01', 1, 1);
 INSERT INTO gasto (descripcion, monto, duracion, periodicidad, fecha, medio_de_pago_id, usuario_id) VALUES ('Pava Electrica', 4000, 12, 2, '2022-07-01', 2, 1);
-INSERT INTO gasto (descripcion, monto, duracion, periodicidad, fecha, medio_de_pago_id, usuario_id) VALUES ('Supermercado', 8000, 1, 2, '2022-09-02', 2, 1);
-INSERT INTO gasto (descripcion, monto, duracion, periodicidad, fecha, medio_de_pago_id, usuario_id) VALUES ('Salida bar', 2000, 1, 2, '2022-09-03', 2, 1);
-INSERT INTO gasto (descripcion, monto, duracion, periodicidad, fecha, medio_de_pago_id, usuario_id) VALUES ('Futbol', 500, 1, 2, '2022-09-04', 2, 1);
-INSERT INTO gasto (descripcion, monto, duracion, periodicidad, fecha, medio_de_pago_id, usuario_id) VALUES ('Carniceria', 10000, 1, 2, '2022-09-05', 2, 1);
+INSERT INTO gasto (descripcion, monto, duracion, periodicidad, fecha, medio_de_pago_id, usuario_id) VALUES ('Supermercado', 8000, 1, 2, '2022-11-02', 2, 1);
+INSERT INTO gasto (descripcion, monto, duracion, periodicidad, fecha, medio_de_pago_id, usuario_id) VALUES ('Salida bar', 2000, 1, 2, '2022-11-03', 2, 1);
+INSERT INTO gasto (descripcion, monto, duracion, periodicidad, fecha, medio_de_pago_id, usuario_id) VALUES ('Futbol', 500, 1, 2, '2022-11-05', 2, 1), ('Asado', 2000, 1, 2, '2022-11-05', 2, 1), ('Boliche', 2000, 1, 2, '2022-11-05', 2, 1);
+INSERT INTO gasto (descripcion, monto, duracion, periodicidad, fecha, medio_de_pago_id, usuario_id) VALUES ('Futbol', 500, 1, 2, '2022-11-12', 2, 1);
+INSERT INTO gasto (descripcion, monto, duracion, periodicidad, fecha, medio_de_pago_id, usuario_id) VALUES ('Sushi', 7000, 1, 2, '2022-11-15', 2, 1);
+INSERT INTO gasto (descripcion, monto, duracion, periodicidad, fecha, medio_de_pago_id, usuario_id) VALUES ('Hamburguesas', 6000, 1, 2, '2022-11-18', 2, 1);
+INSERT INTO gasto (descripcion, monto, duracion, periodicidad, fecha, medio_de_pago_id, usuario_id) VALUES ('Futbol', 500, 1, 2, '2022-11-19', 2, 1);
+INSERT INTO gasto (descripcion, monto, duracion, periodicidad, fecha, medio_de_pago_id, usuario_id) VALUES ('Futbol', 500, 1, 2, '2022-11-26', 2, 1);
+INSERT INTO gasto (descripcion, monto, duracion, periodicidad, fecha, medio_de_pago_id, usuario_id) VALUES ('Carniceria', 10000, 1, 2, '2022-11-04', 2, 1);
 INSERT INTO gasto (descripcion, monto, duracion, periodicidad, fecha, medio_de_pago_id, usuario_id) VALUES ('Colchon', 15000, 12, 2, '2022-09-01', 1, 2), ('Campera', 20000, 3, 2, '2022-09-01', 2, 2);
 INSERT INTO gasto (descripcion, monto, duracion, periodicidad, fecha, medio_de_pago_id, usuario_id) VALUES ('Regalo', 13000, 1, 2, '2022-09-01', 3, 3), ('Sarten', 10000, 1, 2, '2022-09-01', 4, 3);
 INSERT INTO gasto (descripcion, monto, duracion, periodicidad, fecha, medio_de_pago_id, usuario_id) VALUES ('Sushi', 5000, 1, 2, '2022-09-01', 1, 4), ('Afeitadora', 9000, 1, 2, '2022-09-01', 2, 4);
