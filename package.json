@@ -10,7 +10,7 @@
     "dev": "concurrently --kill-others \\\"npm:front\\\" \\\"npm:telegram_bot\\\" \\\"npm:mocks\\\"",
     "front": "npm --prefix ./lfm-front/ run start",
     "telegram_bot": "npm --prefix ./telegram_bot/ run start",
-    "mocks": "json-server --watch -p 4000 mocks/db.json"
+    "mocks": "json-server --watch -H 127.0.0.1 -p 4000 mocks/db.json"
   },
   "repository": {
     "type": "git",
