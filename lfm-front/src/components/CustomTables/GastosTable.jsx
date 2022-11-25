@@ -1,7 +1,6 @@
 import {useEffect, useState} from 'react';
 import ChartCard from "../Core/Charts/ChartCard";
 import Grid from "@mui/material/Grid";
-import StyledTable from "../Core/StyledTable";
 import {getGastosForUserId} from "../../services/GastosService";
 import useUser from "../CustomHooks/UseUser";
 import PaginatedStyledTable from "../Core/PaginatedStyledTable";
@@ -27,7 +26,7 @@ const GastosTable = () => {
     }
 
     return (
-        <Grid item xs={12} sm={12} md={6}>
+        <Grid item xs={12} sm={12} md={8}>
             <ChartCard
                 Chart={PaginatedStyledTable}
                 chartData={gastos}
