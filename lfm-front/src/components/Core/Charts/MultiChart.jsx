@@ -1,21 +1,8 @@
-import {
-    CategoryScale,
-    Chart as ChartJS,
-    Legend,
-    LinearScale,
-    LineElement,
-    PointElement,
-    Title,
-    Tooltip,
-    Filler
-} from 'chart.js';
 import {Chart} from 'react-chartjs-2';
 import {useRef} from "react";
 import {trigger} from "../../../helpers/Events";
 
 export default function MultiChart({data, customOptions}) {
-    ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler);
-
     const chartRef = useRef(null);
 
     const options = {

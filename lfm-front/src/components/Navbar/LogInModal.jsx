@@ -15,6 +15,7 @@ import Divider from "@mui/material/Divider";
 import useUser from "../CustomHooks/UseUser";
 import {logInToLFM} from "../../helpers/AxiosHelper";
 import Utils from "../../helpers/Utils";
+import {useNavigate} from "react-router-dom";
 
 const LogInModal = ({open, handleClose}) => {
     const [showPassword, setShowPassword] = useState(false)
@@ -25,6 +26,7 @@ const LogInModal = ({open, handleClose}) => {
     const {setUser} = useUser()
     const handleClickShowPassword = () => {setShowPassword(!showPassword)}
     const handleMouseDownPassword = (event) => {event.preventDefault()}
+    const navigate = useNavigate();
 
     const logIn = () => {
         logInToLFM(userEmail, userPassword)
@@ -33,6 +35,7 @@ const LogInModal = ({open, handleClose}) => {
                 setUser(response.data)
                 sessionStorage.setItem('user', JSON.stringify(response.data))
                 handleClose()
+                navigate('/dashboard')
             }
         ).catch(
             error => {

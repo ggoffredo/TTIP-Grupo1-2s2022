@@ -6,8 +6,7 @@ import {getIngresosForUserId} from "../../services/IngresosService";
 import Utils from "../../helpers/Utils";
 import {getGastosForUserId, getGastosForUserIdPerMonth} from "../../services/GastosService";
 import useUser from "../CustomHooks/UseUser";
-import ProyeccionYAhorrosChips from "./ProyeccionYAhorrosChips";
-import InflacionEsperadaChip from "./InflacionEsperadaChip";
+import ProyeccionAhorrosIPCEsperadoCards from "./ProyeccionAhorrosIPCEsperadoCards";
 import Divider from "@mui/material/Divider";
 import AhorroYProyeccionChart from "../CustomCharts/AhorroYProyeccionChart";
 
@@ -53,8 +52,7 @@ const ProyeccionYAhorros = ({inversiones}) => {
     return <Grid container>
         <AhorroYProyeccionChart/>
         <Grid item xs={12}> <Divider sx={{borderColor: '#0FC2C0'}}/> </Grid>
-        <ProyeccionYAhorrosChips proyeccion={proyeccionMensual} ahorros={ahorros}/>
-        <InflacionEsperadaChip/>
+        <ProyeccionAhorrosIPCEsperadoCards proyeccion={proyeccionMensual} ahorros={ahorros}/>
         <Grid item xs={12} sm={12} lg={6}>
             <ViewSubTitle subTitle={'En base a proyección mensual'}/>
             <CompraDolares monto={proyeccionMensual} inversiones={inversiones}/>

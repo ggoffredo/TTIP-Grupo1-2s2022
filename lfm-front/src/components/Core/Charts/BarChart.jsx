@@ -1,14 +1,7 @@
 import React from "react";
-import {BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Title, Tooltip} from 'chart.js';
 import {Bar} from 'react-chartjs-2';
 
 export default function BarChart({data}) {
-    ChartJS.register(CategoryScale,
-        LinearScale,
-        BarElement,
-        Title,
-        Tooltip,
-        Legend);
     const backgroundColors = [
         'rgba(255, 99, 132, 0.2)',
         'rgba(54, 162, 235, 0.2)',

@@ -2,40 +2,48 @@ import {useEffect, useState} from "react";
 import Grid from '@mui/material/Grid';
 import {getIngresosForUserIdPerMonth} from "../../services/IngresosService";
 import {getGastosForUserIdPerMonth} from "../../services/GastosService";
-import DolarValues from "./DolarValues";
-import IPCValue from "./IPCValue";
+import DolarAndIPCValues from "./DolarAndIPCValues";
 import ViewTitle from "../ViewTitle";
-import GastosVsIngresos from "./Accordions/GastosVsIngresos";
-import Gastos from "./Accordions/Gastos";
-import PlazosFijos from "./Accordions/PlazosFijos";
 import useUser from "../CustomHooks/UseUser";
+import CurrentMonthGastos from "../CustomCharts/CurrentMonthGastos";
+import GastosTable from "../CustomTables/GastosTable";
+import GastosIngresosDoughnutChart from "../CustomCharts/GastosIngresosDoughnutChart";
+import Utils from "../../helpers/Utils";
 
 export default function Dashboard() {
     const [gastos, setGastos] = useState([])
     const [ingresos, setIngresos] = useState([])
     const {user} = useUser()
 
-    async function getIngresos() {
-        let ingresosApi = await getIngresosForUserIdPerMonth(user.id);
-        setIngresos(ingresosApi)
-    }
-
-    async function getGastos() {
-        let gastosApi = await getGastosForUserIdPerMonth(user.id);
-        setGastos(gastosApi);
-    }
-
     useEffect(() => {
-        getIngresos()
-        getGastos()
+        getIngresosForUserIdPerMonth(user.id).then(res => setIngresos(res))
+        getGastosForUserIdPerMonth(user.id).then(res => setGastos(res))
     }, [user]);
 
-    return <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+    const getMontoTotalFromLastMonth = (data) => {
+        return data.at(-1)?.montoTotal
+    }
+
+    const getSummarizedMontoTotalFromLastMonth = (data) => {
+        return Utils.arraySum(data, 'montoTotal')
+    }
+
+    return <Grid container spacing={2}>
         <ViewTitle title={"Dashboard"}/>
-        <DolarValues/>
-        <IPCValue/>
-        <GastosVsIngresos ingresos={ingresos} gastos={gastos}/>
-        <Gastos gastosMesEnCurso={gastos.at(-1)}/>
-        <PlazosFijos/>
+        <DolarAndIPCValues/>
+        <Grid container item>
+            <CurrentMonthGastos gastosMesEnCurso={gastos.at(-1)}/>
+            <GastosIngresosDoughnutChart
+                gastos={getMontoTotalFromLastMonth(gastos)}
+                ingresos={getMontoTotalFromLastMonth(ingresos)}
+                title={'Mes en curso'}
+            />
+            <GastosIngresosDoughnutChart
+                gastos={getSummarizedMontoTotalFromLastMonth(gastos)}
+                ingresos={getSummarizedMontoTotalFromLastMonth(ingresos)}
+                title={'Histórico'}
+            />
+            <GastosTable/>
+        </Grid>
     </Grid>
 }

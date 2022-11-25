@@ -1,3 +1,17 @@
+import {
+    ArcElement,
+    BarElement,
+    CategoryScale,
+    Chart,
+    Legend,
+    LinearScale,
+    LineElement,
+    PointElement,
+    Title,
+    Tooltip,
+    Filler
+} from 'chart.js';
+
 export default class Utils {
     static arraySum = (array, keyToSum) => {
         return array.reduce((partialSum, e) => partialSum + e[keyToSum], 0)
@@ -73,4 +87,19 @@ export default class Utils {
         })
         return newArr
     }
+
+    static registerChartJs = () => {
+        Chart.register(
+            ArcElement,
+            BarElement,
+            CategoryScale,
+            Legend,
+            LineElement,
+            LinearScale,
+            PointElement,
+            Title,
+            Tooltip,
+            Filler
+        );
+    };
 }

@@ -24,7 +24,7 @@ const CurrentMonthGastos = ({gastosMesEnCurso}) => {
         }
     }
 
-    return <Grid item xs={12} sm={12} md={6}>
+    return <Grid item xs={12} sm={12} md={8}>
         <ChartCard Chart={LineChart} chartData={getData()} title={'Gastos mes en curso'}/>
     </Grid>
 }
