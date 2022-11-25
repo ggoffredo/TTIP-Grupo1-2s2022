@@ -10,6 +10,7 @@ import CustomInput from "../Forms/CustomInput";
 import SubmitButton from "../Forms/SubmitButton";
 import ViewTitle from "../ViewTitle";
 import Utils from "../../helpers/Utils";
+import PlazosFijosTable from "../CustomTables/PlazosFijosTable";
 
 const PlazoFijoSimulator = () => {
     const [amountOfMoney, setAmountOfMoney] = useState(0);
@@ -82,6 +83,7 @@ const PlazoFijoSimulator = () => {
                 </CardContent>
             </Card>
         </Grid>
+        <PlazosFijosTable/>
     </Grid>
 }
 
