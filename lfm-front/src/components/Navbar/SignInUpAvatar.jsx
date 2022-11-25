@@ -28,14 +28,6 @@ const SignInUpAvatar = () => {
     }
     const settings = [
         {
-            name: 'Opción 1',
-            action: handleCloseUserMenu
-        },
-        {
-            name: 'Opción 2',
-            action: handleCloseUserMenu
-        },
-        {
             name: 'Cerrar Sesión',
             action: handleLogOut
         },

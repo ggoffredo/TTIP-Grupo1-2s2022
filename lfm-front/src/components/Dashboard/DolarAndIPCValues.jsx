@@ -54,7 +54,7 @@ const DolarAndIPCValues = () => {
 
     return <Grid container item spacing={1}>
         {getChips()}
-        {getIpc()}
+        {ipc.value && getIpc()}
     </Grid>
 }
 
