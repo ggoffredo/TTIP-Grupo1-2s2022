@@ -162,7 +162,7 @@ const AhorroYProyeccionChart = () => {
         const ahorrosProyectadosData = getAhorrosProyectadosValues()
         const ahorrosAcumuladosData = getAhorrosAcumuladosValues()
         const ahorrosAcumuladosProyectadosData = getAhorrosAcumuladosProyectadosValues()
-        const ahorrosInvertidosData = getAhorrosInvertidosValues().map(ahorroInvertidoValue => doGetData(ahorroInvertidoValue.values, `Ahorros acumulados proyectados invertidos ${ahorroInvertidoValue.nombre}`, getColor(ahorroInvertidoValue.nombre), true))
+        const ahorrosInvertidosData = getAhorrosInvertidosValues().map(ahorroInvertidoValue => doGetData(ahorroInvertidoValue.values, `Ahorros acumulados proyectados invertidos ${ahorroInvertidoValue.nombre}`, getColor(ahorroInvertidoValue.nombre)))
         return [
             doGetData(ahorrosData, "Ahorros mensuales", 'rgb(255,161,99)'),
             doGetData(ahorrosProyectadosData, "Ahorros mensuales proyectados", 'rgb(255, 193, 99)'),
