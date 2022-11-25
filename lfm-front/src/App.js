@@ -8,6 +8,9 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {UserProvider} from "./components/Contexts/UserContext";
 import Landing from "./components/Landing";
 import PrivateRoute from "./components/Router/PrivateRoute";
+import Utils from "./helpers/Utils";
+
+Utils.registerChartJs()
 
 function App() {
     return (

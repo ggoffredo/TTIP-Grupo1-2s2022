@@ -1,23 +1,13 @@
-import {ArcElement, Chart as ChartJS, Legend, Tooltip} from 'chart.js';
 import {Doughnut} from 'react-chartjs-2';
 
 export default function DoughnutChart({data}) {
-    ChartJS.register(ArcElement, Tooltip, Legend);
     const backgroundColors = [
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(255, 206, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(255, 159, 64, 0.2)',
-    ];
-    const borderColors = [
-        'rgba(255, 99, 132, 1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(153, 102, 255, 1)',
-        'rgba(255, 159, 64, 1)',
+        'rgba(255, 99, 132)',
+        'rgba(54, 162, 235)',
+        'rgba(255, 206, 86)',
+        'rgba(75, 192, 192)',
+        'rgba(153, 102, 255)',
+        'rgba(255, 159, 64)',
     ];
 
     const chartData = {
@@ -27,13 +17,14 @@ export default function DoughnutChart({data}) {
                 label: '# of Votes',
                 data: Object.values(data),
                 backgroundColor: backgroundColors.slice(0, Object.keys(data).length),
-                borderColor: borderColors.slice(0, Object.keys(data).length),
-                borderWidth: 1,
+                borderColor: '#FFFFFF',
+                hoverBorderColor: '#FFFFFF',
+                borderWidth: 8,
             },
         ]
     };
 
     return <div>
-        <Doughnut data={chartData} />
+        <Doughnut data={chartData}/>
     </div>
 }
