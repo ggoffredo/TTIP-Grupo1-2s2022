@@ -23,6 +23,7 @@ _**Llegar a fin de mes**_ está orientada a cualquier persona que quiera llevar 
 - Spring Boot
 - Hibernate
 - PostgreSQL
+- ReactJS
 - [CircleCI](https://app.circleci.com/pipelines/github/ggoffredo/TTIP-Grupo1-2s2022)
 - [SonarCloud](https://sonarcloud.io/project/overview?id=ggoffredo_TTIP-Grupo1-2s2022)
  
@@ -36,3 +37,11 @@ Para los criterios de aceptación se utiliza el formato: _dado_ [...] _cuando_ [
 
 ### DOD (Definition of done)
 Para considerar que una tarjeta se encuentra lista, la misma debe haber pasado por el estado _In Review_ y haberse verificado que se cumplan los criterios de aceptación que posee definidos. Junto con cumplir con las reglas de coverage establecidas para la aprobación del pull request vinculado.
+
+### Presentación
+
+- [Modelo de entidades](documentacion/Modelo%20de%20entidades.pdf)
+- [Export Tablero Trello (JSON)](documentacion/Trello.json)
+- [Presentación Video](https://youtu.be/-1JrGS-VUvM)
+- [Presentación PPT POC](documentacion/presentacion/Presentación%20POC.pptx)
+- [Presentación PPT Final](documentacion/presentacion/Presentación%20Final.pptx)

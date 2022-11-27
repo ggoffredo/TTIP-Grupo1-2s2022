@@ -2,9 +2,9 @@ import Grid from "@mui/material/Grid";
 import ViewSubTitle from "../ViewSubTitle";
 import CompraDolares from "../CustomTables/CompraDolaresTable";
 import {useEffect, useState} from "react";
-import {getIngresosForUserId} from "../../services/IngresosService";
+import {getIngresosForUserIdPerMonth} from "../../services/IngresosService";
 import Utils from "../../helpers/Utils";
-import {getGastosForUserId, getGastosForUserIdPerMonth} from "../../services/GastosService";
+import {getGastosForUserIdPerMonth} from "../../services/GastosService";
 import useUser from "../CustomHooks/UseUser";
 import ProyeccionAhorrosIPCEsperadoCards from "./ProyeccionAhorrosIPCEsperadoCards";
 import Divider from "@mui/material/Divider";
@@ -16,11 +16,11 @@ const ProyeccionYAhorros = ({inversiones}) => {
     const {user} = useUser()
 
     function getIngresos() {
-        return getIngresosForUserId(user.id).then(res => Utils.arraySum(res, 'monto'))
+        return getIngresosForUserIdPerMonth(user.id).then(res => Utils.arraySum(res, 'montoTotal'))
     }
 
     function getGastos() {
-        return getGastosForUserId(user.id).then(res => Utils.arraySum(res, 'monto'))
+        return getGastosForUserIdPerMonth(user.id).then(res => Utils.arraySum(res, 'montoTotal'))
     }
 
     function getGastosMensualizados() {
